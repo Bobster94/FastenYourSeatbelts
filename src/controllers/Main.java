@@ -59,12 +59,18 @@ public class Main extends Application {
         int selectedValue = cbLostLuggage.getSelectionModel().getSelectedIndex();
         switch(selectedValue) {
             case 0:
+                AllLostLuggageController allLostLuggage = new AllLostLuggageController();
+                master.setLeft(allLostLuggage.getAllLostLuggageScreen());
                 lblPage.setText("All lost luggage");
                 break;
             case 1:
+                AddLostLuggageController addLostLuggage = new AddLostLuggageController();
+                master.setLeft(addLostLuggage.getAddLostLuggageScreen());
                 lblPage.setText("Add lost luggage");
                 break;
             case 2:
+                EditLostLuggageController editLostLuggage = new EditLostLuggageController();
+                master.setLeft(editLostLuggage.getEditLostLuggageScreen());
                 lblPage.setText("Edit lost luggage");
                 break;
         }
@@ -81,9 +87,13 @@ public class Main extends Application {
                 lblPage.setText("All customers");
                 break;
             case 1:
+                AddCustomerController addCustomer = new AddCustomerController();
+                master.setLeft(addCustomer.getAddCustomerScreen());
                 lblPage.setText("Add customer");
                 break;
             case 2:
+                //editCustomerController editCustomers = new editCustomerController();
+                //master.setLeft(allCustomers.getAllCustomerScreen());
                 lblPage.setText("Edit customer");
                 break;
         }
@@ -95,12 +105,17 @@ public class Main extends Application {
         int selectedValue = cbFoundLuggage.getSelectionModel().getSelectedIndex();
         switch(selectedValue) {
             case 0:
+                AllFoundLuggageController allFoundLuggage = new AllFoundLuggageController();
+                master.setLeft(allFoundLuggage.getAllFoundLuggageScreen());
                 lblPage.setText("All found luggage");
                 break;
             case 1:
+                AddFoundLuggageController addFoundLuggage = new AddFoundLuggageController();
+                master.setLeft(addFoundLuggage.getAddFoundLuggageScreen());
                 lblPage.setText("Add found luggage");
                 break;
             case 2:
+                
                 lblPage.setText("Edit found luggage");
                 break;
         }
@@ -123,6 +138,10 @@ public class Main extends Application {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
         return screen;
+    }
+    
+    public void setMasterContent(BorderPane content) {
+        master.setLeft(content);
     }
     
     public static void main(String[] args) {

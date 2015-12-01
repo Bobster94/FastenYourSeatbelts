@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane id="SaveLost" fx:id="SaveLost" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="508.0" prefWidth="685.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <AnchorPane prefHeight="544.0" prefWidth="699.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="14.0" layoutY="14.0" text="Customer first name" />
+            <Label layoutX="15.0" layoutY="78.0" text="Customer last name" />
+            <Label layoutX="13.0" layoutY="218.0" text="Vacation period:" />
+            <Label layoutX="15.0" layoutY="146.0" text="Vacation destination" />
+            <Label layoutX="258.0" layoutY="400.0" text="Lost at airport" />
+            <Label layoutX="15.0" layoutY="381.0" text="Vacation Zipcode" />
+            <Label layoutX="17.0" layoutY="301.0" text="Vacation Adress" />
+            <TextArea layoutX="9.0" layoutY="42.0" prefHeight="20.0" prefWidth="118.0" />
+            <TextArea layoutX="9.0" layoutY="107.0" prefHeight="20.0" prefWidth="118.0" />
+            <TextArea layoutX="11.0" layoutY="173.0" prefHeight="20.0" prefWidth="118.0" />
+            <TextArea layoutX="14.0" layoutY="261.0" prefHeight="20.0" prefWidth="57.0" />
+            <TextArea layoutX="11.0" layoutY="333.0" prefHeight="20.0" prefWidth="118.0" />
+            <TextArea layoutX="12.0" layoutY="408.0" prefHeight="20.0" prefWidth="118.0" />
+            <TextArea layoutX="258.0" layoutY="428.0" prefHeight="20.0" prefWidth="118.0" />
+            <TextArea layoutX="82.0" layoutY="261.0" prefHeight="20.0" prefWidth="60.0" />
+            <Label layoutX="82.0" layoutY="244.0" text="To" />
+            <Label layoutX="21.0" layoutY="244.0" text="From" />
+            <TextArea layoutX="141.0" layoutY="333.0" prefHeight="20.0" prefWidth="51.0" />
+            <Label layoutX="258.0" layoutY="14.0" text="Color" />
+            <Label layoutX="258.0" layoutY="87.0" text="Type of luggage" />
+            <Label layoutX="258.0" layoutY="165.0" text="Brands" />
+            <Label layoutX="258.0" layoutY="244.0" text="Weight" />
+            <Label layoutX="258.0" layoutY="310.0" text="Size" />
+            <SplitMenuButton layoutX="258.0" layoutY="206.0" mnemonicParsing="false" text="Eastpack">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+                <MenuItem mnemonicParsing="false" text="Action 2" />
+              </items>
+            </SplitMenuButton>
+            <SplitMenuButton layoutX="258.0" layoutY="343.0" mnemonicParsing="false" text="Small">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Action 1" />
+                  <MenuItem mnemonicParsing="false" text="Action 2" />
+               </items>
+            </SplitMenuButton>
+            <SplitMenuButton layoutX="258.0" layoutY="269.0" mnemonicParsing="false" text="0 &gt; 1">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Action 1" />
+                  <MenuItem mnemonicParsing="false" text="Action 2" />
+               </items>
+            </SplitMenuButton>
+            <SplitMenuButton layoutX="258.0" layoutY="115.0" mnemonicParsing="false" text="Bag">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Action 1" />
+                  <MenuItem mnemonicParsing="false" text="Action 2" />
+               </items>
+            </SplitMenuButton>
+            <SplitMenuButton layoutX="258.0" layoutY="40.0" mnemonicParsing="false" text="Blue">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Action 1" />
+                  <MenuItem mnemonicParsing="false" text="Action 2" />
+               </items>
+            </SplitMenuButton>
+            <TextField layoutX="462.0" layoutY="47.0" prefHeight="140.0" prefWidth="201.0" />
+            <ScrollBar layoutX="649.0" layoutY="49.0" orientation="VERTICAL" prefHeight="136.0" prefWidth="14.0" />
+            <Label layoutX="474.0" layoutY="23.0" text="Extra" />
+            <Button layoutX="481.0" layoutY="481.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="91.0" text="Save Edit" />
+            <Button layoutX="585.0" layoutY="481.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="92.0" text="Decline" />
+         </children>
+      </AnchorPane>
+   </top>
+</BorderPane>

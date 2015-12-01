@@ -10,11 +10,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
 
 /**
@@ -22,44 +19,24 @@ import javafx.scene.layout.BorderPane;
  *
  * @author Bas
  */
-public class DashboardController implements Initializable {
-    @FXML private TableView tvLostLuggage;
-    @FXML private TableView tvFoundLuggage;
-    //
-    
+public class AddFoundLuggageController implements Initializable {
+
     /**
      * Initializes the controller class.
      */
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        AllLuggageController allL = new AllLuggageController();
-        tvLostLuggage = allL.buildData(tvLostLuggage,0);
-        tvFoundLuggage = allL.buildData(tvFoundLuggage,1);
-    }
+        // TODO
+    }   
     
-    @FXML
-    protected void GetAddLostLuggage(ActionEvent event){
-        //TODO
-    }
-    
-    @FXML
-    protected void GetAddFoundLuggage(ActionEvent event){
-        //TODO
-    }
-    
-    @FXML
-    protected void GetAddCustomer(ActionEvent event) {
-        //TODO
-    }
-    
-    public BorderPane getDashboardScreen() {
+    public BorderPane getAddFoundLuggageScreen() {
         BorderPane screen = null;
         try {
-            screen = FXMLLoader.load(getClass().getResource("/views/Dashboard.fxml"));
+            screen = FXMLLoader.load(getClass().getResource("/views/AddFoundLuggage.fxml"));
         } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
         return screen;
     }
+    
 }

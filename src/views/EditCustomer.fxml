@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <Pane prefHeight="400.0" prefWidth="611.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="51.0" layoutY="39.0" text="First name" />
+            <Label layoutX="250.0" layoutY="39.0" text="Country" />
+            <TextField layoutX="51.0" layoutY="59.0" />
+            <TextField layoutX="250.0" layoutY="59.0" />
+            <Label layoutX="51.0" layoutY="113.0" text="Last name" />
+            <Label layoutX="250.0" layoutY="113.0" text="City" />
+            <TextField layoutX="51.0" layoutY="135.0" />
+            <TextField layoutX="250.0" layoutY="135.0" />
+            <Label layoutX="51.0" layoutY="183.0" text="E mail address" />
+            <Label layoutX="250.0" layoutY="183.0" text="Streetname" />
+            <TextField layoutX="51.0" layoutY="208.0" />
+            <TextField layoutX="250.0" layoutY="208.0" />
+            <Label layoutX="51.0" layoutY="253.0" text="Phone number" />
+            <Label layoutX="250.0" layoutY="253.0" text="Zip code" />
+            <TextField layoutX="51.0" layoutY="277.0" />
+            <TextField layoutX="250.0" layoutY="277.0" />
+            <Button layoutX="53.0" layoutY="346.0" mnemonicParsing="false" text="Edit customers" />
+         </children>
+      </Pane>
+   </center>
+</BorderPane>

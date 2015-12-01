@@ -30,7 +30,7 @@
             <Insets bottom="10.0" />
          </padding>
          <bottom>
-            <Button mnemonicParsing="false" text="Add new customer" BorderPane.alignment="CENTER_LEFT">
+            <Button onAction="#GetAddCustomer" fx:id="btnAddCustomer" mnemonicParsing="false" text="Add new customer" BorderPane.alignment="CENTER_LEFT">
                <BorderPane.margin>
                   <Insets left="5.0" />
                </BorderPane.margin>
@@ -57,7 +57,7 @@
                      </children>
                   </HBox>
                   <TableView fx:id="tvFoundLuggage" prefHeight="150.0" prefWidth="200.0" />
-                  <Button mnemonicParsing="false" text="Add new found luggage" />
+                  <Button onAction="#GetAddFoundLuggage" fx:id="btnAddFoundLuggage" mnemonicParsing="false" text="Add new found luggage" />
                </children>
             </VBox>
          </left>
@@ -75,7 +75,7 @@
                      </children>
                   </HBox>
                   <TableView fx:id="tvLostLuggage" prefHeight="150.0" prefWidth="200.0" />
-                  <Button mnemonicParsing="false" text="Add new lost luggage" />
+                  <Button onAction="#GetAddLostLuggage" fx:id="btnAddLostLuggage" mnemonicParsing="false" text="Add new lost luggage" />
                </children>
             </VBox>
          </right>
