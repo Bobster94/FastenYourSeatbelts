@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.AddCustomerController">
+   <bottom>
+      <Pane prefHeight="425.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button id="BtnDashboard" layoutX="8.0" layoutY="53.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="110.0" text="Dashboard" />
+            <Button id="BtnLuggage" layoutX="119.0" layoutY="53.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="108.0" text="Luggage" />
+            <Button id="BtnCustomers" layoutX="227.0" layoutY="53.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="128.0" text="Customers" />
+            <Button id="BtnAdmin" layoutX="355.0" layoutY="53.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Admin" />
+            <Label layoutX="8.0" layoutY="8.0" text="Add customer">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <TextField layoutX="45.0" layoutY="125.0" />
+            <TextField layoutX="243.0" layoutY="125.0" />
+            <TextField layoutX="44.0" layoutY="188.0" />
+            <TextField layoutX="243.0" layoutY="188.0" />
+            <TextField layoutX="45.0" layoutY="249.0" />
+            <TextField layoutX="243.0" layoutY="249.0" />
+            <TextField layoutX="44.0" layoutY="312.0" />
+            <TextField layoutX="243.0" layoutY="312.0" />
+            <Label layoutX="44.0" layoutY="98.0" text="Fisrt name" />
+            <Label layoutX="243.0" layoutY="98.0" text="Country" />
+            <Label layoutX="49.0" layoutY="163.0" text="Last name" />
+            <Label layoutX="243.0" layoutY="163.0" text="City" />
+            <Label layoutX="49.0" layoutY="224.0" text="E mail address" />
+            <Label layoutX="239.0" layoutY="224.0" text="Streetname" />
+            <Label layoutX="44.0" layoutY="284.0" text="Phone number" />
+            <Label layoutX="239.0" layoutY="284.0" text="Zip code" />
+            <Button layoutX="46.0" layoutY="351.0" mnemonicParsing="false" text="Add customer" />
+         </children>
+      </Pane>
+   </bottom>
+</BorderPane>

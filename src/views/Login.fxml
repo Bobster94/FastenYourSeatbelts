@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane fx:controller="controllers.LoginController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <Label text="Login" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets top="30.0" />
+         </BorderPane.margin>
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+   </top>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox layoutX="60.0" layoutY="29.0" prefHeight="42.0" prefWidth="140.0">
+               <children>
+                  <Label text="Username" />
+                  <TextField fx:id="txtUsername" />
+               </children>
+            </VBox>
+            <VBox layoutX="60.0" layoutY="78.0" prefHeight="42.0" prefWidth="140.0">
+               <children>
+                  <Label text="Password" />
+                  <PasswordField fx:id="txtPassword" prefHeight="25.0" prefWidth="140.0" />
+               </children>
+            </VBox>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="60.0" layoutY="201.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/corendon.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="btnLogin" layoutX="60.0" layoutY="138.0" mnemonicParsing="false" onAction="#Login" text="Login" />
+            <Button fx:id="btnDecline" layoutX="148.0" layoutY="138.0" mnemonicParsing="false" onAction="#Logout" text="Decline" />
+            <Label fx:id="lblError" layoutX="60.0" layoutY="193.0" text="Label" visible="false" />
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

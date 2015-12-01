@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DashboardController">
+   <top>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <top>
+            <HBox prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label text="Customer">
+                     <padding>
+                        <Insets left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </Label>
+                  <TextField />
+               </children>
+               <padding>
+                  <Insets bottom="5.0" />
+               </padding>
+            </HBox>
+         </top>
+         <left>
+            <TableView fx:id="tvCustomers" prefHeight="200.0" prefWidth="700.0" BorderPane.alignment="CENTER" />
+         </left>
+         <padding>
+            <Insets bottom="10.0" />
+         </padding>
+         <bottom>
+            <Button mnemonicParsing="false" text="Add new customer" BorderPane.alignment="CENTER_LEFT">
+               <BorderPane.margin>
+                  <Insets left="5.0" />
+               </BorderPane.margin>
+            </Button>
+         </bottom>
+         <BorderPane.margin>
+            <Insets left="5.0" />
+         </BorderPane.margin>
+      </BorderPane>
+   </top>
+   <left>
+      <BorderPane prefHeight="200.0" prefWidth="700.0" BorderPane.alignment="CENTER">
+         <left>
+            <VBox prefHeight="200.0" prefWidth="325.0" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox prefWidth="225.0">
+                     <children>
+                        <Label text="Search found luggage">
+                           <padding>
+                              <Insets left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </Label>
+                        <TextField />
+                     </children>
+                  </HBox>
+                  <TableView fx:id="tvFoundLuggage" prefHeight="150.0" prefWidth="200.0" />
+                  <Button mnemonicParsing="false" text="Add new found luggage" />
+               </children>
+            </VBox>
+         </left>
+         <right>
+            <VBox prefHeight="200.0" prefWidth="325.0" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox prefWidth="225.0">
+                     <children>
+                        <Label text="Search lost luggage">
+                           <padding>
+                              <Insets left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </Label>
+                        <TextField />
+                     </children>
+                  </HBox>
+                  <TableView fx:id="tvLostLuggage" prefHeight="150.0" prefWidth="200.0" />
+                  <Button mnemonicParsing="false" text="Add new lost luggage" />
+               </children>
+            </VBox>
+         </right>
+         <BorderPane.margin>
+            <Insets left="5.0" />
+         </BorderPane.margin>
+      </BorderPane>
+   </left>
+</BorderPane>
