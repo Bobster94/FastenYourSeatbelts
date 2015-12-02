@@ -41,6 +41,8 @@ public class AddCustomerController implements Initializable {
     @FXML private TextField city;
     @FXML private TextField email;
     @FXML private TextField street;
+    @FXML private TextField phone;
+    @FXML private TextField zip;
     
     
     
@@ -60,6 +62,10 @@ public class AddCustomerController implements Initializable {
         System.out.println(address);
         String straat = street.getText();
         System.out.println(straat);
+        String telefoon = phone.getText();
+        System.out.println(telefoon);
+        String code = zip.getText();
+        System.out.println(code);
         
         
     }
