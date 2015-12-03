@@ -1,117 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane id="SaveLost" fx:id="SaveLost" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddFoundLuggageController">
-   <top>
-      <AnchorPane prefHeight="400.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <left>
+      <VBox prefHeight="400.0" prefWidth="185.0" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="188.0" layoutY="207.0" text="Found at airport" />
-            <Label layoutX="11.0" layoutY="69.0" text="Color" />
-            <Label layoutX="11.0" layoutY="141.0" text="Type of luggage" />
-            <Label layoutX="14.0" layoutY="207.0" text="Brands" />
-            <Label layoutX="13.0" layoutY="278.0" text="Weight" />
-            <Label layoutX="188.0" layoutY="69.0" text="Size" />
-            <SplitMenuButton layoutX="14.0" layoutY="228.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="156.0" text="Eastpack">
-              <items>
-                  <MenuItem mnemonicParsing="false" text="Eastpack" />
-                <MenuItem mnemonicParsing="false" text="Button" />
-                <MenuItem mnemonicParsing="false" text="Samsonite" />
-                  <MenuItem mnemonicParsing="false" text="Porsche" />
-                  <MenuItem mnemonicParsing="false" text="Guccie" />
-                  <MenuItem mnemonicParsing="false" text="Other" />
-              </items>
-            </SplitMenuButton>
-            <SplitMenuButton layoutX="187.0" layoutY="90.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="160.0" text="Small">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="Small" />
-                  <MenuItem mnemonicParsing="false" text="Medium" />
-                  <MenuItem mnemonicParsing="false" text="Large" />
-                  <MenuItem mnemonicParsing="false" text="Extra large" />
-               </items>
-            </SplitMenuButton>
-            <SplitMenuButton layoutX="11.0" layoutY="301.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="157.0" text="0 &gt; 1 (kg)">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="0 &gt; 1" />
-                  <MenuItem mnemonicParsing="false" text="1 &gt; 3" />
-                  <MenuItem mnemonicParsing="false" text="3 &gt; 6" />
-                  <MenuItem mnemonicParsing="false" text="6 &gt; 10" />
-                  <MenuItem mnemonicParsing="false" text="10 &gt; 15" />
-                  <MenuItem mnemonicParsing="false" text="15 &gt; 20" />
-                  <MenuItem mnemonicParsing="false" text="20 &gt; 25" />
-                  <MenuItem mnemonicParsing="false" text="25+" />
-               </items>
-            </SplitMenuButton>
-            <SplitMenuButton layoutX="14.0" layoutY="163.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="156.0" text="Bag">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="Bag" />
-                  <MenuItem mnemonicParsing="false" text="Backpack" />
-                  <MenuItem mnemonicParsing="false" text="Hardcase" />
-                  <MenuItem mnemonicParsing="false" text="Softcase" />
-                  <MenuItem mnemonicParsing="false" text="Handbag" />
-               </items>
-            </SplitMenuButton>
-            <SplitMenuButton layoutX="8.0" layoutY="90.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="161.0" text="Blue">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="Blue" />
-                  <MenuItem mnemonicParsing="false" text="Red" />
-                  <MenuItem mnemonicParsing="false" text="Orange" />
-                  <MenuItem mnemonicParsing="false" text="Yellow" />
-                  <MenuItem mnemonicParsing="false" text="White" />
-                  <MenuItem mnemonicParsing="false" text="Purple" />
-                  <MenuItem mnemonicParsing="false" text="Green" />
-                  <MenuItem mnemonicParsing="false" text="Other" />
-               </items>
-            </SplitMenuButton>
-            <TextField layoutX="359.0" layoutY="92.0" prefHeight="168.0" prefWidth="201.0" text="For extra information" />
-            <Label layoutX="359.0" layoutY="69.0" text="Extra" />
-            <Label layoutX="14.0" layoutY="19.0" text="Specifications">
+            <Label text="Specifications">
+               <padding>
+                  <Insets bottom="20.0" left="10.0" top="10.0" />
+               </padding>
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <TextField fx:id="txtBarcode" layoutX="188.0" layoutY="163.0" prefHeight="31.0" prefWidth="159.0" />
-            <TextField fx:id="txtFoundAtAirport" layoutX="188.0" layoutY="228.0" prefHeight="31.0" prefWidth="158.0" />
-            <Label layoutX="188.0" layoutY="141.0" text="Barcode" />
-            <Button layoutX="360.0" layoutY="301.0" mnemonicParsing="false" onAction="#AddFoundLuggage" text="Add found luggage" />
-            <TextField text="Color">
+            <Label text="Color">
                <VBox.margin>
                   <Insets left="10.0" />
                </VBox.margin>
-            </TextField>
+            </Label>
             <ComboBox prefHeight="31.0" prefWidth="179.0" promptText="Blue">
                <VBox.margin>
                   <Insets left="10.0" />
                </VBox.margin>
+               <contextMenu>
+                  <ContextMenu>
+                    <items>
+                      <MenuItem mnemonicParsing="false" />
+                    </items>
+                  </ContextMenu>
+               </contextMenu>
             </ComboBox>
-            <TextField prefHeight="15.0" prefWidth="185.0" text="Type of Luggage">
+            <Label text="Type of luggage">
                <VBox.margin>
-                  <Insets left="10.0" top="15.0" />
+                  <Insets left="10.0" />
                </VBox.margin>
-            </TextField>
+            </Label>
             <ComboBox prefHeight="31.0" prefWidth="186.0" promptText="Bag">
                <VBox.margin>
                   <Insets left="10.0" />
                </VBox.margin>
             </ComboBox>
-            <TextField text="Brands">
+            <Label text="Brand">
                <VBox.margin>
-                  <Insets left="10.0" top="15.0" />
+                  <Insets left="10.0" />
                </VBox.margin>
-            </TextField>
+            </Label>
             <ComboBox prefHeight="31.0" prefWidth="191.0" promptText="Eastpack">
                <VBox.margin>
                   <Insets left="10.0" />
                </VBox.margin>
             </ComboBox>
-            <TextField text="Weight">
+            <Label text="Weight">
                <VBox.margin>
-                  <Insets left="10.0" top="15.0" />
+                  <Insets left="10.0" />
                </VBox.margin>
-            </TextField>
+            </Label>
             <ComboBox prefHeight="31.0" prefWidth="200.0" promptText="0 &gt; 1 KG">
                <VBox.margin>
                   <Insets left="10.0" />
@@ -125,27 +73,32 @@
          <children>
             <VBox prefHeight="400.0" prefWidth="180.0">
                <children>
-                  <TextField text="Size">
+                  <Label text="Size">
                      <VBox.margin>
                         <Insets left="10.0" top="60.0" />
                      </VBox.margin>
-                  </TextField>
+                  </Label>
                   <ComboBox prefHeight="31.0" prefWidth="175.0" promptText="Small">
                      <VBox.margin>
                         <Insets left="10.0" />
                      </VBox.margin>
                   </ComboBox>
-                  <TextField text="Barcode">
+                  <Label text="Barcode">
                      <VBox.margin>
-                        <Insets left="10.0" top="45.0" />
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TextField fx:id="Barcode">
+                     <VBox.margin>
+                        <Insets left="10.0" />
                      </VBox.margin>
                   </TextField>
-                  <TextField text="Found at airport">
+                  <Label text="Found at airport">
                      <VBox.margin>
-                        <Insets left="10.0" top="46.0" />
+                        <Insets left="10.0" />
                      </VBox.margin>
-                  </TextField>
-                  <TextField>
+                  </Label>
+                  <TextField fx:id="FoundAtAirport">
                      <VBox.margin>
                         <Insets left="10.0" />
                      </VBox.margin>
@@ -161,12 +114,17 @@
                   </Label>
                   <TextField prefHeight="197.0" prefWidth="234.0" text="for extra information">
                      <VBox.margin>
-                        <Insets left="10.0" right="15.0" top="25.0" />
+                        <Insets left="10.0" right="15.0" />
                      </VBox.margin>
                   </TextField>
+                  <Button mnemonicParsing="false" onAction="#AddFoundLuggage" text="Add found luggage">
+                     <VBox.margin>
+                        <Insets left="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Button>
                </children>
             </VBox>
          </children>
-      </AnchorPane>
-   </top>
+      </HBox>
+   </center>
 </BorderPane>
