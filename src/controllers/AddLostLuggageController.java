@@ -52,20 +52,20 @@ public class AddLostLuggageController implements Initializable {
     
     public void savechanges(ActionEvent event) {
     
-    String name = TXTCustomerfirstname.getText();
-    System.out.println(name);
-    
-    String namelast = TXTCustomerlastname.getText();
-    System.out.println(namelast);  
-    
-    String vacation = TXTVactationname.getText();
-    System.out.println(vacation);  
-     
-    String period = TXTVactationperiod.getText();
-    System.out.println(period); 
-    
-    String zipcode = TXTVactationzipcode.getText();
-    System.out.println(zipcode); 
+        String name = TXTCustomerfirstname.getText();
+        System.out.println(name);
+
+        String namelast = TXTCustomerlastname.getText();
+        System.out.println(namelast);  
+
+        String vacation = TXTVactationname.getText();
+        System.out.println(vacation);  
+
+        String period = TXTVactationperiod.getText();
+        System.out.println(period); 
+
+        String zipcode = TXTVactationzipcode.getText();
+        System.out.println(zipcode); 
     }
     
     
