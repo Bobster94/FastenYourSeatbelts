@@ -18,6 +18,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
@@ -41,23 +42,24 @@ public class AllLuggageController implements Initializable {
     private ObservableList<ObservableList> data;
     
     //CONNECTION DATABASE
-    public TableView buildData(TableView tableview, int luggageType){
+    public TableView buildData(TableView tableview, int luggageType, String selectFields){
           data = FXCollections.observableArrayList();
           try(Connection conn = Database.initDatabase()){
-            String SQL = "SELECT barcode,lostAirport,date,flightNummer FROM luggage WHERE lostFound = "+luggageType;
+            String SQL = "SELECT "+selectFields+" FROM luggage WHERE lostFound = "+luggageType;
             ResultSet rs = conn.createStatement().executeQuery(SQL);
-            
             for(int i=0 ; i<rs.getMetaData().getColumnCount(); i++){
                 final int j = i;                
                 TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i+1));
                 //Connect cell to the respective column
                 col.setCellValueFactory(new Callback<CellDataFeatures<ObservableList,String>,ObservableValue<String>>(){                    
+                    @Override
                     public ObservableValue<String> call(CellDataFeatures<ObservableList, String> param) {                                                                                              
                         return new SimpleStringProperty(param.getValue().get(j).toString());                        
                     }                    
                 });
                 tableview.getColumns().addAll(col); 
             }
+            
             //Add data to the tableview
             while(rs.next()){
                 //Iterate Row
@@ -68,10 +70,10 @@ public class AllLuggageController implements Initializable {
                 }
                 data.add(row);
             }
-            tableview.setItems(data);
-          }catch(Exception e){
-              System.out.println("Error on filling the tableview");             
-          }
-          return tableview;
+                tableview.setItems(data);
+            }catch(Exception e){
+                System.out.println("Error on filling the tableview");             
+            }
+            return tableview;
       }
 }

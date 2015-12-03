@@ -24,7 +24,12 @@ import javafx.stage.Stage;
  *
  * @author jandorresteijn
  */
-public class Main extends Application { 
+public class Main extends Application {
+    private static BorderPane root = new BorderPane();
+    public static BorderPane getRoot(){
+        return root;
+    }
+    
     @FXML private BorderPane master;
     @FXML private Label lblPage;
     LoginController login = new LoginController();
@@ -123,7 +128,7 @@ public class Main extends Application {
     
     @FXML
     protected void getDashboardScreen(ActionEvent event){
-        master.setLeft(dashboard.getDashboardScreen());
+        root.setLeft(dashboard.getDashboardScreen());
         lblPage.setText("Dashboard");
     }
     
@@ -131,9 +136,6 @@ public class Main extends Application {
         BorderPane screen = null;
         try {
             screen = FXMLLoader.load(getClass().getResource("/views/Main.fxml"));
-            DashboardController dashboard = new DashboardController();
-            screen.setLeft(dashboard.getDashboardScreen());
-            //lblPage.setText("Dashboard");
         } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -141,7 +143,19 @@ public class Main extends Application {
     }
     
     public void setMasterContent(BorderPane content) {
-        master.setLeft(content);
+        try {
+            root = FXMLLoader.load(getClass().getResource("/views/Main.fxml"));
+            root.setLeft(content);
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    @FXML
+    protected void GetAddLostLuggage(ActionEvent event){
+        //TODO
+        AddLostLuggageController add = new AddLostLuggageController();
+        master.setLeft(add.getAddLostLuggageScreen());
     }
     
     public static void main(String[] args) {

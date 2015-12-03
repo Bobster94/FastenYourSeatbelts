@@ -76,7 +76,7 @@ public class LoginController implements Initializable {
     @FXML private TextField txtPassword;
     
     @FXML 
-    protected void Login(ActionEvent event) {
+    protected void Login(ActionEvent event) throws IOException {
         String username = txtUsername.getText();
         String password = txtPassword.getText();
         
@@ -84,7 +84,11 @@ public class LoginController implements Initializable {
         if(valid) {
             //Get the main fxml
             Main main = new Main();
-            BorderPane root = main.getMainScreen();
+            
+            //Set master screen
+            BorderPane root = main.getRoot();
+            root.setTop(FXMLLoader.load(getClass().getResource("/views/Main.fxml")));
+            root.setLeft(FXMLLoader.load(getClass().getResource("/views/Dashboard.fxml")));
 
             //Add the fxml to the scene
             Scene scene = new Scene(root);
