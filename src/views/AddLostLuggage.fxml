@@ -85,7 +85,7 @@
             <TextField layoutX="393.0" layoutY="47.0" prefHeight="140.0" prefWidth="201.0" />
             <ScrollBar layoutX="580.0" layoutY="49.0" orientation="VERTICAL" prefHeight="136.0" prefWidth="14.0" />
             <Label layoutX="426.0" layoutY="23.0" text="Extra" />
-            <Button layoutX="414.0" layoutY="366.0" mnemonicParsing="false" onAction="#savechanges"  prefHeight="25.0" prefWidth="91.0" text="Edit Save" />
+            <Button layoutX="414.0" layoutY="366.0" mnemonicParsing="false" onAction="#savechanges" prefHeight="25.0" prefWidth="91.0" text="Edit Save" />
             <Button layoutX="505.0" layoutY="366.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="92.0" text="Decline" />
          </children>
       </AnchorPane>
