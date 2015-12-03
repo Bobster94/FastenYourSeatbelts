@@ -2,3 +2,5 @@
 /dist/
 /nbproject/private/
 src/controllers/Database.java
+
+*.properties
