@@ -4,28 +4,25 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane id="SaveLost" fx:id="SaveLost" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddLostLuggageController">
+<BorderPane id="SaveLost" fx:id="SaveLost" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddLostLuggageController">
    <bottom>
       <AnchorPane prefHeight="400.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
             <Label layoutX="42.0" layoutY="14.0" text="Customer first name" />
-            <Label layoutX="44.0" layoutY="70.0" text="Customer last name" />
-            <Label layoutX="53.0" layoutY="198.0" text="Vacation period:" />
-            <Label layoutX="42.0" layoutY="132.0" text="Vacation destination" />
-            <Label layoutX="256.0" layoutY="347.0" text="Lost at airport" />
-            <Label layoutX="43.0" layoutY="347.0" text="Vacation Zipcode" />
-            <Label layoutX="37.0" layoutY="286.0" text="Vacation Adress" />
-            <TextArea fx:id="TXTCustomerfirstname" layoutX="43.0" layoutY="39.0" prefHeight="20.0" prefWidth="118.0" />
-            <TextArea fx:id="TXTCustomerlastname" layoutX="41.0" layoutY="94.0" prefHeight="20.0" prefWidth="118.0" />
-            <TextArea fx:id="TXTVactationname" layoutX="41.0" layoutY="155.0" prefHeight="20.0" prefWidth="118.0" />
-            <TextArea fx:id="TXTVactationperiod" layoutX="44.0" layoutY="243.0" prefHeight="20.0" prefWidth="57.0" />
-            <TextArea fx:id="TXTVactationzipcode" layoutX="38.0" layoutY="313.0" prefHeight="20.0" prefWidth="118.0" />
-            <TextArea layoutX="43.0" layoutY="368.0" prefHeight="20.0" prefWidth="118.0" />
-            <TextArea layoutX="256.0" layoutY="368.0" prefHeight="20.0" prefWidth="118.0" />
-            <TextArea layoutX="110.0" layoutY="243.0" prefHeight="20.0" prefWidth="60.0" />
-            <Label layoutX="111.0" layoutY="223.0" text="To" />
-            <Label layoutX="44.0" layoutY="223.0" text="From" />
-            <TextArea layoutX="161.0" layoutY="313.0" prefHeight="20.0" prefWidth="51.0" />
+            <Label layoutX="43.0" layoutY="60.0" text="Customer last name" />
+            <Label layoutX="48.0" layoutY="180.0" text="City" />
+            <Label layoutX="43.0" layoutY="141.0" text="Birtdate" />
+            <Label layoutX="414.0" layoutY="14.0" text="Lost at airport" />
+            <Label layoutX="43.0" layoutY="318.0" text="Email" />
+            <Label layoutX="46.0" layoutY="270.0" text="House number" />
+            <TextArea fx:id="TXTCustomerfirstname" layoutX="43.0" layoutY="30.0" prefHeight="20.0" prefWidth="118.0" />
+            <TextArea fx:id="TXTCustomerlastname" layoutX="41.0" layoutY="78.0" prefHeight="20.0" prefWidth="118.0" />
+            <TextArea fx:id="TXTBirthdate" layoutX="43.0" layoutY="158.0" prefHeight="20.0" prefWidth="118.0" />
+            <TextArea fx:id="TXTStreet" layoutX="44.0" layoutY="243.0" prefHeight="20.0" prefWidth="117.0" />
+            <TextArea fx:id="TXTEmail" layoutX="41.0" layoutY="337.0" prefHeight="20.0" prefWidth="118.0" />
+            <TextArea fx:id="TXTLostatairport" layoutX="414.0" layoutY="30.0" prefHeight="20.0" prefWidth="118.0" />
+            <Label layoutX="44.0" layoutY="223.0" text="Street" />
+            <TextArea fx:id="TXTHousenumber" layoutX="44.0" layoutY="291.0" prefHeight="20.0" prefWidth="115.0" />
             <Label layoutX="258.0" layoutY="14.0" text="Color" />
             <Label layoutX="254.0" layoutY="79.0" text="Type of luggage" />
             <Label layoutX="261.0" layoutY="141.0" text="Brands" />
@@ -82,11 +79,16 @@
                   <MenuItem mnemonicParsing="false" text="Other" />
                </items>
             </SplitMenuButton>
-            <TextField layoutX="393.0" layoutY="47.0" prefHeight="140.0" prefWidth="201.0" />
-            <ScrollBar layoutX="580.0" layoutY="49.0" orientation="VERTICAL" prefHeight="136.0" prefWidth="14.0" />
-            <Label layoutX="426.0" layoutY="23.0" text="Extra" />
+            <Label layoutX="414.0" layoutY="119.0" text="Extra" />
             <Button layoutX="414.0" layoutY="366.0" mnemonicParsing="false" onAction="#savechanges" prefHeight="25.0" prefWidth="91.0" text="Edit Save" />
-            <Button layoutX="505.0" layoutY="366.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="92.0" text="Decline" />
+            <Label layoutX="42.0" layoutY="102.0" text="Insertion" />
+            <TextArea fx:id="TXTInsertion" layoutX="41.0" layoutY="117.0" prefHeight="20.0" prefWidth="118.0" />
+            <TextArea fx:id="TXTCity" layoutX="42.0" layoutY="197.0" prefHeight="20.0" prefWidth="118.0" />
+            <TextArea fx:id="TXTDate" layoutX="41.0" layoutY="376.0" prefHeight="20.0" prefWidth="118.0" />
+            <Label layoutX="46.0" layoutY="360.0" text="Date" />
+            <TextArea fx:id="TXTPhonenumber" layoutX="414.0" layoutY="78.0" prefHeight="20.0" prefWidth="118.0" />
+            <Label layoutX="414.0" layoutY="60.0" text="Phone number" />
+            <TextArea fx:id="TXTExtra" layoutX="414.0" layoutY="143.0" prefHeight="200.0" prefWidth="200.0" />
          </children>
       </AnchorPane>
    </bottom>

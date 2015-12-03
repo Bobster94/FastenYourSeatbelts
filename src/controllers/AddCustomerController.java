@@ -5,6 +5,7 @@
  */
 package controllers;
 
+import com.mysql.jdbc.Connection;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -67,30 +68,7 @@ public class AddCustomerController implements Initializable {
         String code = zip.getText();
         System.out.println(code);
         
-        try(Connection conn = Database.initDatabase()) {
-            String SQL = "SELECT firstName,lastName,birthDate,city,street,houseNumber,email,phoneNumber "
-                + "FROM customer "
-                + "WHERE lastName LIKE '%"+lastname+"%' "
-                + "AND birthDate LIKE '%"+birthdate+"%'";
-            ResultSet rs = conn.createStatement().executeQuery(SQL);
-            
-            //Add data to the tableview
-            while(rs.next()) {
-                //Iterate Row
-                ObservableList<String> row = FXCollections.observableArrayList();
-                for(int i=1 ; i<=rs.getMetaData().getColumnCount(); i++){
-                    //Iterate Column
-                    row.add(rs.getString(i));
-                }
-                data.add(row);
-            }
-            tvCustomers.setItems(data);
-        } catch(Exception e){
-            System.out.println("Error on filling the tableview");             
-        } 
-    }
-        
-        
+         
     }
     
     public BorderPane getAddCustomerScreen() {
