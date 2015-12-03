@@ -60,7 +60,8 @@ public class AddFoundLuggageController implements Initializable {
         System.out.println(textveld2);
         
         try(Connection conn = Database.initDatabase()){
-            String SQL = "INSERT INTO luggage (brand,color,type,weight,size,barcode,lostAirport,extra,lostFound,material,date,flightNummer,idEmployee) "
+            String SQL = "INSERT INTO luggage (brand,color,type,weight,size,barcode,lostAirport,"
+                    + "extra,lostFound,material,date,flightNummer,idEmployee) "
                     + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
             
             

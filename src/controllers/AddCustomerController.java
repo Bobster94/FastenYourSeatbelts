@@ -5,9 +5,9 @@
  */
 package controllers;
 
+import com.mysql.jdbc.Connection;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -70,13 +70,14 @@ public class AddCustomerController implements Initializable {
         String code = zip.getText();
         System.out.println(code);
         
-        try(Connection conn = Database.initDatabase()){
+
+        try(Connection conn = (Connection) Database.initDatabase()){
             String Customer = "INSERT INTO customer (firstname,insertion,lastname,birthDate,city,street,houseNumber,email,date,phoneNumber,idEmployee) "
                     + "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
             
             
             PreparedStatement preparedStatement = conn.prepareStatement(Customer);
-            preparedStatement.setString(1, "test");
+            preparedStatement.setString(1, name);
 	    preparedStatement.setString(2, "test"); 
             preparedStatement.setString(3, lastname);
             preparedStatement.setDate(4, java.sql.Date.valueOf("1996-02-03"));
@@ -93,6 +94,7 @@ public class AddCustomerController implements Initializable {
         }
         
         
+ 
     }
     
     public BorderPane getAddCustomerScreen() {
