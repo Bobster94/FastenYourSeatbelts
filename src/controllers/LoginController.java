@@ -36,6 +36,9 @@ public class LoginController implements Initializable {
     @FXML private Label lblError;
     private Boolean loginValidation(String username, String password) {
         Boolean valid = false;
+        Admin adminn = new Admin();
+        int admin;
+        admin = 1;
         try(Connection conn = Database.initDatabase()) {
             //Select the employee with the given username and password
             String selectEmployee = 
@@ -58,6 +61,7 @@ public class LoginController implements Initializable {
                 lblError.setText("Username and/or password is wrong");
                 lblError.setVisible(true);
             } else {
+                adminn.setAdmin(admin);
                 valid = true;
             }
             conn.close();
