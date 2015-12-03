@@ -36,6 +36,9 @@ public class LoginController implements Initializable {
     @FXML private Label lblError;
     private Boolean loginValidation(String username, String password) {
         Boolean valid = false;
+        Admin adminn = new Admin();
+        int admin;
+        admin = 1;
         try(Connection conn = Database.initDatabase()) {
             //Select the employee with the given username and password
             String selectEmployee = 
@@ -58,6 +61,7 @@ public class LoginController implements Initializable {
                 lblError.setText("Username and/or password is wrong");
                 lblError.setVisible(true);
             } else {
+                adminn.setAdmin(admin);
                 valid = true;
             }
             conn.close();
@@ -72,7 +76,7 @@ public class LoginController implements Initializable {
     @FXML private TextField txtPassword;
     
     @FXML 
-    protected void Login(ActionEvent event) {
+    protected void Login(ActionEvent event) throws IOException {
         String username = txtUsername.getText();
         String password = txtPassword.getText();
         
@@ -80,7 +84,11 @@ public class LoginController implements Initializable {
         if(valid) {
             //Get the main fxml
             Main main = new Main();
-            BorderPane root = main.getMainScreen();
+            
+            //Set master screen
+            BorderPane root = main.getRoot();
+            root.setTop((Node) FXMLLoader.load(getClass().getResource("/views/Main.fxml")));
+            root.setLeft((Node) FXMLLoader.load(getClass().getResource("/views/Dashboard.fxml")));
 
             //Add the fxml to the scene
             Scene scene = new Scene(root);

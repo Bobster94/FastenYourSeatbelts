@@ -11,12 +11,22 @@
          <top>
             <HBox prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label text="Customer">
+                  <Label text="Search customer">
                      <padding>
                         <Insets left="5.0" right="5.0" top="5.0" />
                      </padding>
                   </Label>
-                  <TextField />
+                  <TextField fx:id="txtSearchCustomerLastname" promptText="Last name" />
+                  <TextField fx:id="txtSearchCustomerBirthdate" promptText="Birthdate">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <Button fx:id="btnSearchCustomer" mnemonicParsing="false" onAction="#searchCustomer" text="Search">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </Button>
                </children>
                <padding>
                   <Insets bottom="5.0" />
@@ -30,7 +40,7 @@
             <Insets bottom="10.0" />
          </padding>
          <bottom>
-            <Button onAction="#GetAddCustomer" fx:id="btnAddCustomer" mnemonicParsing="false" text="Add new customer" BorderPane.alignment="CENTER_LEFT">
+            <Button fx:id="btnAddCustomer" mnemonicParsing="false" onAction="#GetAddCustomer" text="Add new customer" BorderPane.alignment="CENTER_LEFT">
                <BorderPane.margin>
                   <Insets left="5.0" />
                </BorderPane.margin>
@@ -53,11 +63,16 @@
                               <Insets left="5.0" right="5.0" top="5.0" />
                            </padding>
                         </Label>
-                        <TextField />
+                        <TextField fx:id="txtSearchFoundLuggage" prefHeight="25.0" prefWidth="110.0" promptText="Flight number" />
+                        <Button fx:id="btnSearchFoundLuggage" mnemonicParsing="false" onAction="#searchFoundLuggage" text="Search">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </Button>
                      </children>
                   </HBox>
                   <TableView fx:id="tvFoundLuggage" prefHeight="150.0" prefWidth="200.0" />
-                  <Button onAction="#GetAddFoundLuggage" fx:id="btnAddFoundLuggage" mnemonicParsing="false" text="Add new found luggage" />
+                  <Button fx:id="btnAddFoundLuggage" mnemonicParsing="false" onAction="#GetAddFoundLuggage" text="Add new found luggage" />
                </children>
             </VBox>
          </left>
@@ -71,11 +86,16 @@
                               <Insets left="5.0" right="5.0" top="5.0" />
                            </padding>
                         </Label>
-                        <TextField />
+                        <TextField fx:id="txtSearchLostLuggage" prefHeight="25.0" prefWidth="110.0" promptText="Flight number" />
+                        <Button fx:id="btnSearchLostLuggage" mnemonicParsing="false" onAction="#searchLostLuggage" text="Search">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </Button>
                      </children>
                   </HBox>
                   <TableView fx:id="tvLostLuggage" prefHeight="150.0" prefWidth="200.0" />
-                  <Button onAction="#GetAddLostLuggage" fx:id="btnAddLostLuggage" mnemonicParsing="false" text="Add new lost luggage" />
+                  <Button fx:id="btnAddLostLuggage" mnemonicParsing="false" text="Add new lost luggage" />
                </children>
             </VBox>
          </right>

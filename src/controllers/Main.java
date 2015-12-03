@@ -24,7 +24,12 @@ import javafx.stage.Stage;
  *
  * @author jandorresteijn
  */
-public class Main extends Application { 
+public class Main extends Application {
+    private static BorderPane root = new BorderPane();
+    public static BorderPane getRoot(){
+        return root;
+    }
+    
     @FXML private BorderPane master;
     @FXML private Label lblPage;
     LoginController login = new LoginController();
@@ -60,17 +65,17 @@ public class Main extends Application {
         switch(selectedValue) {
             case 0:
                 AllLostLuggageController allLostLuggage = new AllLostLuggageController();
-                master.setLeft(allLostLuggage.getAllLostLuggageScreen());
+                root.setLeft(allLostLuggage.getAllLostLuggageScreen());
                 lblPage.setText("All lost luggage");
                 break;
             case 1:
                 AddLostLuggageController addLostLuggage = new AddLostLuggageController();
-                master.setLeft(addLostLuggage.getAddLostLuggageScreen());
+                root.setLeft(addLostLuggage.getAddLostLuggageScreen());
                 lblPage.setText("Add lost luggage");
                 break;
             case 2:
                 EditLostLuggageController editLostLuggage = new EditLostLuggageController();
-                master.setLeft(editLostLuggage.getEditLostLuggageScreen());
+                root.setLeft(editLostLuggage.getEditLostLuggageScreen());
                 lblPage.setText("Edit lost luggage");
                 break;
         }
@@ -83,12 +88,12 @@ public class Main extends Application {
         switch(selectedValue) {
             case 0:
                 AllCustomerController allCustomers = new AllCustomerController();
-                master.setLeft(allCustomers.getAllCustomerScreen());
+                root.setLeft(allCustomers.getAllCustomerScreen());
                 lblPage.setText("All customers");
                 break;
             case 1:
                 AddCustomerController addCustomer = new AddCustomerController();
-                master.setLeft(addCustomer.getAddCustomerScreen());
+                root.setLeft(addCustomer.getAddCustomerScreen());
                 lblPage.setText("Add customer");
                 break;
             case 2:
@@ -106,12 +111,12 @@ public class Main extends Application {
         switch(selectedValue) {
             case 0:
                 AllFoundLuggageController allFoundLuggage = new AllFoundLuggageController();
-                master.setLeft(allFoundLuggage.getAllFoundLuggageScreen());
+                root.setLeft(allFoundLuggage.getAllFoundLuggageScreen());
                 lblPage.setText("All found luggage");
                 break;
             case 1:
                 AddFoundLuggageController addFoundLuggage = new AddFoundLuggageController();
-                master.setLeft(addFoundLuggage.getAddFoundLuggageScreen());
+                root.setLeft(addFoundLuggage.getAddFoundLuggageScreen());
                 lblPage.setText("Add found luggage");
                 break;
             case 2:
@@ -123,7 +128,7 @@ public class Main extends Application {
     
     @FXML
     protected void getDashboardScreen(ActionEvent event){
-        master.setLeft(dashboard.getDashboardScreen());
+        root.setLeft(dashboard.getDashboardScreen());
         lblPage.setText("Dashboard");
     }
     
@@ -131,9 +136,6 @@ public class Main extends Application {
         BorderPane screen = null;
         try {
             screen = FXMLLoader.load(getClass().getResource("/views/Main.fxml"));
-            DashboardController dashboard = new DashboardController();
-            screen.setLeft(dashboard.getDashboardScreen());
-            //lblPage.setText("Dashboard");
         } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -141,7 +143,19 @@ public class Main extends Application {
     }
     
     public void setMasterContent(BorderPane content) {
-        master.setLeft(content);
+        try {
+            root = FXMLLoader.load(getClass().getResource("/views/Main.fxml"));
+            root.setLeft(content);
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    @FXML
+    protected void GetAddLostLuggage(ActionEvent event){
+        //TODO
+        AddLostLuggageController add = new AddLostLuggageController();
+        root.setLeft(add.getAddLostLuggageScreen());
     }
     
     public static void main(String[] args) {
