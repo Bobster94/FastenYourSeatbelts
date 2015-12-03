@@ -20,6 +20,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -96,7 +97,7 @@ public class DashboardController implements Initializable {
 //            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
 //        }
         URL paneOneUrl = getClass().getResource("/views/AddFoundLuggage.fxml");
-        root.setLeft(FXMLLoader.load(paneOneUrl));
+        root.setLeft((Node) FXMLLoader.load(paneOneUrl));
         //AddFoundLuggageController add = new AddFoundLuggageController();
         //root.setLeft(add.getAddFoundLuggageScreen());
     }

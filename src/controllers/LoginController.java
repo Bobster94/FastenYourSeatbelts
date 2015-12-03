@@ -87,8 +87,8 @@ public class LoginController implements Initializable {
             
             //Set master screen
             BorderPane root = main.getRoot();
-            root.setTop(FXMLLoader.load(getClass().getResource("/views/Main.fxml")));
-            root.setLeft(FXMLLoader.load(getClass().getResource("/views/Dashboard.fxml")));
+            root.setTop((Node) FXMLLoader.load(getClass().getResource("/views/Main.fxml")));
+            root.setLeft((Node) FXMLLoader.load(getClass().getResource("/views/Dashboard.fxml")));
 
             //Add the fxml to the scene
             Scene scene = new Scene(root);

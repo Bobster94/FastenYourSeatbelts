@@ -116,7 +116,7 @@ public class Main extends Application {
                 break;
             case 1:
                 AddFoundLuggageController addFoundLuggage = new AddFoundLuggageController();
-                master.setLeft(addFoundLuggage.getAddFoundLuggageScreen());
+                root.setLeft(addFoundLuggage.getAddFoundLuggageScreen());
                 lblPage.setText("Add found luggage");
                 break;
             case 2:
