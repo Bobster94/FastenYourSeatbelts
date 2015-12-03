@@ -7,6 +7,9 @@ package controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -62,33 +65,32 @@ public class AddCustomerController implements Initializable {
         System.out.println(address);
         String straat = street.getText();
         System.out.println(straat);
-        String telefoon = phone.getText();
+        int telefoon = Integer.parseInt(phone.getText());
         System.out.println(telefoon);
         String code = zip.getText();
         System.out.println(code);
         
-        try(Connection conn = Database.initDatabase()) {
-            String SQL = "SELECT firstName,lastName,birthDate,city,street,houseNumber,email,phoneNumber "
-                + "FROM customer "
-                + "WHERE lastName LIKE '%"+lastname+"%' "
-                + "AND birthDate LIKE '%"+birthdate+"%'";
-            ResultSet rs = conn.createStatement().executeQuery(SQL);
+        try(Connection conn = Database.initDatabase()){
+            String Customer = "INSERT INTO customer (firstname,insertion,lastname,birthDate,city,street,houseNumber,email,date,phoneNumber,idEmployee) "
+                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
             
-            //Add data to the tableview
-            while(rs.next()) {
-                //Iterate Row
-                ObservableList<String> row = FXCollections.observableArrayList();
-                for(int i=1 ; i<=rs.getMetaData().getColumnCount(); i++){
-                    //Iterate Column
-                    row.add(rs.getString(i));
-                }
-                data.add(row);
-            }
-            tvCustomers.setItems(data);
-        } catch(Exception e){
-            System.out.println("Error on filling the tableview");             
-        } 
-    }
+            
+            PreparedStatement preparedStatement = conn.prepareStatement(Customer);
+            preparedStatement.setString(1, "test");
+	    preparedStatement.setString(2, "test"); 
+            preparedStatement.setString(3, lastname);
+            preparedStatement.setDate(4, java.sql.Date.valueOf("1996-02-03"));
+            preparedStatement.setString(5, stad);
+            preparedStatement.setString(6, straat);
+            preparedStatement.setString(7, "test");
+            preparedStatement.setString(8, address);
+            preparedStatement.setDate(9, java.sql.Date.valueOf("1996-03-03"));
+            preparedStatement.setInt(10, telefoon);
+            preparedStatement.setInt(11, 1);
+            preparedStatement.executeUpdate();
+    }   catch (SQLException ex) {
+            Logger.getLogger(AddCustomerController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         
     }
