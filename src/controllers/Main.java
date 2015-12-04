@@ -16,7 +16,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -43,6 +43,7 @@ public class Main extends Application {
         //Add fxml to the scene
         primaryStage.setScene(new Scene(bpRoot, 320, 400));
         primaryStage.setResizable(false);
+        primaryStage.getIcons().add(new Image("images/favicon.png"));
         primaryStage.setTitle("Corendon Luggage Application");
         primaryStage.show();
     }
@@ -149,13 +150,6 @@ public class Main extends Application {
         } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-    
-    @FXML
-    protected void GetAddLostLuggage(ActionEvent event){
-        //TODO
-        AddLostLuggageController add = new AddLostLuggageController();
-        root.setLeft(add.getAddLostLuggageScreen());
     }
     
     public static void main(String[] args) {

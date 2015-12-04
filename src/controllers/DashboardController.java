@@ -40,6 +40,7 @@ public class DashboardController implements Initializable {
     @FXML private TableView tvFoundLuggage;
     @FXML private TableView tvCustomers;
     
+    
     /**
      * Initializes the controller class.
      */
@@ -51,6 +52,7 @@ public class DashboardController implements Initializable {
         tvFoundLuggage = allL.buildData(tvFoundLuggage,1, "barcode,lostAirport,date,flightNummer");
         tvCustomers = buildCustomersTable(tvCustomers);
     }
+    
     private ObservableList<ObservableList> data;
     public TableView buildCustomersTable(TableView tableview) {
        data = FXCollections.observableArrayList();
@@ -76,10 +78,11 @@ public class DashboardController implements Initializable {
                 for(int i=1 ; i<=rs.getMetaData().getColumnCount(); i++){
                     //Iterate Column
                     row.add(rs.getString(i));
+                    
                 }
                 data.add(row);
             }
-                tableview.setItems(data);
+            tableview.setItems(data);
             }catch(Exception e){
                 System.out.println("Error on filling the tableview");             
             }

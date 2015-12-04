@@ -1,22 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.collections.FXCollections?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AllLostLuggageController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AllLostLuggageController">
    <center>
-      <AnchorPane prefHeight="400.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="400.0" prefWidth="700.0" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="14.0" layoutY="14.0" text="Lost Luggage" />
-            <TextArea layoutX="14.0" layoutY="39.0" prefHeight="22.0" prefWidth="171.0" />
-            <TreeTableView layoutX="14.0" layoutY="80.0" prefHeight="250.0" prefWidth="557.0">
-              <columns>
-                <TreeTableColumn prefWidth="75.0" text="C1" />
-                <TreeTableColumn prefWidth="75.0" text="C2" />
-              </columns>
-            </TreeTableView>
+            <TableView fx:id="tvLostLuggage" layoutX="14.0" layoutY="80.0" prefHeight="250.0" prefWidth="760.0" />
             <Button layoutX="14.0" layoutY="351.0" mnemonicParsing="false" text="Add Lost Luggage" />
+            <VBox layoutX="14.0" layoutY="11.0" prefHeight="63.0" prefWidth="650.0">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="650.0">
+                     <children>
+                        <ComboBox fx:id="cbColor" prefWidth="130.0" promptText="Color">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="Blue" />
+                                    <String fx:value="Green" />
+                                    <String fx:value="Red" />
+                                    <String fx:value="Yellow" />
+                                    <String fx:value="Black" />
+                                    <String fx:value="White" />
+                                    <String fx:value="Grey" />
+                                    <String fx:value="Purple" />
+                                </FXCollections>
+                            </items>    
+                        </ComboBox>
+                        <ComboBox fx:id="cbSize" prefWidth="110.0" promptText="Size">
+                                                        <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="small" />
+                                    <String fx:value="medium" />
+                                    <String fx:value="large" />
+                                </FXCollections>
+                            </items>  
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </ComboBox>
+                        <TextField fx:id="txtMaterial" prefWidth="110.0" promptText="Material">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </TextField>
+                        <TextField fx:id="txtFlightnumber" prefWidth="110.0" promptText="Flight number">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </TextField>
+                        <TextField fx:id="cbBrand" prefWidth="110.0" promptText="Brand">
+                            <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="650.0">
+                     <children>
+                        <ComboBox fx:id="cbType" prefWidth="130.0" promptText="Luggage type">
+                                                        <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="Hardcase" />
+                                    <String fx:value="bag" />
+                                    <String fx:value="handbag" />
+                                </FXCollections>
+                            </items>  
+                        </ComboBox>
+                        <ComboBox fx:id="cbWeight" prefWidth="110.0" promptText="Weight">
+                                                        <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="1 - 10" />
+                                    <String fx:value="11 - 20" />
+                                    <String fx:value="21 - 30" />
+                                </FXCollections>
+                            </items>  
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </ComboBox>
+                        <TextField fx:id="txtExtra" prefWidth="110.0" promptText="Extra">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </TextField>
+                        <TextField fx:id="txtDate" prefWidth="110.0" promptText="Date">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </TextField>
+                        <Button fx:id="btnSearchLostLuggage" mnemonicParsing="false" onAction="#searchLostLuggage" prefWidth="110.0" text="Search">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
          </children>
       </AnchorPane>
    </center>
