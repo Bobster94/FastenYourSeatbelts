@@ -69,12 +69,11 @@ public class AddCustomerController implements Initializable {
         System.out.println(telefoon);
         String code = zip.getText();
         System.out.println(code);
-        int zip = Integer.parseInt(phone.getText());
         
 
         try(Connection conn = (Connection) Database.initDatabase()){
-            String Customer = "INSERT INTO customer (firstname,insertion,lastname,birthDate,city,street,houseNumber,email,date,phoneNumber,idEmployee,country,zipcode) "
-                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            String Customer = "INSERT INTO customer (firstname,insertion,lastname,birthDate,city,street,houseNumber,email,date,phoneNumber,idEmployee) "
+                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
             
             
             PreparedStatement preparedStatement = conn.prepareStatement(Customer);
@@ -89,8 +88,6 @@ public class AddCustomerController implements Initializable {
             preparedStatement.setDate(9, java.sql.Date.valueOf("1996-03-03"));
             preparedStatement.setInt(10, telefoon);
             preparedStatement.setInt(11, 1);
-            preparedStatement.setString(12, counrty);
-            preparedStatement.setInt(13, zip);
             preparedStatement.executeUpdate();
     }   catch (SQLException ex) {
             Logger.getLogger(AddCustomerController.class.getName()).log(Level.SEVERE, null, ex);
