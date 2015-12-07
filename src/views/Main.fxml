@@ -75,7 +75,7 @@
                         </FXCollections>
                     </items>
                   </ComboBox>
-                  <Button mnemonicParsing="false" onAction="#getManagerScreen" text="Manager" />
+                  <Button fx:id="cbManager" mnemonicParsing="false" onAction="#getManagerScreen" text="Manager" />
               </items>
             </ToolBar>
          </children>

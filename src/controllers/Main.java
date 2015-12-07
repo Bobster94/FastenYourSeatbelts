@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -54,9 +55,17 @@ public class Main extends Application {
         stage.close();
     }
     
+    @FXML private Button cbManager;
     @FXML
     protected void getManagerScreen(ActionEvent event){
-        //TODO
+        ManagerController manager = new ManagerController();
+        root.setLeft(manager.getManagerScreen());
+        lblPage.setText("Manager");
+        
+        int admin2 = 1;
+        if (admin2 == 1) {
+            cbManager.setDisable(true);
+        }
     }
     
     @FXML private ComboBox cbLostLuggage;
