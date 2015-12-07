@@ -17,6 +17,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
@@ -36,13 +37,11 @@ public class LoginController implements Initializable {
     @FXML private Label lblError;
     private Boolean loginValidation(String username, String password) {
         Boolean valid = false;
-        Admin adminn = new Admin();
-        int admin;
-        admin = 1;
+        
         try(Connection conn = Database.initDatabase()) {
             //Select the employee with the given username and password
             String selectEmployee = 
-                    "SELECT userName,firstName,lastName,password,email " +
+                    "SELECT userName,firstName,lastName,password,email,admin " +
                     "FROM employee " +
                     "WHERE userName = ? AND password = ?";
             
@@ -61,7 +60,10 @@ public class LoginController implements Initializable {
                 lblError.setText("Username and/or password is wrong");
                 lblError.setVisible(true);
             } else {
-                adminn.setAdmin(admin);
+                int admin;
+                admin = employee.getInt("admin");
+                Main.admin.setAdmin(admin);
+                System.out.println(employee.getInt("admin"));
                 valid = true;
             }
             conn.close();
@@ -74,6 +76,7 @@ public class LoginController implements Initializable {
     
     @FXML private TextField txtUsername;
     @FXML private TextField txtPassword;
+    @FXML private Button cbManager;
     
     @FXML 
     protected void Login(ActionEvent event) throws IOException {
@@ -89,7 +92,7 @@ public class LoginController implements Initializable {
             BorderPane root = main.getRoot();
             root.setTop((Node) FXMLLoader.load(getClass().getResource("/views/Main.fxml")));
             root.setLeft((Node) FXMLLoader.load(getClass().getResource("/views/Dashboard.fxml")));
-
+            
             //Add the fxml to the scene
             Scene scene = new Scene(root);
             Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();

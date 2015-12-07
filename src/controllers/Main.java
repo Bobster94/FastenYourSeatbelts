@@ -27,12 +27,14 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
     private static BorderPane root = new BorderPane();
+    public static Admin admin = new Admin();
     public static BorderPane getRoot(){
         return root;
     }
     
     @FXML private BorderPane master;
     @FXML private Label lblPage;
+    @FXML private Label lblUser;
     LoginController login = new LoginController();
     DashboardController dashboard = new DashboardController();
     
@@ -61,10 +63,11 @@ public class Main extends Application {
         ManagerController manager = new ManagerController();
         root.setLeft(manager.getManagerScreen());
         lblPage.setText("Manager");
-        
-        int admin2 = 1;
-        if (admin2 == 1) {
+        int admin2=  admin.getAdmin();
+        if (admin2 == 0) {
             cbManager.setDisable(true);
+        }else{
+            cbManager.setDisable(false);
         }
     }
     
@@ -142,24 +145,6 @@ public class Main extends Application {
         lblPage.setText("Dashboard");
     }
     
-    public BorderPane getMainScreen()  {
-        BorderPane screen = null;
-        try {
-            screen = FXMLLoader.load(getClass().getResource("/views/Main.fxml"));
-        } catch (IOException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return screen;
-    }
-    
-    public void setMasterContent(BorderPane content) {
-        try {
-            root = FXMLLoader.load(getClass().getResource("/views/Main.fxml"));
-            root.setLeft(content);
-        } catch (IOException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
     
     public static void main(String[] args) {
         launch(args);

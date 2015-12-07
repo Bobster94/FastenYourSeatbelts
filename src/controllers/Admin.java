@@ -14,7 +14,7 @@ public class Admin {
     public static final int manager = 1;
     
     private int admin;
-    
+     
     public Admin() {
         admin = user;
     }
@@ -24,7 +24,7 @@ public class Admin {
     }
 
     public void setAdmin(int manager) {
-        this.admin = admin;
+        this.admin = manager;
     }
     
    
