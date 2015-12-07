@@ -30,7 +30,15 @@
                <contextMenu>
                   <ContextMenu>
                     <items>
-                      <MenuItem mnemonicParsing="false" />
+                      <MenuItem mnemonicParsing="false" text="Blue" />
+                        <MenuItem mnemonicParsing="false" text="Red" />
+                        <MenuItem mnemonicParsing="false" text="Orange" />
+                        <MenuItem mnemonicParsing="false" text="Yellow" />
+                        <MenuItem mnemonicParsing="false" text="White" />
+                        <MenuItem mnemonicParsing="false" text="Purple" />
+                        <MenuItem mnemonicParsing="false" text="Green" />
+                        <MenuItem mnemonicParsing="false" text="Pink" />
+                        <MenuItem mnemonicParsing="false" text="Other" />
                     </items>
                   </ContextMenu>
                </contextMenu>
@@ -44,6 +52,17 @@
                <VBox.margin>
                   <Insets left="10.0" />
                </VBox.margin>
+               <contextMenu>
+                  <ContextMenu>
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Bag" />
+                        <MenuItem mnemonicParsing="false" text="Backpack" />
+                        <MenuItem mnemonicParsing="false" text="Hardcase" />
+                        <MenuItem mnemonicParsing="false" text="Softcase" />
+                        <MenuItem mnemonicParsing="false" text="Handbag" />
+                    </items>
+                  </ContextMenu>
+               </contextMenu>
             </ComboBox>
             <Label text="Brand">
                <VBox.margin>
@@ -54,16 +73,42 @@
                <VBox.margin>
                   <Insets left="10.0" />
                </VBox.margin>
+               <contextMenu>
+                  <ContextMenu>
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Eastpack" />
+                        <MenuItem mnemonicParsing="false" text="Button" />
+                        <MenuItem mnemonicParsing="false" text="Samsonite" />
+                        <MenuItem mnemonicParsing="false" text="Porsche" />
+                        <MenuItem mnemonicParsing="false" text="Guccie" />
+                        <MenuItem mnemonicParsing="false" text="Other" />
+                    </items>
+                  </ContextMenu>
+               </contextMenu>
             </ComboBox>
             <Label text="Weight">
                <VBox.margin>
                   <Insets left="10.0" />
                </VBox.margin>
             </Label>
-            <ComboBox prefHeight="31.0" prefWidth="200.0" promptText="0 &gt; 1 KG">
+            <ComboBox prefHeight="31.0" prefWidth="200.0" promptText="0 &gt; 1 (kg)">
                <VBox.margin>
                   <Insets left="10.0" />
                </VBox.margin>
+               <contextMenu>
+                  <ContextMenu>
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="0 &gt; 1 kg" />
+                        <MenuItem mnemonicParsing="false" text="1 &gt; 3" />
+                        <MenuItem mnemonicParsing="false" text="3 &gt; 6" />
+                        <MenuItem mnemonicParsing="false" text="6 &gt; 10" />
+                        <MenuItem mnemonicParsing="false" text="10 &gt; 15" />
+                        <MenuItem mnemonicParsing="false" text="15 &gt; 20" />
+                        <MenuItem mnemonicParsing="false" text="20 &gt; 25" />
+                        <MenuItem mnemonicParsing="false" text="25+" />
+                    </items>
+                  </ContextMenu>
+               </contextMenu>
             </ComboBox>
          </children>
       </VBox>
@@ -82,6 +127,16 @@
                      <VBox.margin>
                         <Insets left="10.0" />
                      </VBox.margin>
+                     <contextMenu>
+                        <ContextMenu>
+                          <items>
+                            <MenuItem mnemonicParsing="false" text="Small" />
+                              <MenuItem mnemonicParsing="false" text="Medium" />
+                              <MenuItem mnemonicParsing="false" text="Large" />
+                              <MenuItem mnemonicParsing="false" text="Extra large" />
+                          </items>
+                        </ContextMenu>
+                     </contextMenu>
                   </ComboBox>
                   <Label text="Barcode">
                      <VBox.margin>
