@@ -61,6 +61,11 @@ public class Main extends Application {
         ManagerController manager = new ManagerController();
         root.setLeft(manager.getManagerScreen());
         lblPage.setText("Manager");
+        
+        int admin2 = 1;
+        if (admin2 == 1) {
+            cbManager.setDisable(true);
+        }
     }
     
     @FXML private ComboBox cbLostLuggage;
