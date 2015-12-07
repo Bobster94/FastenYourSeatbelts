@@ -5,8 +5,9 @@
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.collections.FXCollections?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddFoundLuggageController">
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"  maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8"  fx:controller="controllers.AddFoundLuggageController">
    <left>
       <VBox prefHeight="400.0" prefWidth="185.0" BorderPane.alignment="CENTER">
          <children>
@@ -23,92 +24,103 @@
                   <Insets left="10.0" />
                </VBox.margin>
             </Label>
-            <ComboBox prefHeight="31.0" prefWidth="179.0" promptText="Blue">
+            <ComboBox fx:id="txtColor"  prefHeight="31.0" prefWidth="179.0" >
                <VBox.margin>
                   <Insets left="10.0" />
                </VBox.margin>
-               <contextMenu>
-                  <ContextMenu>
                     <items>
-                      <MenuItem mnemonicParsing="false" text="Blue" />
-                        <MenuItem mnemonicParsing="false" text="Red" />
-                        <MenuItem mnemonicParsing="false" text="Orange" />
-                        <MenuItem mnemonicParsing="false" text="Yellow" />
-                        <MenuItem mnemonicParsing="false" text="White" />
-                        <MenuItem mnemonicParsing="false" text="Purple" />
-                        <MenuItem mnemonicParsing="false" text="Green" />
-                        <MenuItem mnemonicParsing="false" text="Pink" />
-                        <MenuItem mnemonicParsing="false" text="Other" />
+                        <FXCollections fx:factory="observableArrayList">
+                             <String fx:value="Blue" />
+                             <String fx:value="Red" />
+                             <String fx:value="Orange" />
+                             <String fx:value="Yellow" />
+                             <String fx:value="White" />
+                             <String fx:value="Purple" />
+                             <String fx:value="Green" />
+                             <String fx:value="Pink" />
+                             <String fx:value="Other" />
+                         </FXCollections>
                     </items>
-                  </ContextMenu>
-               </contextMenu>
             </ComboBox>
             <Label text="Type of luggage">
                <VBox.margin>
                   <Insets left="10.0" />
                </VBox.margin>
             </Label>
-            <ComboBox prefHeight="31.0" prefWidth="186.0" promptText="Bag">
+            <ComboBox fx:id="txtType"  prefHeight="31.0" prefWidth="186.0" >
                <VBox.margin>
                   <Insets left="10.0" />
                </VBox.margin>
-               <contextMenu>
-                  <ContextMenu>
                     <items>
-                      <MenuItem mnemonicParsing="false" text="Bag" />
-                        <MenuItem mnemonicParsing="false" text="Backpack" />
-                        <MenuItem mnemonicParsing="false" text="Hardcase" />
-                        <MenuItem mnemonicParsing="false" text="Softcase" />
-                        <MenuItem mnemonicParsing="false" text="Handbag" />
+                       <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Bag" />
+                            <String fx:value="Handbag" />
+                            <String fx:value="Backpack" />
+                            <String fx:value="Hardcase" />
+                            <String fx:value="Softcase" />
+                        </FXCollections>
                     </items>
-                  </ContextMenu>
-               </contextMenu>
             </ComboBox>
             <Label text="Brand">
                <VBox.margin>
                   <Insets left="10.0" />
                </VBox.margin>
             </Label>
-            <ComboBox prefHeight="31.0" prefWidth="191.0" promptText="Eastpack">
+            <ComboBox fx:id="txtBrand" prefHeight="31.0" prefWidth="191.0" >
                <VBox.margin>
                   <Insets left="10.0" />
                </VBox.margin>
-               <contextMenu>
-                  <ContextMenu>
                     <items>
-                      <MenuItem mnemonicParsing="false" text="Eastpack" />
-                        <MenuItem mnemonicParsing="false" text="Button" />
-                        <MenuItem mnemonicParsing="false" text="Samsonite" />
-                        <MenuItem mnemonicParsing="false" text="Porsche" />
-                        <MenuItem mnemonicParsing="false" text="Guccie" />
-                        <MenuItem mnemonicParsing="false" text="Other" />
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Eastpack)" />
+                            <String fx:value="Button" />
+                            <String fx:value="Samsonite" />
+                            <String fx:value="Porsche" />
+                            <String fx:value="Gucci" />
+                            <String fx:value="Other" />
+                        </FXCollections>
                     </items>
-                  </ContextMenu>
-               </contextMenu>
             </ComboBox>
             <Label text="Weight">
                <VBox.margin>
                   <Insets left="10.0" />
                </VBox.margin>
             </Label>
-            <ComboBox prefHeight="31.0" prefWidth="200.0" promptText="0 &gt; 1 (kg)">
+            <ComboBox fx:id="txtWeight" prefHeight="31.0" prefWidth="200.0" >
                <VBox.margin>
                   <Insets left="10.0" />
                </VBox.margin>
-               <contextMenu>
-                  <ContextMenu>
                     <items>
-                      <MenuItem mnemonicParsing="false" text="0 &gt; 1 kg" />
-                        <MenuItem mnemonicParsing="false" text="1 &gt; 3" />
-                        <MenuItem mnemonicParsing="false" text="3 &gt; 6" />
-                        <MenuItem mnemonicParsing="false" text="6 &gt; 10" />
-                        <MenuItem mnemonicParsing="false" text="10 &gt; 15" />
-                        <MenuItem mnemonicParsing="false" text="15 &gt; 20" />
-                        <MenuItem mnemonicParsing="false" text="20 &gt; 25" />
-                        <MenuItem mnemonicParsing="false" text="25+" />
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="0 > 1 (kg)" />
+                            <String fx:value="1 > 3" />
+                            <String fx:value="3 > 6" />
+                            <String fx:value="6 > 10" />
+                            <String fx:value="10 > 15" />
+                            <String fx:value="15 > 20" />
+                            <String fx:value="20 > 25" />
+                            <String fx:value="25+" />
+                        </FXCollections>
                     </items>
-                  </ContextMenu>
-               </contextMenu>
+                    </ComboBox>
+            <Label text="Material">
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </Label>
+            <ComboBox fx:id="txtMaterial" prefHeight="31.0" prefWidth="200.0" >
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Plastic" />
+                            <String fx:value="Leather" />
+                            <String fx:value="Fabric" />
+                            <String fx:value="Metal" />
+                            <String fx:value="Aluminum" />
+                        </FXCollections>
+                    </items>
             </ComboBox>
          </children>
       </VBox>
@@ -123,27 +135,35 @@
                         <Insets left="10.0" top="60.0" />
                      </VBox.margin>
                   </Label>
-                  <ComboBox prefHeight="31.0" prefWidth="175.0" promptText="Small">
+                  <ComboBox fx:id="txtSize" prefHeight="31.0" prefWidth="175.0">
                      <VBox.margin>
                         <Insets left="10.0" />
                      </VBox.margin>
-                     <contextMenu>
-                        <ContextMenu>
-                          <items>
-                            <MenuItem mnemonicParsing="false" text="Small" />
-                              <MenuItem mnemonicParsing="false" text="Medium" />
-                              <MenuItem mnemonicParsing="false" text="Large" />
-                              <MenuItem mnemonicParsing="false" text="Extra large" />
-                          </items>
-                        </ContextMenu>
-                     </contextMenu>
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Small" />
+                            <String fx:value="Medium" />
+                            <String fx:value="Large" />
+                            <String fx:value="Extra large" />
+                        </FXCollections>
+                    </items>
                   </ComboBox>
                   <Label text="Barcode">
                      <VBox.margin>
                         <Insets left="10.0" />
                      </VBox.margin>
                   </Label>
-                  <TextField fx:id="Barcode">
+                  <TextField fx:id="txtBarcode">
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Label text="Lost at airport">
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TextField fx:id="txtLostAtAirport">
                      <VBox.margin>
                         <Insets left="10.0" />
                      </VBox.margin>
@@ -153,7 +173,27 @@
                         <Insets left="10.0" />
                      </VBox.margin>
                   </Label>
-                  <TextField fx:id="FoundAtAirport">
+                  <TextField fx:id="txtFoundAtAirport">
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Label text="Flightnumber">
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TextField fx:id="txtFlightNumber">
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Label text="Date">
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TextField fx:id="txtDate">
                      <VBox.margin>
                         <Insets left="10.0" />
                      </VBox.margin>
@@ -167,7 +207,7 @@
                         <Insets left="15.0" top="65.0" />
                      </VBox.margin>
                   </Label>
-                  <TextField prefHeight="197.0" prefWidth="234.0" text="for extra information">
+                  <TextField fx:id="txtExtra" prefHeight="197.0" prefWidth="234.0" text="for extra information">
                      <VBox.margin>
                         <Insets left="10.0" right="15.0" />
                      </VBox.margin>

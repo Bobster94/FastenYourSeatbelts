@@ -19,6 +19,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
@@ -47,44 +48,61 @@ public class AddFoundLuggageController implements Initializable {
         }
         return screen;
     }
+    @FXML private TextField txtExtra;
     @FXML private TextField txtBarcode;
+    @FXML private TextField txtLostAtAirport;
     @FXML private TextField txtFoundAtAirport;
+    @FXML private TextField txtFlightNumber;
+    @FXML private TextField txtDate;
+    @FXML private ComboBox  txtMaterial;
+    @FXML private ComboBox  txtColor;
+    @FXML private ComboBox  txtType;
+    @FXML private ComboBox  txtBrand;
+    @FXML private ComboBox  txtWeight;
+    @FXML private ComboBox  txtSize;
     
     @FXML
     public void AddFoundLuggage (ActionEvent event) {
         
-        String textveld1 = txtBarcode.getText();
-        System.out.println(textveld1);
-
-        String textveld2 = txtFoundAtAirport.getText();
-        System.out.println(textveld2);
-        
+        String barcode = txtBarcode.getText();
+        String foundAirport = txtFoundAtAirport.getText();
+        String extra = txtExtra.getText();
+        String lostAirport = txtLostAtAirport.getText();
+        String flightNumber = txtFlightNumber.getText();
+        String date = txtDate.getText();
+        String material = txtMaterial.getValue().toString();
+        String color = txtColor.getValue().toString();
+        String type = txtType.getValue().toString();
+        String brand = txtBrand.getValue().toString();
+        String weight = txtWeight.getValue().toString();
+        String size = txtSize.getValue().toString();
         try(Connection conn = Database.initDatabase()){
             String SQL = "INSERT INTO luggage (brand,color,type,weight,size,barcode,lostAirport,"
-                    + "extra,lostFound,material,date,flightNummer,idEmployee) "
-                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                    + "foundAirport,extra,lostFound,material,date,flightNumber,idEmployee) "
+                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             
             
             PreparedStatement preparedStatement = conn.prepareStatement(SQL);
-            preparedStatement.setString(1, "test");
-	    preparedStatement.setString(2, "test");
-            preparedStatement.setString(3, "test");
-            preparedStatement.setInt(4, 2);
-            preparedStatement.setString(5, "test");
-            preparedStatement.setString(6, textveld1);
-            preparedStatement.setString(7, textveld2);
-            preparedStatement.setString(8, "test");
-            preparedStatement.setInt(9, 1);
-            preparedStatement.setString(10,"test");
-            preparedStatement.setDate(11, java.sql.Date.valueOf("1996-10-24"));
-            preparedStatement.setString(12,"test");
-            preparedStatement.setInt(13, 1);
+            preparedStatement.setString(1, brand);
+	    preparedStatement.setString(2, color);
+            preparedStatement.setString(3, type);
+            preparedStatement.setString(4, weight);
+            preparedStatement.setString(5, size);
+            preparedStatement.setString(6, barcode);
+            preparedStatement.setString(7, lostAirport);
+            preparedStatement.setString(8, foundAirport);
+            preparedStatement.setString(9, extra);
+            preparedStatement.setInt(10, 1);
+            preparedStatement.setString(11, material);
+            preparedStatement.setDate(12, java.sql.Date.valueOf(date));
+            preparedStatement.setString(13, flightNumber);
+            preparedStatement.setInt(14, 1);
             preparedStatement.executeUpdate();
         
             //Close connection
             conn.close();
         }catch(SQLException ex){
-              Logger.getLogger(AddFoundLuggageController.class.getName()).log(Level.SEVERE,null,ex);             
+              Logger.getLogger(AddFoundLuggageController.class.getName()).log(Level.SEVERE,null,ex);
           }
        
     }
