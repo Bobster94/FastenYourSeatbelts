@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package controllers;
 
 import java.io.IOException;
@@ -17,17 +13,17 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 
 /**
  * FXML Controller class
  *
- * @author Bas
+ * @author Jeroen
  */
 public class AddLostLuggageController implements Initializable {
-    @FXML
-    private BorderPane SaveLost;
+ 
 
     /**
      * Initializes the controller class.
@@ -46,77 +42,96 @@ public class AddLostLuggageController implements Initializable {
         }
         return screen;
     }
-    @FXML private TextArea TXTCustomerfirstname;
-    @FXML private TextArea TXTCustomerlastname;
-    @FXML private TextArea TXTVactationname;
-    @FXML private TextArea TXTVactationperiod;
-    @FXML private TextArea TXTVactationzipcode;
-    @FXML private TextArea TXTVactation1;
-    @FXML private TextArea TXTVactation2;
-    @FXML private TextArea TXTVactation3;
-    @FXML private TextArea TXTVactation4;
+    @FXML private TextField txtFirstName;
+    @FXML private TextField txtLastName;
+    @FXML private TextField txtInsertion;
+    @FXML private TextField txtBirthdate;
+    @FXML private TextField txtCity;
+    @FXML private TextField txtStreet;
+    @FXML private TextField txtHouseNumber;
+    @FXML private TextField txtEmail;
+    @FXML private TextField txtDate;
+    @FXML private TextField txtLostAirport;
+    @FXML private TextField txtPhoneNumber;
+    @FXML private TextField txtExtra;
+    @FXML private TextField txtZipcode;
+    @FXML private TextField txtCountry;
+    @FXML private ComboBox  txtBrand;
+    @FXML private ComboBox  txtSize;
+    @FXML private ComboBox  txtWeight;
+    @FXML private ComboBox  txtColor;
+    @FXML private ComboBox  txtType;  
     @FXML
     
     public void savechanges(ActionEvent event) {
     
-        String name = TXTCustomerfirstname.getText();
-        System.out.println(name);
-
-        String namelast = TXTCustomerlastname.getText();
-        System.out.println(namelast);  
-
-        String vacation = TXTVactationname.getText();
-        System.out.println(vacation);  
-
-        String period = TXTVactationperiod.getText();
-        System.out.println(period); 
-
-        String zipcode = TXTVactationzipcode.getText();
-        System.out.println(zipcode); 
-        
-        String vacation1 = TXTVactation1.getText();
-        System.out.println(vacation1);
-        
-        String vacation2 = TXTVactation2.getText();
-        System.out.println(vacation2);
-        
-        String vacation3 = TXTVactation3.getText();
-        System.out.println(vacation3);
-        
-        String vacation4 = TXTVactation4.getText();
-        System.out.println(vacation4);
-        
+        String firstName = txtFirstName.getText();
+        String lastName = txtLastName.getText();
+        String insertion = txtInsertion.getText();
+        String birthdate = txtBirthdate.getText();
+        String city = txtCity.getText();
+        String street = txtStreet.getText();
+        String houseNumber = txtHouseNumber.getText();
+        String email = txtEmail.getText();
+        String date = txtDate.getText();
+        String lostAirport = txtLostAirport.getText();
+        int phoneNumber = Integer.parseInt(txtPhoneNumber.getText());
+        String extra = txtExtra.getText();
+        String zipcode = txtZipcode.getText();
+        String country = txtCountry.getText();
+        String brand = txtBrand.getValue().toString();
+        String size = txtSize.getValue().toString();
+        String weight = txtWeight.getValue().toString();
+        String color = txtColor.getValue().toString();
+        String type = txtType.getValue().toString();
         
         try(Connection conn = Database.initDatabase()){
             String SQL = "INSERT INTO luggage (brand,color,type,weight,size,barcode,lostAirport,"
-                    + "extra,lostFound,material,date,flightNummer,idEmployee) "
+                    + "extra,lostFound,material,date,flightNumber,idEmployee) "
                     + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
             
             
             PreparedStatement preparedStatement = conn.prepareStatement(SQL);
-            preparedStatement.setString(1, "test");
-	    preparedStatement.setString(2, "test");
-            preparedStatement.setString(3, "test");
-            preparedStatement.setInt(4, 2);
-            preparedStatement.setString(5, "test");
-            preparedStatement.setString(6, vacation4);
-            preparedStatement.setString(7, vacation3);
-            preparedStatement.setString(8, "test");
-            preparedStatement.setInt(9, 1);
-            preparedStatement.setString(10,"test");
-            preparedStatement.setDate(11, java.sql.Date.valueOf("1996-10-24"));
-            preparedStatement.setString(12,"test");
+            preparedStatement.setString(1, brand);
+	    preparedStatement.setString(2, color);
+            preparedStatement.setString(3, type);
+            preparedStatement.setString(4, weight);
+            preparedStatement.setString(5, size);
+            preparedStatement.setString(6, "barcode");
+            preparedStatement.setString(7, lostAirport);
+            preparedStatement.setString(8, extra);
+            preparedStatement.setInt(9, 0);
+            preparedStatement.setString(10,"material");
+            preparedStatement.setDate(11, java.sql.Date.valueOf(date));
+            preparedStatement.setString(12,"flightnumber");
             preparedStatement.setInt(13, 1);
             preparedStatement.executeUpdate();
         
+        String Customer = "INSERT INTO customer (firstname,insertion,lastname,birthDate,country,"
+                + "city,zipCode,street,houseNumber,email,date,phoneNumber,idEmployee) "
+                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";  
+        
+            preparedStatement = conn.prepareStatement(Customer);
+            preparedStatement.setString(1, firstName);
+	    preparedStatement.setString(2, insertion); 
+            preparedStatement.setString(3, lastName);
+            preparedStatement.setDate(4, java.sql.Date.valueOf(birthdate));
+            preparedStatement.setString(5, country);
+            preparedStatement.setString(6, city);
+            preparedStatement.setString(7, zipcode);
+            preparedStatement.setString(8, street);
+            preparedStatement.setString(9, houseNumber);
+            preparedStatement.setString(10, email);
+            preparedStatement.setDate(11, java.sql.Date.valueOf(date));
+            preparedStatement.setInt(12, phoneNumber);
+            preparedStatement.setInt(13, 1);
+            preparedStatement.executeUpdate();
+            
             //Close connection
             conn.close();
         }catch(SQLException ex){
-              Logger.getLogger(AddFoundLuggageController.class.getName()).log(Level.SEVERE,null,ex);             
+              Logger.getLogger(AddLostLuggageController.class.getName()).log(Level.SEVERE,null,ex);             
           }
-   
-    
-    
         
     }   
     }
