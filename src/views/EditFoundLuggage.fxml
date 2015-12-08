@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.collections.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
@@ -7,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.collections.FXCollections?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml/1"  maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8"  fx:controller="controllers.AddFoundLuggageController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EditFoundLuggageController">
    <left>
       <VBox prefHeight="400.0" prefWidth="185.0" BorderPane.alignment="CENTER">
          <children>
@@ -24,7 +25,7 @@
                   <Insets left="10.0" />
                </VBox.margin>
             </Label>
-            <ComboBox fx:id="txtColor"  prefHeight="31.0" prefWidth="179.0" >
+            <ComboBox fx:id="txtColor" prefHeight="31.0" prefWidth="179.0">
                <VBox.margin>
                   <Insets left="10.0" />
                </VBox.margin>
@@ -47,7 +48,7 @@
                   <Insets left="10.0" />
                </VBox.margin>
             </Label>
-            <ComboBox fx:id="txtType"  prefHeight="31.0" prefWidth="186.0" >
+            <ComboBox fx:id="txtType" prefHeight="31.0" prefWidth="186.0">
                <VBox.margin>
                   <Insets left="10.0" />
                </VBox.margin>
@@ -68,7 +69,7 @@
                   <Insets left="10.0" />
                </VBox.margin>
             </Label>
-            <ComboBox fx:id="txtBrand" prefHeight="31.0" prefWidth="191.0" >
+            <ComboBox fx:id="txtBrand" prefHeight="31.0" prefWidth="191.0">
                <VBox.margin>
                   <Insets left="10.0" />
                </VBox.margin>
@@ -88,19 +89,19 @@
                   <Insets left="10.0" />
                </VBox.margin>
             </Label>
-            <ComboBox fx:id="txtWeight" prefHeight="31.0" prefWidth="200.0" >
+            <ComboBox fx:id="txtWeight" prefHeight="31.0" prefWidth="200.0">
                <VBox.margin>
                   <Insets left="10.0" />
                </VBox.margin>
                     <items>
                         <FXCollections fx:factory="observableArrayList">
-                            <String fx:value="0 > 1 (kg)" />
-                            <String fx:value="1 > 3 (kg)" />
-                            <String fx:value="3 > 6 (kg)" />
-                            <String fx:value="6 > 10 (kg)" />
-                            <String fx:value="10 > 15 (kg)" />
-                            <String fx:value="15 > 20 (kg)" />
-                            <String fx:value="20 > 25 (kg)" />
+                            <String fx:value="0 &gt; 1 (kg)" />
+                            <String fx:value="1 &gt; 3 (kg)" />
+                            <String fx:value="3 &gt; 6 (kg)" />
+                            <String fx:value="6 &gt; 10 (kg)" />
+                            <String fx:value="10 &gt; 15 (kg)" />
+                            <String fx:value="15 &gt; 20 (kg)" />
+                            <String fx:value="20 &gt; 25 (kg)" />
                             <String fx:value="25+" />
                         </FXCollections>
                     </items>
@@ -110,7 +111,7 @@
                   <Insets left="10.0" />
                </VBox.margin>
             </Label>
-            <ComboBox fx:id="txtMaterial" prefHeight="31.0" prefWidth="200.0" >
+            <ComboBox fx:id="txtMaterial" prefHeight="31.0" prefWidth="200.0">
                <VBox.margin>
                   <Insets left="10.0" />
                </VBox.margin>
@@ -214,9 +215,14 @@
                         <Insets left="10.0" right="15.0" />
                      </VBox.margin>
                   </TextField>
-                  <Button mnemonicParsing="false" onAction="#AddFoundLuggage" text="Add found luggage">
+                  <Button mnemonicParsing="false" onAction="#AddFoundLuggage" text="Edit found luggage">
                      <VBox.margin>
                         <Insets left="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button layoutX="20.0" layoutY="299.0" mnemonicParsing="false" onAction="#AddFoundLuggage" text="Load from existing luggage">
+                     <VBox.margin>
+                        <Insets left="10.0" top="5.0" />
                      </VBox.margin>
                   </Button>
                </children>
