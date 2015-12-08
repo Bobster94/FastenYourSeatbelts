@@ -30,7 +30,7 @@
             <Label layoutX="186.0" layoutY="233.0" text="Phone number" /> 
             <Label layoutX="187.0" layoutY="289.0" text="Zipcode" />
             <Label layoutX="20.0" layoutY="184.0" text="Country" />
-            <Button layoutX="351.0" layoutY="310.0" mnemonicParsing="false" onAction="#savechanges" prefHeight="25.0" prefWidth="91.0" text="Edit Save" />
+            <Button layoutX="351.0" layoutY="310.0" mnemonicParsing="false" onAction="#savechanges" prefHeight="25.0" prefWidth="91.0" text="Save" />
             
             <TextField fx:id="txtFirstName" layoutX="16.0" layoutY="35.0" prefHeight="31.0" prefWidth="160.0" />
             <TextField fx:id="txtLastName" layoutX="15.0" layoutY="147.0" prefHeight="31.0" prefWidth="157.0" />

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package views;
+package controllers;
 
 import controllers.AddCustomerController;
 import controllers.Database;
@@ -41,7 +41,7 @@ public class EditCustomerController implements Initializable {
         // TODO
         
         }
-    @FXML private Button btnAddCustomer;
+;
     @FXML private TextField first;
     @FXML private TextField country;
     @FXML private TextField last;

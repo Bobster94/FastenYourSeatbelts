@@ -9,21 +9,13 @@
       <Pane prefHeight="400.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
             <Label layoutX="23.0" text="Customer first name" />
-            <TextArea layoutX="20.0" layoutY="23.0" prefHeight="20.0" prefWidth="118.0" />
             <Label layoutX="24.0" layoutY="52.0" text="Customer last name" />
-            <TextArea layoutX="20.0" layoutY="81.0" prefHeight="20.0" prefWidth="118.0" />
             <Label layoutX="22.0" layoutY="110.0" text="Vacation destination" />
-            <TextArea layoutX="20.0" layoutY="135.0" prefHeight="20.0" prefWidth="118.0" />
             <Label layoutX="20.0" layoutY="171.0" text="Vacation period:" />
             <Label layoutX="24.0" layoutY="200.0" text="From" />
             <Label layoutX="99.0" layoutY="200.0" text="To" />
-            <TextArea layoutX="23.0" layoutY="225.0" prefHeight="20.0" prefWidth="57.0" />
-            <TextArea layoutX="99.0" layoutY="225.0" prefHeight="20.0" prefWidth="60.0" />
             <Label layoutX="21.0" layoutY="265.0" text="Vacation Adress" />
-            <TextArea layoutX="21.0" layoutY="293.0" prefHeight="20.0" prefWidth="118.0" />
-            <TextArea layoutX="151.0" layoutY="293.0" prefHeight="20.0" prefWidth="51.0" />
             <Label layoutX="23.0" layoutY="328.0" text="Vacation Zipcode" />
-            <TextArea layoutX="20.0" layoutY="352.0" prefHeight="20.0" prefWidth="118.0" />
             <Label layoutX="230.0" layoutY="9.0" text="Color" />
             <SplitMenuButton layoutX="227.0" layoutY="31.0" mnemonicParsing="false" text="Blue">
                <items>
@@ -81,12 +73,18 @@
                </items>
             </SplitMenuButton>
             <Label layoutX="221.0" layoutY="334.0" text="Lost at airport" />
-            <TextArea layoutX="223.0" layoutY="352.0" prefHeight="20.0" prefWidth="118.0" />
-            <TextField layoutX="385.0" layoutY="40.0" prefHeight="140.0" prefWidth="201.0" />
             <Label layoutX="359.0" layoutY="15.0" text="Extra" />
             <Button layoutX="372.0" layoutY="350.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="91.0" text="Save Edit" />
             <Button layoutX="494.0" layoutY="350.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="92.0" text="Decline" />
-            <ScrollBar layoutX="572.0" layoutY="43.0" orientation="VERTICAL" prefHeight="136.0" prefWidth="14.0" />
+            <TextArea layoutX="363.0" layoutY="54.0" prefHeight="200.0" prefWidth="200.0" />
+            <TextField layoutX="14.0" layoutY="20.0" prefHeight="25.0" prefWidth="122.0" />
+            <TextField layoutX="14.0" layoutY="78.0" prefHeight="25.0" prefWidth="122.0" />
+            <TextField layoutX="14.0" layoutY="133.0" prefHeight="25.0" prefWidth="123.0" />
+            <TextField layoutX="14.0" layoutY="221.0" prefHeight="25.0" prefWidth="67.0" />
+            <TextField layoutX="91.0" layoutY="221.0" prefHeight="25.0" prefWidth="42.0" />
+            <TextField layoutX="210.0" layoutY="363.0" prefHeight="25.0" prefWidth="109.0" />
+            <TextField layoutX="17.0" layoutY="350.0" prefHeight="25.0" prefWidth="115.0" />
+            <TextField layoutX="17.0" layoutY="289.0" prefHeight="25.0" prefWidth="116.0" />
          </children>
       </Pane>
    </left>
