@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package controllers;
 
 import com.mysql.jdbc.Connection;
@@ -17,7 +13,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 
@@ -37,57 +32,55 @@ public class AddCustomerController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     } 
-    @FXML private Button btnAddCustomer;
-    @FXML private TextField first;
-    @FXML private TextField country;
-    @FXML private TextField last;
-    @FXML private TextField city;
-    @FXML private TextField email;
-    @FXML private TextField street;
-    @FXML private TextField phone;
-    @FXML private TextField zip;
-    
-    
-    
+    @FXML private TextField txtFirstName;
+    @FXML private TextField txtCountry;
+    @FXML private TextField txtLastName;
+    @FXML private TextField txtCity;
+    @FXML private TextField txtEmail;
+    @FXML private TextField txtStreet;
+    @FXML private TextField txtPhone;
+    @FXML private TextField txtZipcode;
+    @FXML private TextField txtInsertion;
+    @FXML private TextField txtHouseNumber;
+    @FXML private TextField txtBirthdate;
+    @FXML private TextField txtDate;
    
     
     @FXML
     private void saveCustomer(ActionEvent event) {
-        String name = first.getText();
-        System.out.println(name);
-        String counrty = country.getText();
-        System.out.println(counrty);
-        String lastname = last.getText();
-        System.out.println(lastname);
-        String stad = city.getText();
-        System.out.println(stad);
-        String address = email.getText();
-        System.out.println(address);
-        String straat = street.getText();
-        System.out.println(straat);
-        int telefoon = Integer.parseInt(phone.getText());
-        System.out.println(telefoon);
-        String code = zip.getText();
-        System.out.println(code);
-        
+        String firstName = txtFirstName.getText();       
+        String country = txtCountry.getText();      
+        String lastName = txtLastName.getText();
+        String city = txtCity.getText();
+        String email= txtEmail.getText();
+        String street = txtStreet.getText();
+        int phoneNumber = Integer.parseInt(txtPhone.getText());
+        String zipcode = txtZipcode.getText();
+        String insertion = txtInsertion.getText();
+        String houseNumber = txtHouseNumber.getText();
+        String birthdate = txtBirthdate.getText();
+        String date = txtDate.getText();
 
         try(Connection conn = (Connection) Database.initDatabase()){
-            String Customer = "INSERT INTO customer (firstname,insertion,lastname,birthDate,city,street,houseNumber,email,date,phoneNumber,idEmployee) "
-                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+            String Customer = "INSERT INTO customer (firstname,insertion,lastname,birthDate,country,"
+                + "city,zipCode,street,houseNumber,email,date,phoneNumber,idEmployee) "
+                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";  
             
             
             PreparedStatement preparedStatement = conn.prepareStatement(Customer);
-            preparedStatement.setString(1, name);
-	    preparedStatement.setString(2, "test"); 
-            preparedStatement.setString(3, lastname);
-            preparedStatement.setDate(4, java.sql.Date.valueOf("1996-02-03"));
-            preparedStatement.setString(5, stad);
-            preparedStatement.setString(6, straat);
-            preparedStatement.setString(7, "test");
-            preparedStatement.setString(8, address);
-            preparedStatement.setDate(9, java.sql.Date.valueOf("1996-03-03"));
-            preparedStatement.setInt(10, telefoon);
-            preparedStatement.setInt(11, 1);
+            preparedStatement.setString(1, firstName);
+	    preparedStatement.setString(2, insertion); 
+            preparedStatement.setString(3, lastName);
+            preparedStatement.setDate(4, java.sql.Date.valueOf(birthdate));
+            preparedStatement.setString(5, country);
+            preparedStatement.setString(6, city);
+            preparedStatement.setString(7, zipcode);
+            preparedStatement.setString(8, street);
+            preparedStatement.setString(9, houseNumber);
+            preparedStatement.setString(10, email);
+            preparedStatement.setDate(11, java.sql.Date.valueOf(date));
+            preparedStatement.setInt(12, phoneNumber);
+            preparedStatement.setInt(13, 1);
             preparedStatement.executeUpdate();
     }   catch (SQLException ex) {
             Logger.getLogger(AddCustomerController.class.getName()).log(Level.SEVERE, null, ex);
