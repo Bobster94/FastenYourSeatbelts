@@ -110,8 +110,8 @@ public class Main extends Application {
                 lblPage.setText("Add customer");
                 break;
             case 2:
-                //editCustomerController editCustomers = new editCustomerController();
-                //master.setLeft(allCustomers.getAllCustomerScreen());
+                EditCustomerController editCustomer = new EditCustomerController();
+                root.setLeft(editCustomer.getEditCustomerScreen());
                 lblPage.setText("Edit customer");
                 break;
         }
@@ -133,7 +133,8 @@ public class Main extends Application {
                 lblPage.setText("Add found luggage");
                 break;
             case 2:
-                
+                EditFoundLuggageController editFoundLuggage = new EditFoundLuggageController();
+                root.setLeft(editFoundLuggage.getEditFoundLuggageScreen());
                 lblPage.setText("Edit found luggage");
                 break;
         }
