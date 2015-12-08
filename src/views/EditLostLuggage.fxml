@@ -115,7 +115,7 @@
                         </FXCollections>
                     </items>
             </ComboBox>
-            <Button layoutX="454.0" layoutY="310.0" mnemonicParsing="false" onAction="#savechanges" prefHeight="25.0" prefWidth="91.0" text="Load from existing customer" />
+            <Button layoutX="349.0" layoutY="346.0" mnemonicParsing="false" onAction="#savechanges" prefHeight="25.0" prefWidth="167.0" text="Load from existing luggage" />
             
          </children>
       </AnchorPane>

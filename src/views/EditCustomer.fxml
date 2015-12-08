@@ -4,7 +4,6 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.EditCustomerController">
    <center>
       <Pane prefHeight="400.0" prefWidth="611.0" BorderPane.alignment="CENTER">
@@ -26,6 +25,7 @@
             <TextField layoutX="51.0" layoutY="277.0" />
             <TextField layoutX="250.0" layoutY="277.0" />
             <Button layoutX="53.0" layoutY="346.0" mnemonicParsing="false" text="Edit customers" />
+            <Button layoutX="253.0" layoutY="346.0" mnemonicParsing="false" text="Load form existing customer" />
          </children>
       </Pane>
    </center>
