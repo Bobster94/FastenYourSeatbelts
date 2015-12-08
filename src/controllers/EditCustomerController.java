@@ -5,7 +5,7 @@
  */
 package controllers;
 
-import controllers.AddCustomerController;
+import controllers.EditCustomerController;
 import controllers.Database;
 import controllers.LoginController;
 import java.io.IOException;
@@ -93,7 +93,7 @@ public class EditCustomerController implements Initializable {
             preparedStatement.setInt(11, 1);
             preparedStatement.executeUpdate();
     }   catch (SQLException ex) {
-            Logger.getLogger(AddCustomerController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EditCustomerController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }

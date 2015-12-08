@@ -32,10 +32,10 @@ public class EditFoundLuggageController implements Initializable {
         // TODO
     }   
     
-    public BorderPane getAddFoundLuggageScreen() {
+    public BorderPane getEditFoundLuggageScreen() {
         BorderPane screen = null;
         try {
-            screen = FXMLLoader.load(getClass().getResource("/views/AddFoundLuggage.fxml"));
+            screen = FXMLLoader.load(getClass().getResource("/views/EditFoundLuggage.fxml"));
         } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
