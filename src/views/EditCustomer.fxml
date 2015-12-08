@@ -5,13 +5,13 @@
 <?import javafx.scene.layout.*?>
 
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.EditCustomerController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EditCustomerController">
    <center>
       <Pane prefHeight="400.0" prefWidth="611.0" BorderPane.alignment="CENTER">
          <children>
             <Label layoutX="51.0" layoutY="39.0" text="First name" />
             <Label layoutX="250.0" layoutY="39.0" text="Country" />
-            <TextField layoutX="51.0" layoutY="59.0" />
+            <TextField fx:id="txtFirstname" layoutX="51.0" layoutY="59.0" />
             <TextField layoutX="250.0" layoutY="59.0" />
             <Label layoutX="51.0" layoutY="113.0" text="Last name" />
             <Label layoutX="250.0" layoutY="113.0" text="City" />

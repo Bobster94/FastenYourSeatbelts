@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
@@ -7,15 +9,70 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AllCustomerController">
-   <bottom>
-      <Button id="BtnAddCustomer" mnemonicParsing="false" prefHeight="25.0" prefWidth="128.0" text="Add new customer" BorderPane.alignment="TOP_LEFT" />
-   </bottom>
-   <left>
-      <HBox prefHeight="400.0" prefWidth="500.0" BorderPane.alignment="CENTER">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AllFoundLuggageController">
+   <center>
+      <AnchorPane prefHeight="400.0" prefWidth="700.0" BorderPane.alignment="CENTER">
          <children>
-            <TableView prefHeight="200.0" prefWidth="600.0" />
+            <TableView fx:id="tvCustomers" layoutX="14.0" layoutY="80.0" prefHeight="250.0" prefWidth="760.0" />
+            <Button fx:id="btnAddNewCustomer" layoutX="14.0" layoutY="351.0" mnemonicParsing="false" text="Add new customer" />
+            <VBox layoutX="14.0" layoutY="11.0" prefHeight="63.0" prefWidth="650.0">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="650.0">
+                     <children>
+                        <TextField fx:id="txtMaterial" prefWidth="110.0" promptText="First name">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </TextField>
+                        <TextField fx:id="txtFlightnumber" prefWidth="110.0" promptText="Last name">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </TextField>
+                        <TextField fx:id="cbBrand" prefWidth="110.0" promptText="Birth date">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </TextField>
+                        <TextField fx:id="txtDate11" prefWidth="110.0" promptText="Email">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="650.0">
+                     <children>
+                        <TextField fx:id="txtExtra" prefWidth="110.0" promptText="City">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </TextField>
+                        <TextField fx:id="txtDate" prefWidth="110.0" promptText="Street">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </TextField>
+                        <TextField fx:id="txtDate1" prefWidth="110.0" promptText="House number">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </TextField>
+                        <TextField fx:id="txtDate12" prefWidth="110.0" promptText="Phone number">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </TextField>
+                        <Button fx:id="btnCustomer" mnemonicParsing="false" onAction="#searchFoundLuggage" prefWidth="110.0" text="Search">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
          </children>
-      </HBox>
-   </left>
+      </AnchorPane>
+   </center>
 </BorderPane>

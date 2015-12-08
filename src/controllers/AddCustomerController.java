@@ -5,9 +5,9 @@
  */
 package controllers;
 
-import com.mysql.jdbc.Connection;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -70,9 +70,11 @@ public class AddCustomerController implements Initializable {
         String code = zip.getText();
         System.out.println(code);
         
-
-        try(Connection conn = (Connection) Database.initDatabase()){
-            String Customer = "INSERT INTO customer (firstname,insertion,lastname,birthDate,city,street,houseNumber,email,date,phoneNumber,idEmployee) "
+        try(Connection conn = Database.initDatabase()){
+            String Customer = "INSERT INTO customer "
+                    + "(firstname,insertion,lastname,birthDate,"
+                    + "city,street,houseNumber,email,date,"
+                    + "phoneNumber,idEmployee) "
                     + "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
             
             
@@ -92,9 +94,6 @@ public class AddCustomerController implements Initializable {
     }   catch (SQLException ex) {
             Logger.getLogger(AddCustomerController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
- 
     }
     
     public BorderPane getAddCustomerScreen() {
@@ -106,5 +105,4 @@ public class AddCustomerController implements Initializable {
         }
         return screen;
     }
-    
 }   

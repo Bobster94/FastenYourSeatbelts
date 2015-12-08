@@ -1,92 +1,102 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.collections.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.collections.FXCollections?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EditLostLuggageController">
    <left>
       <Pane prefHeight="400.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
             <Label layoutX="23.0" text="Customer first name" />
-            <TextArea layoutX="20.0" layoutY="23.0" prefHeight="20.0" prefWidth="118.0" />
             <Label layoutX="24.0" layoutY="52.0" text="Customer last name" />
-            <TextArea layoutX="20.0" layoutY="81.0" prefHeight="20.0" prefWidth="118.0" />
             <Label layoutX="22.0" layoutY="110.0" text="Vacation destination" />
-            <TextArea layoutX="20.0" layoutY="135.0" prefHeight="20.0" prefWidth="118.0" />
             <Label layoutX="20.0" layoutY="171.0" text="Vacation period:" />
             <Label layoutX="24.0" layoutY="200.0" text="From" />
             <Label layoutX="99.0" layoutY="200.0" text="To" />
-            <TextArea layoutX="23.0" layoutY="225.0" prefHeight="20.0" prefWidth="57.0" />
-            <TextArea layoutX="99.0" layoutY="225.0" prefHeight="20.0" prefWidth="60.0" />
             <Label layoutX="21.0" layoutY="265.0" text="Vacation Adress" />
-            <TextArea layoutX="21.0" layoutY="293.0" prefHeight="20.0" prefWidth="118.0" />
-            <TextArea layoutX="151.0" layoutY="293.0" prefHeight="20.0" prefWidth="51.0" />
             <Label layoutX="23.0" layoutY="328.0" text="Vacation Zipcode" />
-            <TextArea layoutX="20.0" layoutY="352.0" prefHeight="20.0" prefWidth="118.0" />
             <Label layoutX="230.0" layoutY="9.0" text="Color" />
-            <SplitMenuButton layoutX="227.0" layoutY="31.0" mnemonicParsing="false" text="Blue">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="Blue" />
-                  <MenuItem mnemonicParsing="false" text="Red" />
-                  <MenuItem mnemonicParsing="false" text="Orange" />
-                  <MenuItem mnemonicParsing="false" text="Yellow" />
-                  <MenuItem mnemonicParsing="false" text="White" />
-                  <MenuItem mnemonicParsing="false" text="Purple" />
-                  <MenuItem mnemonicParsing="false" text="Green" />
-                  <MenuItem mnemonicParsing="false" text="Other" />
-               </items>
-            </SplitMenuButton>
+            <ComboBox fx:id="cbColor" layoutX="227.0" layoutY="31.0" promptText="Color">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Blue" />
+                            <String fx:value="Red" />
+                            <String fx:value="Orange" />
+                            <String fx:value="Yellow" />
+                            <String fx:value="White" />
+                            <String fx:value="Black" />
+                            <String fx:value="Purple" />
+                            <String fx:value="Green" />
+                            <String fx:value="Other" />
+                        </FXCollections>
+                    </items>
+            </ComboBox>
             <Label layoutX="227.0" layoutY="73.0" text="Type of luggage" />
-            <SplitMenuButton layoutX="228.0" layoutY="98.0" mnemonicParsing="false" text="Bag">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="Bag" />
-                  <MenuItem mnemonicParsing="false" text="Backpack" />
-                  <MenuItem mnemonicParsing="false" text="Hardcase" />
-                  <MenuItem mnemonicParsing="false" text="Softcase" />
-                  <MenuItem mnemonicParsing="false" text="Handbag" />
-               </items>
-            </SplitMenuButton>
+            <ComboBox fx:id="cbType" layoutX="228.0" layoutY="98.0" promptText="Type">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Bag" />
+                            <String fx:value="Backpack" />
+                            <String fx:value="Hardcase" />
+                            <String fx:value="Softcase" />
+                            <String fx:value="Handbag" />
+                        </FXCollections>
+                    </items>
+            </ComboBox>
             <Label layoutX="226.0" layoutY="137.0" text="Brands" />
-            <SplitMenuButton layoutX="223.0" layoutY="168.0" mnemonicParsing="false" text="Eastpack">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="Eastpack" />
-                  <MenuItem mnemonicParsing="false" text="Button" />
-                  <MenuItem mnemonicParsing="false" text="Samsonite" />
-                  <MenuItem mnemonicParsing="false" text="Porsche" />
-                  <MenuItem mnemonicParsing="false" text="Guccie" />
-                  <MenuItem mnemonicParsing="false" text="Other" />
-               </items>
-            </SplitMenuButton>
+            <ComboBox fx:id="cbBrand" layoutX="223.0" layoutY="168.0" promptText="Brand">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Eastpack" />
+                            <String fx:value="Samsonite" />
+                            <String fx:value="Porsche" />
+                            <String fx:value="Gucci" />
+                            <String fx:value="Other" />
+                        </FXCollections>
+                    </items>
+            </ComboBox>
             <Label layoutX="225.0" layoutY="209.0" text="Weight" />
-            <SplitMenuButton layoutX="225.0" layoutY="233.0" mnemonicParsing="false" text="0 &gt; 1">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="0 &gt; 1" />
-                  <MenuItem mnemonicParsing="false" text="1 &gt; 3" />
-                  <MenuItem mnemonicParsing="false" text="3 &gt; 6" />
-                  <MenuItem mnemonicParsing="false" text="6 &gt; 10" />
-                  <MenuItem mnemonicParsing="false" text="10 &gt; 15" />
-                  <MenuItem mnemonicParsing="false" text="15 &gt; 20" />
-                  <MenuItem mnemonicParsing="false" text="20 &gt; 25" />
-                  <MenuItem mnemonicParsing="false" text="25+" />
-               </items>
-            </SplitMenuButton>
+            <ComboBox fx:id="cbWeight" layoutX="225.0" layoutY="233.0" promptText="Weight">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="0 - 1" />
+                            <String fx:value="2 - 10" />
+                            <String fx:value="11 - 20" />
+                            <String fx:value="21 - 30" />
+                            <String fx:value="31 - 40" />
+                        </FXCollections>
+                    </items>
+            </ComboBox>
             <Label layoutX="227.0" layoutY="274.0" text="Size" />
-            <SplitMenuButton layoutX="224.0" layoutY="301.0" mnemonicParsing="false" text="Small">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="Small" />
-                  <MenuItem mnemonicParsing="false" text="Medium" />
-                  <MenuItem mnemonicParsing="false" text="Large" />
-                  <MenuItem mnemonicParsing="false" text="Extra large" />
-               </items>
-            </SplitMenuButton>
+            <ComboBox fx:id="cbSize" layoutX="227.0" layoutY="301.0" promptText="Size">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Small" />
+                            <String fx:value="Medium" />
+                            <String fx:value="Large" />
+                            <String fx:value="Extra large" />
+                        </FXCollections>
+                    </items>
+            </ComboBox>
             <Label layoutX="221.0" layoutY="334.0" text="Lost at airport" />
-            <TextArea layoutX="223.0" layoutY="352.0" prefHeight="20.0" prefWidth="118.0" />
-            <TextField layoutX="385.0" layoutY="40.0" prefHeight="140.0" prefWidth="201.0" />
-            <Label layoutX="359.0" layoutY="15.0" text="Extra" />
+            <Label layoutX="363.0" layoutY="90.0" text="Extra" />
             <Button layoutX="372.0" layoutY="350.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="91.0" text="Save Edit" />
             <Button layoutX="494.0" layoutY="350.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="92.0" text="Decline" />
-            <ScrollBar layoutX="572.0" layoutY="43.0" orientation="VERTICAL" prefHeight="136.0" prefWidth="14.0" />
+            <TextField fx:id="txtCustomerFirstname" layoutX="20.0" layoutY="20.0" />
+            <TextField fx:id="txtCustomerLastname" layoutX="20.0" layoutY="69.0" />
+            <TextField fx:id="txtCustomerVacation" layoutX="20.0" layoutY="125.0" />
+            <TextField fx:id="txtVacationFrom" layoutX="20.0" layoutY="221.0" prefHeight="25.0" prefWidth="60.0" />
+            <TextField fx:id="txtVacationTo" layoutX="100.0" layoutY="221.0" prefHeight="25.0" prefWidth="60.0" />
+            <TextField fx:id="txtVacationStreet" layoutX="20.0" layoutY="281.0" prefHeight="25.0" prefWidth="110.0" />
+            <TextField fx:id="txtVacationNumber" layoutX="138.0" layoutY="281.0" prefHeight="25.0" prefWidth="30.0" />
+            <TextField fx:id="txtVacationZipcode" layoutX="20.0" layoutY="350.0" />
+            <TextField fx:id="txtLostAirport" layoutX="221.0" layoutY="350.0" />
+            <TextArea fx:id="txtExtra" layoutX="363.0" layoutY="126.0" prefHeight="200.0" prefWidth="200.0" />
+            <TextField fx:id="txtFlightnumber" layoutX="363.0" layoutY="28.0" />
+            <Label layoutX="363.0" layoutY="12.0" text="Flight number" />
          </children>
       </Pane>
    </left>

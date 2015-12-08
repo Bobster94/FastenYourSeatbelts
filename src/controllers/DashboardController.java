@@ -27,6 +27,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.util.Callback;
 
@@ -44,65 +45,126 @@ public class DashboardController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         AllLuggageController allL = new AllLuggageController();
-        tvLostLuggage = allL.buildData(tvLostLuggage,0, "barcode,date,flightNummer");
-        tvFoundLuggage = allL.buildData(tvFoundLuggage,1, "barcode,lostAirport,date,flightNummer");
-        tvCustomers = buildCustomersTable(tvCustomers);
-    }
-    
-    private ObservableList<ObservableList> data;
-    public TableView buildCustomersTable(TableView tableview) {
-       data = FXCollections.observableArrayList();
-          try(Connection conn = Database.initDatabase()){
-            String SQL = "SELECT firstName,lastName,birthDate,city,street,houseNumber,email,phoneNumber FROM customer";
+        //tvLostLuggage = allL.buildData(tvLostLuggage,0, "barcode,date,flightNummer");
+        ObservableList<Luggage> LostData = FXCollections.observableArrayList();
+        try (Connection conn = Database.initDatabase()) {
+            String SQL = "SELECT id,barcode,date,flightNumber FROM luggage WHERE lostFound = 0";
             ResultSet rs = conn.createStatement().executeQuery(SQL);
-            for(int i=0 ; i<rs.getMetaData().getColumnCount(); i++){
-                final int j = i;                
+            for (int i = 1; i < rs.getMetaData().getColumnCount(); i++) {
                 TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i+1));
-                //Connect cell to the respective column
-                col.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ObservableList,String>,ObservableValue<String>>(){                    
-                    @Override
-                    public ObservableValue<String> call(TableColumn.CellDataFeatures<ObservableList, String> param) {                                                                                              
-                        return new SimpleStringProperty(param.getValue().get(j).toString());                        
-                    }                    
-                });
-                tableview.getColumns().addAll(col); 
+                col.setCellValueFactory(new PropertyValueFactory<>(rs.getMetaData().getColumnName(i+1)));
+                tvLostLuggage.getColumns().add(col);
+            }
+
+            //Add data to the tableview
+            while (rs.next()) {
+                //Iterate Row
+                String[] params = new String[rs.getMetaData().getColumnCount() + 1];
+                for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
+                    //Iterate Column
+                    params[i-1] = rs.getString(i);
+                }
+                params[4] = null;
+                LostData.add(new Luggage(params));
+            }
+            tvLostLuggage.setItems(LostData);
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        
+        tvLostLuggage.setRowFactory(tv -> {
+            TableRow<Luggage> row = new TableRow<>();
+            BorderPane root = Main.getRoot();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) { 
+                    allL.buildscreen(row.getItem().getID());
+                    //root.setLeft(new BorderPane(new Label(row.getItem().getID())));
+                }
+            });
+            return row;
+        });
+        
+        ObservableList<Luggage> foundData = FXCollections.observableArrayList();
+        try (Connection conn = Database.initDatabase()) {
+            String SQL = "SELECT id,barcode,date,flightNumber,lostAirport FROM luggage WHERE lostFound = 1";
+            ResultSet rs = conn.createStatement().executeQuery(SQL);
+            for (int i = 1; i < rs.getMetaData().getColumnCount(); i++) {
+                TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i+1));
+                col.setCellValueFactory(new PropertyValueFactory<>(rs.getMetaData().getColumnName(i+1)));
+                tvFoundLuggage.getColumns().add(col);
+            }
+
+            //Add data to the tableview
+            while (rs.next()) {
+                //Iterate Row
+                String[] params = new String[rs.getMetaData().getColumnCount()];
+                for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
+                    //Iterate Column
+                    params[i-1] = rs.getString(i);
+                }
+                foundData.add(new Luggage(params));
+            }
+            tvFoundLuggage.setItems(foundData);
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        
+        tvFoundLuggage.setRowFactory(tv -> {
+            TableRow<Luggage> row = new TableRow<>();
+            BorderPane root = Main.getRoot();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) {                      
+                    allL.buildscreen(row.getItem().getID());
+                }
+            });
+            return row;
+        });
+        
+        ObservableList<Customer> customerData = FXCollections.observableArrayList();
+          try(Connection conn = Database.initDatabase()){
+            String SQL = "SELECT id,firstName,lastName,birthDate,city,street,houseNumber,email,phoneNumber FROM customer";
+            ResultSet rs = conn.createStatement().executeQuery(SQL);
+            for(int i=1 ; i<rs.getMetaData().getColumnCount(); i++){
+                TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i+1));
+                col.setCellValueFactory(new PropertyValueFactory<>(rs.getMetaData().getColumnName(i+1)));
+                tvCustomers.getColumns().addAll(col); 
             }
             //Add data to the tableview
             while(rs.next()){
                 //Iterate Row
-                ObservableList<String> row = FXCollections.observableArrayList();
-                for(int i=1 ; i<=rs.getMetaData().getColumnCount(); i++){
+                String[] params = new String[rs.getMetaData().getColumnCount()];
+                for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
                     //Iterate Column
-                    row.add(rs.getString(i));
-                    
+                    params[i-1] = rs.getString(i);
                 }
-                data.add(row);
+                customerData.add(new Customer(params));
             }
-            tableview.setItems(data);
+            tvCustomers.setItems(customerData);
             }catch(Exception e){
                 System.out.println("Error on filling the tableview");             
             }
-            return tableview;
-      }
-    
+          SpecificCustomer specCustomer = new SpecificCustomer();
+        tvCustomers.setRowFactory(tv -> {
+            TableRow<Customer> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                    specCustomer.buildscreen(row.getItem().getID());
+                }
+            });
+            return row;
+        });
+    }
     
     @FXML
     protected void GetAddFoundLuggage(ActionEvent event) throws IOException{
         BorderPane root = Main.getRoot();
-        //try {
-            
-           
-//        } catch (IOException ex) {
-//            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
         URL paneOneUrl = getClass().getResource("/views/AddFoundLuggage.fxml");
         root.setLeft((Node) FXMLLoader.load(paneOneUrl));
-        //AddFoundLuggageController add = new AddFoundLuggageController();
-        //root.setLeft(add.getAddFoundLuggageScreen());
     }
     
     @FXML
@@ -114,24 +176,24 @@ public class DashboardController implements Initializable {
     @FXML
     protected void searchLostLuggage(ActionEvent event) {
         String searchField = txtSearchLostLuggage.getText();
-        ObservableList<ObservableList> data;
+        ObservableList<Luggage> data;
         data = FXCollections.observableArrayList();
         
         try(Connection conn = Database.initDatabase()){
-            String SQL = "SELECT barcode,date,flightNummer "
+            String SQL = "SELECT id,barcode,date,flightNummer "
                 + "FROM luggage "
                 + "WHERE lostFound = 0 "
-                + "AND flightNummer LIKE '%"+searchField+"%'";
+                + "AND flightNumber LIKE '%"+searchField+"%'";
         ResultSet rs = conn.createStatement().executeQuery(SQL);
             //Add data to the tableview
             while(rs.next()){
                 //Iterate Row
-                ObservableList<String> row = FXCollections.observableArrayList();
+                String[] params = new String[rs.getMetaData().getColumnCount()];
                 for(int i=1 ; i<=rs.getMetaData().getColumnCount(); i++){
                     //Iterate Column
-                    row.add(rs.getString(i));
+                    params[i-1] = rs.getString(i);
                 }
-                data.add(row);
+                data.add(new Luggage(params));
             }
                 tvLostLuggage.setItems(data);
             }catch(Exception e){
@@ -143,11 +205,11 @@ public class DashboardController implements Initializable {
     @FXML
     protected void searchFoundLuggage(ActionEvent event) {
         String searchField = txtSearchFoundLuggage.getText();
-        ObservableList<ObservableList> data;
+        ObservableList<Luggage> data;
         data = FXCollections.observableArrayList();
         
         try(Connection conn = Database.initDatabase()) {
-            String SQL = "SELECT barcode,date,lostAirport,flightNummer "
+            String SQL = "SELECT id,barcode,date,flightNumber,lostAirport "
                 + "FROM luggage "
                 + "WHERE lostFound = 1 "
                 + "AND flightNummer LIKE '%"+searchField+"%'";
@@ -156,12 +218,12 @@ public class DashboardController implements Initializable {
             //Add data to the tableview
             while(rs.next()) {
                 //Iterate Row
-                ObservableList<String> row = FXCollections.observableArrayList();
+                String[] params = new String[rs.getMetaData().getColumnCount()];
                 for(int i=1 ; i<=rs.getMetaData().getColumnCount(); i++){
                     //Iterate Column
-                    row.add(rs.getString(i));
+                    params[i-1] = rs.getString(i);
                 }
-                data.add(row);
+                data.add(new Luggage(params));
             }
             tvFoundLuggage.setItems(data);
         } catch(Exception e){
@@ -182,7 +244,7 @@ public class DashboardController implements Initializable {
         try(Connection conn = Database.initDatabase()) {
             String SQL = "SELECT firstName,lastName,birthDate,city,street,houseNumber,email,phoneNumber "
                 + "FROM customer "
-                + "WHERE lastName LIKE '%"+lastname+"%' "
+                + "WHERE lastName LIKE '%"+lastname+"%'"
                 + "AND birthDate LIKE '%"+birthdate+"%'";
             ResultSet rs = conn.createStatement().executeQuery(SQL);
             
