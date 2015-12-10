@@ -152,5 +152,4 @@ public class EditCustomerController implements Initializable {
             Logger.getLogger(EditCustomerController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
 }

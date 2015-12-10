@@ -60,10 +60,12 @@ public class LoginController implements Initializable {
                 lblError.setText("Username and/or password is wrong");
                 lblError.setVisible(true);
             } else {
+                String firstName;
                 int admin;
+                firstName = employee.getString("firstName");
                 admin = employee.getInt("admin");
+                Main.username.setUsername(firstName);
                 Main.admin.setAdmin(admin);
-                System.out.println(employee.getInt("admin"));
                 valid = true;
             }
             conn.close();
@@ -90,8 +92,13 @@ public class LoginController implements Initializable {
             
             //Set master screen
             BorderPane root = main.getRoot();
-            root.setTop((Node) FXMLLoader.load(getClass().getResource("/views/Main.fxml")));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/Main.fxml"));
+            root.setTop((Node) loader.load());
+            Main controller = loader.getController();
+            controller.hallo();
+            
             root.setLeft((Node) FXMLLoader.load(getClass().getResource("/views/Dashboard.fxml")));
+            
             
             //Add the fxml to the scene
             Scene scene = new Scene(root);

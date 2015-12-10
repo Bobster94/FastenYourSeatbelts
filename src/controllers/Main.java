@@ -28,6 +28,8 @@ import javafx.stage.Stage;
 public class Main extends Application {
     private static BorderPane root = new BorderPane();
     public static Admin admin = new Admin();
+    public static Username username = new Username();
+
     public static BorderPane getRoot(){
         return root;
     }
@@ -35,6 +37,7 @@ public class Main extends Application {
     @FXML private BorderPane master;
     @FXML private Label lblPage;
     @FXML private Label lblUser;
+    @FXML private Label lblFunction;
     LoginController login = new LoginController();
     DashboardController dashboard = new DashboardController();
     
@@ -62,15 +65,20 @@ public class Main extends Application {
     protected void getManagerScreen(ActionEvent event){
         ManagerController manager = new ManagerController();
         root.setLeft(manager.getManagerScreen());
-        lblPage.setText("Manager");
-        int admin2=  admin.getAdmin();
-        if (admin2 == 0) {
-            cbManager.setDisable(true);
-        }else{
-            cbManager.setDisable(false);
-        }
     }
     
+    public void hallo(){
+        lblUser.setText(username.getUsername());
+        int admin2=  admin.getAdmin();
+        if (admin2 == 0) {
+            cbManager.setVisible(false);
+            lblFunction.setText("employee");
+        }else{
+            cbManager.setVisible(true);
+            lblFunction.setText("Manager");
+        }
+    }
+            
     @FXML private ComboBox cbLostLuggage;
     @FXML
     protected void selectLostLuggage(ActionEvent event){
