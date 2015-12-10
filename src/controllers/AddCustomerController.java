@@ -48,30 +48,6 @@ public class AddCustomerController implements Initializable {
     
     @FXML
     private void saveCustomer(ActionEvent event) {
-        String name = first.getText();
-        System.out.println(name);
-        String counrty = country.getText();
-        System.out.println(counrty);
-        String lastname = last.getText();
-        System.out.println(lastname);
-        String stad = city.getText();
-        System.out.println(stad);
-        String address = email.getText();
-        System.out.println(address);
-        String straat = street.getText();
-        System.out.println(straat);
-        int telefoon = Integer.parseInt(phone.getText());
-        System.out.println(telefoon);
-        String code = zip.getText();
-        System.out.println(code);
-        
-        try(Connection conn = Database.initDatabase()){
-            String Customer = "INSERT INTO customer "
-                    + "(firstname,insertion,lastname,birthDate,"
-                    + "city,street,houseNumber,email,date,"
-                    + "phoneNumber,idEmployee) "
-                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-
         String firstName = txtFirstName.getText();       
         String country = txtCountry.getText();      
         String lastName = txtLastName.getText();

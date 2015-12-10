@@ -107,5 +107,7 @@ public class EditCustomerController implements Initializable {
         }
         return screen;
     }    
-    
+    public void buildScreen(String id){
+        
+    }
 }
