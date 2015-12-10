@@ -5,28 +5,32 @@
 <?import javafx.scene.layout.*?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EditCustomerController">
-   <center>
+   <left>
       <Pane prefHeight="400.0" prefWidth="611.0" BorderPane.alignment="CENTER">
          <children>
             <Label layoutX="51.0" layoutY="39.0" text="First name" />
-            <Label layoutX="250.0" layoutY="39.0" text="Country" />
+            <Label layoutX="250.0" layoutY="88.0" text="Country" />
             <TextField fx:id="txtFirstname" layoutX="51.0" layoutY="59.0" />
-            <TextField layoutX="250.0" layoutY="59.0" />
-            <Label layoutX="51.0" layoutY="113.0" text="Last name" />
-            <Label layoutX="250.0" layoutY="113.0" text="City" />
-            <TextField layoutX="51.0" layoutY="135.0" />
-            <TextField layoutX="250.0" layoutY="135.0" />
-            <Label layoutX="51.0" layoutY="183.0" text="E mail address" />
-            <Label layoutX="250.0" layoutY="183.0" text="Streetname" />
-            <TextField layoutX="51.0" layoutY="208.0" />
-            <TextField layoutX="250.0" layoutY="208.0" />
-            <Label layoutX="51.0" layoutY="253.0" text="Phone number" />
-            <Label layoutX="250.0" layoutY="253.0" text="Zip code" />
-            <TextField layoutX="51.0" layoutY="277.0" />
-            <TextField layoutX="250.0" layoutY="277.0" />
-            <Button layoutX="53.0" layoutY="346.0" mnemonicParsing="false" text="Edit customers" />
-            <Button layoutX="253.0" layoutY="346.0" mnemonicParsing="false" text="Load form existing customer" />
+            <TextField fx:id="txtCountry" layoutX="250.0" layoutY="108.0" />
+            <Label layoutX="51.0" layoutY="142.0" text="Last name" />
+            <Label layoutX="250.0" layoutY="142.0" text="City" />
+            <TextField fx:id="txtLastname" layoutX="51.0" layoutY="164.0" />
+            <TextField fx:id="txtCity" layoutX="250.0" layoutY="164.0" />
+            <Label layoutX="51.0" layoutY="212.0" text="E mail address" />
+            <Label layoutX="250.0" layoutY="212.0" text="Streetname" />
+            <TextField fx:id="txtEmail" layoutX="51.0" layoutY="237.0" />
+            <TextField fx:id="txtStreetname" layoutX="250.0" layoutY="237.0" />
+            <Label layoutX="51.0" layoutY="282.0" text="Phone number" />
+            <Label layoutX="250.0" layoutY="282.0" text="Zip code" />
+            <TextField fx:id="txtPhonenumber" layoutX="51.0" layoutY="306.0" />
+            <TextField fx:id="txtZipcode" layoutX="250.0" layoutY="306.0" />
+            <Button fx:id="btnSave" layoutX="51.0" layoutY="347.0" onAction="#editCustomer" mnemonicParsing="false" text="Save customer" />
+            <TextField fx:id="txtInsertion" layoutX="52.0" layoutY="110.0" />
+            <Label layoutX="52.0" layoutY="90.0" text="Insertion" />
+            <Label layoutX="250.0" layoutY="37.0" text="Birth date (yyyy-mm-dd)" />
+            <TextField fx:id="txtBirthdate" layoutX="250.0" layoutY="57.0" />
+            <TextField fx:id="txtHousenumber" layoutX="411.0" layoutY="237.0" prefHeight="25.0" prefWidth="40.0" />
          </children>
       </Pane>
-   </center>
+   </left>
 </BorderPane>

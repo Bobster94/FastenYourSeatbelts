@@ -12,8 +12,6 @@ import java.sql.ResultSet;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,15 +19,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
-import javafx.util.Callback;
 
 /**
  * FXML Controller class
@@ -47,8 +42,7 @@ public class DashboardController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        AllLuggageController allL = new AllLuggageController();
-        //tvLostLuggage = allL.buildData(tvLostLuggage,0, "barcode,date,flightNummer");
+        AllLuggageController allLuggage = new AllLuggageController();
         ObservableList<Luggage> LostData = FXCollections.observableArrayList();
         try (Connection conn = Database.initDatabase()) {
             String SQL = "SELECT id,barcode,date,flightNumber FROM luggage WHERE lostFound = 0";
@@ -81,8 +75,7 @@ public class DashboardController implements Initializable {
             BorderPane root = Main.getRoot();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (!row.isEmpty())) { 
-                    allL.buildscreen(row.getItem().getID());
-                    //root.setLeft(new BorderPane(new Label(row.getItem().getID())));
+                    allLuggage.buildscreen(row.getItem().getID());
                 }
             });
             return row;
@@ -119,7 +112,7 @@ public class DashboardController implements Initializable {
             BorderPane root = Main.getRoot();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (!row.isEmpty())) {                      
-                    allL.buildscreen(row.getItem().getID());
+                    allLuggage.buildscreen(row.getItem().getID());
                 }
             });
             return row;
@@ -223,6 +216,7 @@ public class DashboardController implements Initializable {
                     //Iterate Column
                     params[i-1] = rs.getString(i);
                 }
+                params[4] = null;
                 data.add(new Luggage(params));
             }
             tvFoundLuggage.setItems(data);

@@ -9,10 +9,15 @@ import controllers.EditCustomerController;
 import controllers.Database;
 import controllers.LoginController;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,62 +45,78 @@ public class EditCustomerController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         
-        }
-;
-    @FXML private TextField first;
-    @FXML private TextField country;
-    @FXML private TextField last;
-    @FXML private TextField city;
-    @FXML private TextField email;
-    @FXML private TextField street;
-    @FXML private TextField phone;
-    @FXML private TextField zip;
+        };
+    //Customer id
+    private static int id;
     
-    
-    
-   
+    @FXML private TextField txtFirstname;
+    @FXML private TextField txtInsertion;
+    @FXML private TextField txtLastname;
+    @FXML private TextField txtCountry;
+    @FXML private TextField txtCity;
+    @FXML private TextField txtEmail;
+    @FXML private TextField txtStreetname;
+    @FXML private TextField txtHousenumber;
+    @FXML private TextField txtPhonenumber;
+    @FXML private TextField txtZipcode;
+    @FXML private TextField txtBirthdate;
     
     @FXML
-    private void saveCustomer(ActionEvent event) {
-        String name = first.getText();
-        System.out.println(name);
-        String counrty = country.getText();
-        System.out.println(counrty);
-        String lastname = last.getText();
-        System.out.println(lastname);
-        String stad = city.getText();
-        System.out.println(stad);
-        String address = email.getText();
-        System.out.println(address);
-        String straat = street.getText();
-        System.out.println(straat);
-        int telefoon = Integer.parseInt(phone.getText());
-        System.out.println(telefoon);
-        String code = zip.getText();
-        System.out.println(code);
+    private void editCustomer(ActionEvent event) {
+        String firstname = txtFirstname.getText();
+        String birthDate = txtBirthdate.getText();
+        String insertion = txtInsertion.getText();
+        String country = txtCountry.getText();
+        String lastname = txtLastname.getText();
+        String city = txtCity.getText();
+        String address = txtEmail.getText();
+        String street = txtStreetname.getText();
+        String houseNumber = txtHousenumber.getText();
+        int telephoneNumber = Integer.parseInt(txtPhonenumber.getText());
+        String zipcode = txtZipcode.getText();
         
-               try(Connection conn = Database.initDatabase()){
-            String Customer = "UPDATE INTO customer (firstname,insertion,lastname,birthDate,city,street,houseNumber,email,date,phoneNumber,idEmployee) "
-                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-            
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        //get current date time with Date()
+        Date date = new Date();
+        String dateToday = dateFormat.format(date);
+        
+        try(Connection conn = Database.initDatabase()) {
+            String Customer = "UPDATE customer "
+                    + "SET firstName = ?,"
+                    + " insertion = ?,"
+                    + " lastName = ?,"
+                    + " birthDate = ?,"
+                    + " country = ?,"
+                    + " city = ?,"
+                    + " zipCode = ?,"
+                    + " street = ?,"
+                    + " houseNumber = ?,"
+                    + " email = ?,"
+                    + " date = ?,"
+                    + " phoneNumber = ?,"
+                    + " idEmployee = ? "
+                    + "WHERE id = ?";
             
             PreparedStatement preparedStatement = conn.prepareStatement(Customer);
-            preparedStatement.setString(1, "test");
-	    preparedStatement.setString(2, "test"); 
+            preparedStatement.setString(1, firstname);
+	    preparedStatement.setString(2, insertion); 
             preparedStatement.setString(3, lastname);
-            preparedStatement.setDate(4, java.sql.Date.valueOf("1996-02-03"));
-            preparedStatement.setString(5, stad);
-            preparedStatement.setString(6, straat);
-            preparedStatement.setString(7, "test");
-            preparedStatement.setString(8, address);
-            preparedStatement.setDate(9, java.sql.Date.valueOf("1996-03-03"));
-            preparedStatement.setInt(10, telefoon);
-            preparedStatement.setInt(11, 1);
+            preparedStatement.setDate(4, java.sql.Date.valueOf(birthDate));
+            preparedStatement.setString(5, country);
+            preparedStatement.setString(6, city);
+            preparedStatement.setString(7, zipcode);
+            preparedStatement.setString(8, street);
+            preparedStatement.setString(9, houseNumber);
+            preparedStatement.setString(10, address);
+            preparedStatement.setDate(11, java.sql.Date.valueOf(dateToday));
+            preparedStatement.setInt(12, telephoneNumber);
+            preparedStatement.setInt(13, 2);
+            preparedStatement.setInt(14, id);
             preparedStatement.executeUpdate();
-    }   catch (SQLException ex) {
-            Logger.getLogger(EditCustomerController.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }   catch (SQLException ex) {
+                Logger.getLogger(EditCustomerController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     }
         
     public BorderPane getEditCustomerScreen() {
@@ -106,6 +127,30 @@ public class EditCustomerController implements Initializable {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
         return screen;
-    }    
+    } 
+    
+    public void buildScreen(String id) {
+        try {
+            this.id = Integer.parseInt(id);
+            Connection conn = Database.initDatabase();
+            String selectCustomer = "SELECT * FROM customer WHERE id = "+id;
+            ResultSet rs = conn.createStatement().executeQuery(selectCustomer);
+            if(rs.next()) {
+                txtFirstname.setText(new String(rs.getBytes("firstName"), "UTF-8"));
+                txtInsertion.setText(new String(rs.getBytes("insertion"), "UTF-8"));
+                txtLastname.setText(new String(rs.getBytes("lastName"), "UTF-8"));
+                txtBirthdate.setText(new String(rs.getBytes("birthDate"), "UTF-8"));
+                txtCountry.setText(new String(rs.getBytes("country"), "UTF-8"));
+                txtCity.setText(new String(rs.getBytes("city"), "UTF-8"));
+                txtZipcode.setText(new String(rs.getBytes("zipCode"), "UTF-8"));
+                txtStreetname.setText(new String(rs.getBytes("street"),"UTF-8"));
+                txtHousenumber.setText(new String(rs.getBytes("houseNumber"),"UTF-8"));
+                txtEmail.setText(new String(rs.getBytes("email"),"UTF-8"));
+                txtPhonenumber.setText(new String(rs.getBytes("phoneNumber"),"UTF-8"));
+            }
+        } catch (SQLException | UnsupportedEncodingException ex) {
+            Logger.getLogger(EditCustomerController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
 }

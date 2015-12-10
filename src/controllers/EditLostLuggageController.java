@@ -50,16 +50,14 @@ public class EditLostLuggageController implements Initializable {
             ResultSet rs = conn.createStatement().executeQuery(selectLuggage);
             if(rs.next()) {
                 txtExtra.setText(new String(rs.getBytes("extra"), "UTF-8"));
-                txtFlightnumber.setText(new String(rs.getBytes("flightNummer"), "UTF-8"));
+                txtFlightnumber.setText(new String(rs.getBytes("flightNumber"), "UTF-8"));
                 cbBrand.setValue(new String(rs.getBytes("brand"), "UTF-8"));
                 cbColor.setValue(new String(rs.getBytes("color"), "UTF-8"));
                 cbSize.setValue(new String(rs.getBytes("size"), "UTF-8"));
                 cbType.setValue(new String(rs.getBytes("type"), "UTF-8"));
                 cbWeight.setValue(new String(rs.getBytes("weight"), "UTF-8"));
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(EditLostLuggageController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UnsupportedEncodingException ex) {
+        } catch (SQLException | UnsupportedEncodingException ex) {
             Logger.getLogger(EditLostLuggageController.class.getName()).log(Level.SEVERE, null, ex);
         }   
     }
