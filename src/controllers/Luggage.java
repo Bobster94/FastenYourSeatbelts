@@ -10,14 +10,14 @@ public class Luggage {
     private final SimpleStringProperty id;
     private final SimpleStringProperty barcode;
     private final SimpleStringProperty date;
-    private final SimpleStringProperty flightNummer;
+    private final SimpleStringProperty flightNumber;
     private final SimpleStringProperty lostAirport;
     
-    Luggage(String[] params) {
+    public Luggage(String[] params) {
         id = new SimpleStringProperty(params[0]);
         barcode = new SimpleStringProperty(params[1]);
         date = new SimpleStringProperty(params[2]);
-        flightNummer = new SimpleStringProperty(params[3]);
+        flightNumber = new SimpleStringProperty(params[3]);
         lostAirport = new SimpleStringProperty(params[4]);
     }
     
@@ -31,8 +31,8 @@ public class Luggage {
         return date.get();
     }
     
-    public String getFlightnummer() {
-        return flightNummer.get();
+    public String getFlightNumber() {
+        return flightNumber.get();
     }
     
     public String getLostAirport() {

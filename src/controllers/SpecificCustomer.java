@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controllers;
 
 import java.io.IOException;
@@ -24,24 +19,25 @@ import javafx.scene.layout.VBox;
  * @author Bas
  */
 public class SpecificCustomer {
-        public void buildscreen(String id) {
+
+    public void buildscreen(String id) {
         BorderPane root = Main.getRoot();
-        try(Connection conn = Database.initDatabase()) {
-            String selectLuggage = "SELECT * FROM customer WHERE id = "+id;
+        try (Connection conn = Database.initDatabase()) {
+            String selectLuggage = "SELECT * FROM customer WHERE id = " + id;
             ResultSet rs = conn.createStatement().executeQuery(selectLuggage);
             VBox layout = new VBox();
-            if(rs.next()) {
+            if (rs.next()) {
                 for (int i = 2; i < rs.getMetaData().getColumnCount(); i++) {
                     Label label = new Label();
-                    label.setText(rs.getMetaData().getColumnName(i)+":");
-                    label.setPadding(new Insets(10,0,0,10));
+                    label.setText(rs.getMetaData().getColumnName(i) + ":");
+                    label.setPadding(new Insets(10, 0, 0, 10));
                     Label dataLabel = new Label();
                     dataLabel.setText(rs.getString(i));
-                    dataLabel.setPadding(new Insets(10,0,0,10));
+                    dataLabel.setPadding(new Insets(10, 0, 0, 10));
                     HBox hbox = new HBox();
-                    hbox.getChildren().addAll(label,dataLabel);
+                    hbox.getChildren().addAll(label, dataLabel);
                     layout.getChildren().add(hbox);
-                }                
+                }
                 HBox hbox = new HBox();
                 Button btnEdit = new Button();
                 btnEdit.setText("Edit");
@@ -59,19 +55,16 @@ public class SpecificCustomer {
                 Button btnMatch = new Button();
                 btnMatch.setText("Match with luggage");
                 btnMatch.setOnAction((ActionEvent actionEvent) -> {
-                    
+
                 });
-                hbox.getChildren().addAll(btnEdit,btnMatch);
+                hbox.getChildren().addAll(btnEdit, btnMatch);
                 layout.getChildren().add(hbox);
-            root.setLeft(layout);
+                root.setLeft(layout);
             } else {
                 root.setLeft(new Label("Foutmelding"));
             }
-        } catch(Exception ex) {
+        } catch (Exception ex) {
             System.out.println("ging wat fout");
         }
-
     }
-    
-    
 }

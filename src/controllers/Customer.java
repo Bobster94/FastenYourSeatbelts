@@ -38,7 +38,37 @@ public class Customer {
         return id.get();
     }
     
-    public String getFirstname() {
+    public String getFirstName() {
         return firstName.get();
     }
+    
+    public String getLastName() {
+        return lastName.get();
+    }
+
+    public String getBirthDate() {
+        return birthDate.get();
+    }
+
+    public String getCity() {
+        return city.get();
+    }
+
+    public String getStreet() {
+        return street.get();
+    }
+
+    public String getHouseNumber() {
+        return houseNumber.get();
+    }
+
+    public String getEmail() {
+        return email.get();
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber.get();
+    }
+    
+    
 }

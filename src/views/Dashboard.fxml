@@ -95,7 +95,7 @@
                      </children>
                   </HBox>
                   <TableView fx:id="tvLostLuggage" prefHeight="150.0" prefWidth="200.0" />
-                  <Button fx:id="btnAddLostLuggage" mnemonicParsing="false" text="Add new lost luggage" />
+                  <Button fx:id="btnAddLostLuggage" onAction="#GetAddLostLuggage" mnemonicParsing="false" text="Add new lost luggage" />
                </children>
             </VBox>
          </right>
