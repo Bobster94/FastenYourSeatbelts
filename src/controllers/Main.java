@@ -6,6 +6,10 @@
 package controllers;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
@@ -62,12 +66,21 @@ public class Main extends Application {
     
     @FXML private Button cbManager;
     @FXML
-    protected void getManagerScreen(ActionEvent event){
+    protected void getManagerScreen(ActionEvent event) throws ParseException{
         ManagerController manager = new ManagerController();
         root.setLeft(manager.getManagerScreen());
+        //DateFormat("19941030");
+        
+        DateFormat formatter = null;
+        Date convertedDate = null;
+
+        String yyyyMMdd = "20110914";
+        formatter = new SimpleDateFormat("yyyyMMdd");
+        convertedDate = (Date) formatter.parse(yyyyMMdd);
+        System.out.println("Date from yyyyMMdd String in Java : " + convertedDate);
     }
     
-    public void hallo(){
+    public void UsernameManager(){
         lblUser.setText(username.getUsername());
         int admin2=  admin.getAdmin();
         if (admin2 == 0) {
@@ -152,6 +165,17 @@ public class Main extends Application {
     protected void getDashboardScreen(ActionEvent event){
         root.setLeft(dashboard.getDashboardScreen());
         lblPage.setText("Dashboard");
+    }
+    
+    public void DateFormat(String hallo) throws ParseException{
+        DateFormat formatter = null;
+        Date convertedDate = null;
+
+        String yyyyMMdd = hallo;
+        formatter = new SimpleDateFormat("yyyyMMdd");
+        convertedDate = (Date) formatter.parse(yyyyMMdd);
+        System.out.println("Date from yyyyMMdd String in Java : " + convertedDate);
+        
     }
     
     
