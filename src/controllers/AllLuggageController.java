@@ -32,7 +32,7 @@ public class AllLuggageController implements Initializable {
         
     }
     
-    public void buildscreen(String id) {
+    public void buildscreen(String id, String luggageType) {
         BorderPane root = Main.getRoot();
         try(Connection conn = Database.initDatabase()) {
             String selectLuggage = "SELECT * FROM luggage WHERE id = "+id;
@@ -71,11 +71,19 @@ public class AllLuggageController implements Initializable {
                 btnEdit.setText("Edit");
                 btnEdit.setOnAction((ActionEvent actionEvent) -> {
                     try {
+                    if("lostLuggage".equals(luggageType)) {
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/EditLostLuggage.fxml"));
                         BorderPane screen = loader.load();
                         EditLostLuggageController controller = loader.getController();
                         controller.buildScreen(id);
                         root.setLeft(screen);
+                    } else if("foundLuggage".equals(luggageType)) {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/EditFoundLuggage.fxml"));
+                        BorderPane screen = loader.load();
+                        EditFoundLuggageController controller = loader.getController();
+                        controller.buildScreen(id);
+                        root.setLeft(screen);
+                    }
                     } catch (IOException ex) {
                         Logger.getLogger(AllLuggageController.class.getName()).log(Level.SEVERE, null, ex);
                     }

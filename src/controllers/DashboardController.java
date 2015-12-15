@@ -46,7 +46,6 @@ public class DashboardController implements Initializable {
             for (int i = 1; i < rs.getMetaData().getColumnCount(); i++) {
                 TableColumn col = new TableColumn(rs.getMetaData().getColumnLabel(i + 1));
                 col.setCellValueFactory(new PropertyValueFactory<>(rs.getMetaData().getColumnName(i + 1)));
-                System.out.println(rs.getMetaData().getColumnName(i + 1));
                 tvLostLuggage.getColumns().add(col);
             }
 
@@ -72,7 +71,7 @@ public class DashboardController implements Initializable {
             BorderPane root = Main.getRoot();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (!row.isEmpty())) {
-                    allLuggage.buildscreen(row.getItem().getID());
+                    allLuggage.buildscreen(row.getItem().getID(), "lostLuggage");
                 }
             });
             return row;
@@ -113,7 +112,7 @@ public class DashboardController implements Initializable {
             BorderPane root = Main.getRoot();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (!row.isEmpty())) {
-                    allLuggage.buildscreen(row.getItem().getID());
+                    allLuggage.buildscreen(row.getItem().getID(), "foundLuggage");
                 }
             });
             return row;
@@ -121,10 +120,11 @@ public class DashboardController implements Initializable {
 
         ObservableList<Customer> customerData = FXCollections.observableArrayList();
         try (Connection conn = Database.initDatabase()) {
-            String SQL = "SELECT id,firstName as 'firstname',lastName as 'lastname',"
+            String SQL = "SELECT id,firstName as 'firstname',"
+                    + "lastName as 'lastname',"
                     + "birthDate as 'date of birth',"
-                    + "city,street,houseNumber as 'house number',"
-                    + "email,phoneNumber as 'phone number' FROM customer";
+                    + "city,street,houseNumber as 'house number',email,"
+                    + "phoneNumber as 'phone number' FROM customer";
             ResultSet rs = conn.createStatement().executeQuery(SQL);
             for (int i = 1; i < rs.getMetaData().getColumnCount(); i++) {
                 TableColumn col = new TableColumn(rs.getMetaData().getColumnLabel(i + 1));

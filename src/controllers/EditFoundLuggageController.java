@@ -1,9 +1,11 @@
 package controllers;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -97,5 +99,19 @@ public class EditFoundLuggageController implements Initializable {
               Logger.getLogger(AddFoundLuggageController.class.getName()).log(Level.SEVERE,null,ex);
           }
        
+    }
+    
+    public void buildScreen(String id) {
+        try {
+            Connection conn = Database.initDatabase();
+            String selectLuggage = "SELECT brand,color,type,weight,size,extra,material,flightNumber FROM luggage WHERE id = "+id;
+            ResultSet rs = conn.createStatement().executeQuery(selectLuggage);
+            if(rs.next()) {
+                txtExtra.setText(new String(rs.getBytes("extra"), "UTF-8"));
+                txtFlightNumber.setText(new String(rs.getBytes("flightNumber"), "UTF-8"));
+            }
+        } catch (SQLException | UnsupportedEncodingException ex) {
+            Logger.getLogger(EditLostLuggageController.class.getName()).log(Level.SEVERE, null, ex);
+        }   
     }
 }

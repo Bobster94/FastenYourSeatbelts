@@ -21,6 +21,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.util.Callback;
 
@@ -38,7 +39,7 @@ public class AllFoundLuggageController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         populateTableView();
     } 
-    private ObservableList<ObservableList> data;
+    private ObservableList<detailedLuggage> data;
     @FXML private TableView tvFoundLuggage;
     @FXML private ComboBox cbColor;
     @FXML private TextField cbBrand;
@@ -80,18 +81,18 @@ public class AllFoundLuggageController implements Initializable {
         
           data = FXCollections.observableArrayList();
           try(Connection conn = Database.initDatabase()){
-            String SQL = "SELECT brand,color,type,weight,"
+            String SQL = "SELECT id,brand,color,type,weight,"
                     + "size,barcode,lostAirport,extra,material,"
                     + "date,flightNumber "
                     + "FROM luggage "
-                    + "WHERE lostFound = 0 "
+                    + "WHERE lostFound = 1 "
                     + "AND extra LIKE '%"+extra+"%' "
                     + "AND date LIKE '%"+date+"%' "
                     + "AND color LIKE '%"+color+"%' "
                     + "AND brand LIKE '%"+brand+"%' "
                     + "AND size LIKE '%"+size+"%' "
                     + "AND material LIKE '%"+material+"%' "
-                    + "AND flightNummer LIKE '%"+flightnumber+"%' "
+                    + "AND flightNumber LIKE '%"+flightnumber+"%' "
                     + "AND weight LIKE '%"+weight+"%' "
                     + "AND type LIKE '%"+type+"%'";
             
@@ -99,51 +100,56 @@ public class AllFoundLuggageController implements Initializable {
             //Add data to the tableview
             while(rs.next()){
                 //Iterate Row
-                ObservableList<String> row = FXCollections.observableArrayList();
+                String[] params = new String[rs.getMetaData().getColumnCount()];
                 for(int i=1 ; i<=rs.getMetaData().getColumnCount(); i++){
                     //Iterate Column
-                    row.add(rs.getString(i));
+                    params[i-1] = rs.getString(i);
                 }
-                data.add(row);
+                data.add(new detailedLuggage(params));
             }
                 tvFoundLuggage.setItems(data);
             }catch(Exception e){
-                System.out.println("Error on filling the tableview");             
+                System.out.println(e);             
             }
       }
     
     public void populateTableView() {
         data = FXCollections.observableArrayList();
           try(Connection conn = Database.initDatabase()){
-            String SQL = "SELECT brand,color,type,weight,size,barcode,lostAirport,extra,material,date,flightNumber FROM luggage WHERE lostFound = 1";
+            String SQL = "SELECT id,brand,color,type,weight,size,barcode,lostAirport,extra,material,date,flightNumber FROM luggage WHERE lostFound = 1";
             ResultSet rs = conn.createStatement().executeQuery(SQL);
-            for(int i=0 ; i<rs.getMetaData().getColumnCount(); i++){
-                final int j = i;                
-                TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i+1));
-                //Connect cell to the respective column
-                col.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ObservableList,String>,ObservableValue<String>>(){                    
-                    @Override
-                    public ObservableValue<String> call(TableColumn.CellDataFeatures<ObservableList, String> param) {                                                                                              
-                        return new SimpleStringProperty(param.getValue().get(j).toString());                        
-                    }                    
-                });
+            for(int i=1 ; i<rs.getMetaData().getColumnCount(); i++) {
+                TableColumn col = new TableColumn(rs.getMetaData().getColumnLabel(i + 1));
+                col.setCellValueFactory(new PropertyValueFactory<>(rs.getMetaData().getColumnName(i + 1)));
                 tvFoundLuggage.getColumns().addAll(col); 
             }
             
             //Add data to the tableview
             while(rs.next()){
                 //Iterate Row
-                ObservableList<String> row = FXCollections.observableArrayList();
+                String[] params = new String[rs.getMetaData().getColumnCount()];
                 for(int i=1 ; i<=rs.getMetaData().getColumnCount(); i++){
                     //Iterate Column
-                    row.add(rs.getString(i));
+                    params[i-1] = rs.getString(i);
                 }
-                data.add(row);
+                data.add(new detailedLuggage(params));
             }
-                tvFoundLuggage.setItems(data);
+            
+            tvFoundLuggage.setItems(data);
             }catch(Exception e){
-                System.out.println("Error on filling the tableview");             
+                System.out.println(e);             
             }
+            AllLuggageController  allLuggage = new AllLuggageController();
+        tvFoundLuggage.setRowFactory(tv -> {
+            TableRow<detailedLuggage> row = new TableRow<>();
+            BorderPane root = Main.getRoot();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                    allLuggage.buildscreen(row.getItem().getID(), "foundLuggage");
+                }
+            });
+            return row;
+        });
     }
     
     public BorderPane getAllFoundLuggageScreen() {

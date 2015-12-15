@@ -7,19 +7,11 @@
 <?import javafx.collections.FXCollections?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EditLostLuggageController">
-   <left>
+   <center>
       <Pane prefHeight="400.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="23.0" text="Customer first name" />
-            <Label layoutX="24.0" layoutY="52.0" text="Customer last name" />
-            <Label layoutX="22.0" layoutY="110.0" text="Vacation destination" />
-            <Label layoutX="20.0" layoutY="171.0" text="Vacation period:" />
-            <Label layoutX="24.0" layoutY="200.0" text="From" />
-            <Label layoutX="99.0" layoutY="200.0" text="To" />
-            <Label layoutX="21.0" layoutY="265.0" text="Vacation Adress" />
-            <Label layoutX="23.0" layoutY="328.0" text="Vacation Zipcode" />
-            <Label layoutX="230.0" layoutY="9.0" text="Color" />
-            <ComboBox fx:id="cbColor" layoutX="227.0" layoutY="31.0" promptText="Color">
+            <Label layoutX="37.0" layoutY="17.0" text="Color" />
+            <ComboBox fx:id="cbColor" layoutX="34.0" layoutY="39.0" promptText="Color">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
                             <String fx:value="Blue" />
@@ -34,8 +26,8 @@
                         </FXCollections>
                     </items>
             </ComboBox>
-            <Label layoutX="227.0" layoutY="73.0" text="Type of luggage" />
-            <ComboBox fx:id="cbType" layoutX="228.0" layoutY="98.0" promptText="Type">
+            <Label layoutX="34.0" layoutY="81.0" text="Type of luggage" />
+            <ComboBox fx:id="cbType" layoutX="35.0" layoutY="106.0" promptText="Type">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
                             <String fx:value="Bag" />
@@ -46,8 +38,8 @@
                         </FXCollections>
                     </items>
             </ComboBox>
-            <Label layoutX="226.0" layoutY="137.0" text="Brands" />
-            <ComboBox fx:id="cbBrand" layoutX="223.0" layoutY="168.0" promptText="Brand">
+            <Label layoutX="33.0" layoutY="145.0" text="Brands" />
+            <ComboBox fx:id="cbBrand" layoutX="30.0" layoutY="176.0" promptText="Brand">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
                             <String fx:value="Eastpack" />
@@ -58,8 +50,8 @@
                         </FXCollections>
                     </items>
             </ComboBox>
-            <Label layoutX="225.0" layoutY="209.0" text="Weight" />
-            <ComboBox fx:id="cbWeight" layoutX="225.0" layoutY="233.0" promptText="Weight">
+            <Label layoutX="32.0" layoutY="217.0" text="Weight" />
+            <ComboBox fx:id="cbWeight" layoutX="32.0" layoutY="241.0" promptText="Weight">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
                             <String fx:value="0 - 1" />
@@ -70,8 +62,8 @@
                         </FXCollections>
                     </items>
             </ComboBox>
-            <Label layoutX="227.0" layoutY="274.0" text="Size" />
-            <ComboBox fx:id="cbSize" layoutX="227.0" layoutY="301.0" promptText="Size">
+            <Label layoutX="34.0" layoutY="282.0" text="Size" />
+            <ComboBox fx:id="cbSize" layoutX="34.0" layoutY="309.0" promptText="Size">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
                             <String fx:value="Small" />
@@ -81,23 +73,14 @@
                         </FXCollections>
                     </items>
             </ComboBox>
-            <Label layoutX="221.0" layoutY="334.0" text="Lost at airport" />
-            <Label layoutX="363.0" layoutY="90.0" text="Extra" />
-            <Button layoutX="372.0" layoutY="350.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="91.0" text="Save Edit" />
-            <Button layoutX="494.0" layoutY="350.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="92.0" text="Decline" />
-            <TextField fx:id="txtCustomerFirstname" layoutX="20.0" layoutY="20.0" />
-            <TextField fx:id="txtCustomerLastname" layoutX="20.0" layoutY="69.0" />
-            <TextField fx:id="txtCustomerVacation" layoutX="20.0" layoutY="125.0" />
-            <TextField fx:id="txtVacationFrom" layoutX="20.0" layoutY="221.0" prefHeight="25.0" prefWidth="60.0" />
-            <TextField fx:id="txtVacationTo" layoutX="100.0" layoutY="221.0" prefHeight="25.0" prefWidth="60.0" />
-            <TextField fx:id="txtVacationStreet" layoutX="20.0" layoutY="281.0" prefHeight="25.0" prefWidth="110.0" />
-            <TextField fx:id="txtVacationNumber" layoutX="138.0" layoutY="281.0" prefHeight="25.0" prefWidth="30.0" />
-            <TextField fx:id="txtVacationZipcode" layoutX="20.0" layoutY="350.0" />
-            <TextField fx:id="txtLostAirport" layoutX="221.0" layoutY="350.0" />
-            <TextArea fx:id="txtExtra" layoutX="363.0" layoutY="126.0" prefHeight="200.0" prefWidth="200.0" />
-            <TextField fx:id="txtFlightnumber" layoutX="363.0" layoutY="28.0" />
-            <Label layoutX="363.0" layoutY="12.0" text="Flight number" />
+            <Label layoutX="28.0" layoutY="342.0" text="Lost at airport" />
+            <Label layoutX="170.0" layoutY="98.0" text="Extra" />
+            <Button layoutX="279.0" layoutY="358.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="91.0" text="Save Edit" />
+            <TextField fx:id="txtLostAirport" layoutX="28.0" layoutY="358.0" />
+            <TextArea fx:id="txtExtra" layoutX="170.0" layoutY="134.0" prefHeight="200.0" prefWidth="200.0" />
+            <TextField fx:id="txtFlightnumber" layoutX="170.0" layoutY="36.0" />
+            <Label layoutX="170.0" layoutY="20.0" text="Flight number" />
          </children>
       </Pane>
-   </left>
+   </center>
 </BorderPane>
