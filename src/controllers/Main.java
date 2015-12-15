@@ -1,21 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controllers;
 
-import java.io.IOException;
-import java.sql.Date;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -107,11 +94,6 @@ public class Main extends Application {
                 root.setLeft(addLostLuggage.getAddLostLuggageScreen());
                 lblPage.setText("Add lost luggage");
                 break;
-            case 2:
-                EditLostLuggageController editLostLuggage = new EditLostLuggageController();
-                root.setLeft(editLostLuggage.getEditLostLuggageScreen());
-                lblPage.setText("Edit lost luggage");
-                break;
         }
     }
     
@@ -130,11 +112,6 @@ public class Main extends Application {
                 root.setLeft(addCustomer.getAddCustomerScreen());
                 lblPage.setText("Add customer");
                 break;
-            case 2:
-                EditCustomerController editCustomer = new EditCustomerController();
-                root.setLeft(editCustomer.getEditCustomerScreen());
-                lblPage.setText("Edit customer");
-                break;
         }
     }
     
@@ -152,11 +129,6 @@ public class Main extends Application {
                 AddFoundLuggageController addFoundLuggage = new AddFoundLuggageController();
                 root.setLeft(addFoundLuggage.getAddFoundLuggageScreen());
                 lblPage.setText("Add found luggage");
-                break;
-            case 2:
-                EditFoundLuggageController editFoundLuggage = new EditFoundLuggageController();
-                root.setLeft(editFoundLuggage.getEditFoundLuggageScreen());
-                lblPage.setText("Edit found luggage");
                 break;
         }
     }
