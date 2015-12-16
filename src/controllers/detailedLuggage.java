@@ -27,12 +27,12 @@ public class detailedLuggage {
         type = new SimpleStringProperty(params[3]);
         weight = new SimpleStringProperty(params[4]);
         size = new SimpleStringProperty(params[5]);
-        extra = new SimpleStringProperty(params[6]);
-        material = new SimpleStringProperty(params[7]);
-        date = new SimpleStringProperty(params[8]);
-        barcode = new SimpleStringProperty(params[9]);
-        flightNumber = new SimpleStringProperty(params[10]);
-        lostAirport = new SimpleStringProperty(params[11]);
+        barcode = new SimpleStringProperty(params[6]);
+        lostAirport = new SimpleStringProperty(params[7]);
+        extra = new SimpleStringProperty(params[8]);
+        material = new SimpleStringProperty(params[9]);
+        date = new SimpleStringProperty(params[10]);
+        flightNumber = new SimpleStringProperty(params[11]);
     }
     
     public String getID() {

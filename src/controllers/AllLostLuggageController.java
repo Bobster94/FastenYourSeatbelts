@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controllers;
 
 import java.io.IOException;
@@ -84,15 +79,15 @@ public class AllLostLuggageController implements Initializable {
                     + "date,flightNumber "
                     + "FROM luggage "
                     + "WHERE lostFound = 0 "
-                    + "AND extra LIKE '%"+extra+"%' "
-                    + "AND date LIKE '%"+date+"%' "
-                    + "AND color LIKE '%"+color+"%' "
-                    + "AND brand LIKE '%"+brand+"%' "
-                    + "AND size LIKE '%"+size+"%' "
-                    + "AND material LIKE '%"+material+"%' "
-                    + "AND flightNumber LIKE '%"+flightnumber+"%' "
-                    + "AND weight LIKE '%"+weight+"%' "
-                    + "AND type LIKE '%"+type+"%'";
+                    + "AND IFNULL(extra,'') LIKE '%"+extra+"%' "
+                    + "AND IFNULL(date,'') LIKE '%"+date+"%' "
+                    + "AND IFNULL(color,'') LIKE '%"+color+"%' "
+                    + "AND IFNULL(brand,'') LIKE '%"+brand+"%' "
+                    + "AND IFNULL(size,'') LIKE '%"+size+"%' "
+                    + "AND IFNULL(material,'') LIKE '%"+material+"%' "
+                    + "AND IFNULL(flightNumber,'') LIKE '%"+flightnumber+"%' "
+                    + "AND IFNULL(weight,'') LIKE '%"+weight+"%' "
+                    + "AND IFNULL(type,'') LIKE '%"+type+"%'";
             
         ResultSet rs = conn.createStatement().executeQuery(SQL);      
         //Add data to the tableview

@@ -19,22 +19,32 @@
                <children>
                   <HBox prefHeight="100.0" prefWidth="650.0">
                      <children>
-                        <TextField fx:id="txtMaterial" prefWidth="110.0" promptText="First name">
+                        <TextField fx:id="txtFirstname" prefWidth="110.0" promptText="First name">
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin>
                         </TextField>
-                        <TextField fx:id="txtFlightnumber" prefWidth="110.0" promptText="Last name">
+                        <TextField fx:id="txtInsertion" prefWidth="110.0" promptText="Insertion">
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin>
                         </TextField>
-                        <TextField fx:id="cbBrand" prefWidth="110.0" promptText="Birth date">
+                        <TextField fx:id="txtLastname" prefWidth="110.0" promptText="Last name">
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin>
                         </TextField>
-                        <TextField fx:id="txtDate11" prefWidth="110.0" promptText="Email">
+                        <TextField fx:id="txtBirthdate" prefWidth="110.0" promptText="Birth date">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </TextField>
+                        <TextField fx:id="txtEmail" prefWidth="110.0" promptText="Email">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </TextField>
+                        <TextField fx:id="txtZipcode" prefWidth="110.0" promptText="Zipcode">
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin>
@@ -43,27 +53,32 @@
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="650.0">
                      <children>
-                        <TextField fx:id="txtExtra" prefWidth="110.0" promptText="City">
+                        <TextField fx:id="txtCountry" prefWidth="110.0" promptText="Country">
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin>
                         </TextField>
-                        <TextField fx:id="txtDate" prefWidth="110.0" promptText="Street">
+                        <TextField fx:id="txtCity" prefWidth="110.0" promptText="City">
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin>
                         </TextField>
-                        <TextField fx:id="txtDate1" prefWidth="110.0" promptText="House number">
+                        <TextField fx:id="txtStreet" prefWidth="110.0" promptText="Street">
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin>
                         </TextField>
-                        <TextField fx:id="txtDate12" prefWidth="110.0" promptText="Phone number">
+                        <TextField fx:id="txtHousenumber" prefWidth="110.0" promptText="House number">
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin>
                         </TextField>
-                        <Button fx:id="btnCustomer" mnemonicParsing="false" prefWidth="110.0" text="Search">
+                        <TextField fx:id="txtPhonenumber" prefWidth="110.0" promptText="Phone number">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </TextField>
+                        <Button fx:id="btnSearchCustomer" mnemonicParsing="false" onAction="#searchCustomer" prefWidth="110.0" text="Search">
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin>

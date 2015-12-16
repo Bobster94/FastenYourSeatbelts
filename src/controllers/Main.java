@@ -39,7 +39,7 @@ public class Main extends Application {
         
         //Add fxml to the scene
         primaryStage.setScene(new Scene(bpRoot, 320, 400));
-        primaryStage.setResizable(false);
+        primaryStage.setResizable(true);
         primaryStage.getIcons().add(new Image("images/favicon.png"));
         primaryStage.setTitle("Corendon Luggage Application");
         primaryStage.show();
@@ -129,7 +129,6 @@ public class Main extends Application {
         root.setLeft(dashboard.getDashboardScreen());
         lblPage.setText("Dashboard");
     }
-    
     
     public static void main(String[] args) {
         launch(args);
