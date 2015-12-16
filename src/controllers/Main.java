@@ -53,12 +53,12 @@ public class Main extends Application {
     
     @FXML private Button cbManager;
     @FXML
-    protected void getManagerScreen(ActionEvent event){
+    protected void getManagerScreen(ActionEvent event) throws ParseException{
         ManagerController manager = new ManagerController();
         root.setLeft(manager.getManagerScreen());
     }
     
-    public void hallo(){
+    public void UsernameManager(){
         lblUser.setText(username.getUsername());
         int admin2=  admin.getAdmin();
         if (admin2 == 0) {

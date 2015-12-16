@@ -95,7 +95,7 @@ public class LoginController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/Main.fxml"));
             root.setTop((Node) loader.load());
             Main controller = loader.getController();
-            controller.hallo();
+            controller.UsernameManager();
             
             root.setLeft((Node) FXMLLoader.load(getClass().getResource("/views/Dashboard.fxml")));
             
