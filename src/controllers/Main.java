@@ -18,8 +18,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
     private static BorderPane root = new BorderPane();
-    public static Admin admin = new Admin();
-    public static Username username = new Username();
+    public static Employee employee = new Employee();
 
     public static BorderPane getRoot(){
         return root;
@@ -53,15 +52,15 @@ public class Main extends Application {
     
     @FXML private Button cbManager;
     @FXML
-    protected void getManagerScreen(ActionEvent event) throws ParseException{
+    protected void getManagerScreen(ActionEvent event) {
         ManagerController manager = new ManagerController();
         root.setLeft(manager.getManagerScreen());
     }
     
     public void UsernameManager(){
-        lblUser.setText(username.getUsername());
-        int admin2=  admin.getAdmin();
-        if (admin2 == 0) {
+        lblUser.setText(employee.getUsername());
+        int functionId = employee.getFunctionID();
+        if (functionId == 0) {
             cbManager.setVisible(false);
             lblFunction.setText("employee");
         }else{

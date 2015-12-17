@@ -4,11 +4,9 @@ import java.io.IOException;
 import javafx.event.ActionEvent;
 import java.net.URL;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -41,7 +39,7 @@ public class LoginController implements Initializable {
         try(Connection conn = Database.initDatabase()) {
             //Select the employee with the given username and password
             String selectEmployee = 
-                    "SELECT userName,firstName,lastName,password,email,admin " +
+                    "SELECT id,userName,firstName,lastName,password,email,admin " +
                     "FROM employee " +
                     "WHERE userName = ? AND password = ?";
             
@@ -60,12 +58,9 @@ public class LoginController implements Initializable {
                 lblError.setText("Username and/or password is wrong");
                 lblError.setVisible(true);
             } else {
-                String firstName;
-                int admin;
-                firstName = employee.getString("firstName");
-                admin = employee.getInt("admin");
-                Main.username.setUsername(firstName);
-                Main.admin.setAdmin(admin);
+                Main.employee.setUsername(employee.getString("firstName"));
+                Main.employee.setFunctionID(employee.getInt("admin"));
+                Main.employee.setEmployeeID(employee.getInt("id"));
                 valid = true;
             }
             conn.close();
@@ -98,7 +93,6 @@ public class LoginController implements Initializable {
             controller.UsernameManager();
             
             root.setLeft((Node) FXMLLoader.load(getClass().getResource("/views/Dashboard.fxml")));
-            
             
             //Add the fxml to the scene
             Scene scene = new Scene(root);

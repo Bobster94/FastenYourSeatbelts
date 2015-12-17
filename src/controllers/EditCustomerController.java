@@ -114,6 +114,9 @@ public class EditCustomerController implements Initializable {
             preparedStatement.setInt(14, id);
             preparedStatement.executeUpdate();
             
+            SpecificCustomer specCustomer = new SpecificCustomer();
+            specCustomer.buildscreen(String.valueOf(id));
+            
         }   catch (SQLException ex) {
                 Logger.getLogger(EditCustomerController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -136,19 +139,30 @@ public class EditCustomerController implements Initializable {
             String selectCustomer = "SELECT * FROM customer WHERE id = "+id;
             ResultSet rs = conn.createStatement().executeQuery(selectCustomer);
             if(rs.next()) {
-                txtFirstname.setText(new String(rs.getBytes("firstName"), "UTF-8"));
-                txtInsertion.setText(new String(rs.getBytes("insertion"), "UTF-8"));
-                txtLastname.setText(new String(rs.getBytes("lastName"), "UTF-8"));
-                txtBirthdate.setText(new String(rs.getBytes("birthDate"), "UTF-8"));
-                txtCountry.setText(new String(rs.getBytes("country"), "UTF-8"));
-                txtCity.setText(new String(rs.getBytes("city"), "UTF-8"));
-                txtZipcode.setText(new String(rs.getBytes("zipCode"), "UTF-8"));
-                txtStreetname.setText(new String(rs.getBytes("street"),"UTF-8"));
-                txtHousenumber.setText(new String(rs.getBytes("houseNumber"),"UTF-8"));
-                txtEmail.setText(new String(rs.getBytes("email"),"UTF-8"));
-                txtPhonenumber.setText(new String(rs.getBytes("phoneNumber"),"UTF-8"));
+                txtFirstname.setText(rs.getString("firstName"));
+                if(rs.wasNull()) txtFirstname.setText("");
+                txtInsertion.setText(rs.getString("insertion"));
+                if(rs.wasNull()) txtInsertion.setText("");
+                txtLastname.setText(rs.getString("lastName"));
+                if(rs.wasNull()) txtLastname.setText("");
+                txtBirthdate.setText(rs.getString("birthDate"));
+                if(rs.wasNull()) txtBirthdate.setText("");
+                txtCountry.setText(rs.getString("country"));
+                if(rs.wasNull()) txtCountry.setText("");
+                txtCity.setText(rs.getString("city"));
+                if(rs.wasNull()) txtCity.setText("");
+                txtZipcode.setText(rs.getString("zipCode"));
+                if(rs.wasNull()) txtZipcode.setText("");
+                txtStreetname.setText(rs.getString("street"));
+                if(rs.wasNull()) txtStreetname.setText("");
+                txtHousenumber.setText(rs.getString("houseNumber"));
+                if(rs.wasNull()) txtHousenumber.setText("");
+                txtEmail.setText(rs.getString("email"));
+                if(rs.wasNull()) txtEmail.setText("");
+                txtPhonenumber.setText(rs.getString("phoneNumber"));
+                if(rs.wasNull())txtPhonenumber.setText("");
             }
-        } catch (SQLException | UnsupportedEncodingException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(EditCustomerController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
