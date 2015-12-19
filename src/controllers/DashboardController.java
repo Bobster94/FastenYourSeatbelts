@@ -41,7 +41,10 @@ public class DashboardController implements Initializable {
         ObservableList<Luggage> LostData = FXCollections.observableArrayList();
         try (Connection conn = Database.initDatabase()) {
             String SQL = "SELECT id,barcode,date,flightNumber as 'flight number' "
-                    + "FROM luggage WHERE lostFound = 0";
+                    + "FROM luggage WHERE lostFound = 0 "
+                    + "AND NOT EXISTS (SELECT idLuggage "
+                    + "FROM history "
+                    + "WHERE  luggage.id = history.idLuggage)";
             ResultSet rs = conn.createStatement().executeQuery(SQL);
             for (int i = 1; i < rs.getMetaData().getColumnCount(); i++) {
                 TableColumn col = new TableColumn(rs.getMetaData().getColumnLabel(i + 1));
@@ -83,7 +86,10 @@ public class DashboardController implements Initializable {
                     + "flightNumber as 'flight number',"
                     + "lostAirport as 'lost at airport' "
                     + "FROM luggage "
-                    + "WHERE lostFound = 1";
+                    + "WHERE lostFound = 1 "
+                    + "AND NOT EXISTS (SELECT idLuggage "
+                    + "FROM history "
+                    + "WHERE  luggage.id = history.idLuggage)";
             ResultSet rs = conn.createStatement().executeQuery(SQL);
             for (int i = 1; i < rs.getMetaData().getColumnCount(); i++) {
                 TableColumn col = new TableColumn(rs.getMetaData().getColumnLabel(i + 1));
@@ -203,7 +209,10 @@ public class DashboardController implements Initializable {
             String SQL = "SELECT id,barcode,date,flightNumber "
                     + "FROM luggage "
                     + "WHERE lostFound = 0 "
-                    + "AND flightNumber LIKE '%" + searchField + "%'";
+                    + "AND flightNumber LIKE '%" + searchField + "%' "
+                    + "AND NOT EXISTS (SELECT idLuggage "
+                    + "FROM history "
+                    + "WHERE  luggage.id = history.idLuggage)";
             ResultSet rs = conn.createStatement().executeQuery(SQL);
             //Add data to the tableview
             while (rs.next()) {
@@ -234,7 +243,10 @@ public class DashboardController implements Initializable {
             String SQL = "SELECT id,barcode,date,flightNumber,lostAirport "
                     + "FROM luggage "
                     + "WHERE lostFound = 1 "
-                    + "AND flightNumber LIKE '%" + searchField + "%'";
+                    + "AND flightNumber LIKE '%" + searchField + "%' "
+                    + "AND NOT EXISTS (SELECT idLuggage "
+                    + "FROM history "
+                    + "WHERE  luggage.id = history.idLuggage)";
             ResultSet rs = conn.createStatement().executeQuery(SQL);
 
             //Add data to the tableview

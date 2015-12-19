@@ -109,7 +109,10 @@ public class AllFoundLuggageController implements Initializable {
     public void populateTableView() {
         data = FXCollections.observableArrayList();
           try(Connection conn = Database.initDatabase()){
-            String SQL = "SELECT id,brand,color,type,weight,size,barcode,lostAirport,extra,material,date,flightNumber FROM luggage WHERE lostFound = 1";
+            String SQL = "SELECT id,brand,color,type,weight,size,barcode,"
+                    + "lostAirport,extra,material,date,flightNumber "
+                    + "FROM luggage "
+                    + "WHERE lostFound = 1";
             ResultSet rs = conn.createStatement().executeQuery(SQL);
             for(int i=1 ; i<rs.getMetaData().getColumnCount(); i++) {
                 TableColumn col = new TableColumn(rs.getMetaData().getColumnLabel(i + 1));
