@@ -31,19 +31,29 @@ public class AllFoundLuggageController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         populateTableView();
-    } 
+    }
     private ObservableList<detailedLuggage> data;
-    @FXML private TableView tvFoundLuggage;
-    @FXML private ComboBox cbColor;
-    @FXML private TextField cbBrand;
-    @FXML private ComboBox cbSize;
-    @FXML private TextField txtMaterial;
-    @FXML private TextField txtFlightnumber;
-    @FXML private ComboBox cbType;
-    @FXML private ComboBox cbWeight;
-    @FXML private TextField txtExtra;
-    @FXML private TextField txtDate;
-    
+    @FXML
+    private TableView tvFoundLuggage;
+    @FXML
+    private ComboBox cbColor;
+    @FXML
+    private TextField cbBrand;
+    @FXML
+    private ComboBox cbSize;
+    @FXML
+    private TextField txtMaterial;
+    @FXML
+    private TextField txtFlightnumber;
+    @FXML
+    private ComboBox cbType;
+    @FXML
+    private ComboBox cbWeight;
+    @FXML
+    private TextField txtExtra;
+    @FXML
+    private TextField txtDate;
+
     @FXML
     protected void searchFoundLuggage(ActionEvent event) {
         String extra = txtExtra.getText();
@@ -51,91 +61,94 @@ public class AllFoundLuggageController implements Initializable {
         String brand = cbBrand.getText();
         String material = txtMaterial.getText();
         String flightnumber = txtFlightnumber.getText();
-        
+
         String color = "";
-        if(cbColor.getValue() != null ) {
+        if (cbColor.getValue() != null) {
             color = cbColor.getValue().toString();
         }
-        
+
         String size = "";
-        if(cbSize.getValue() != null ) {
+        if (cbSize.getValue() != null) {
             size = cbSize.getValue().toString();
         }
-        
+
         String weight = "";
-        if(cbWeight.getValue() != null ) {
+        if (cbWeight.getValue() != null) {
             weight = cbWeight.getValue().toString();
         }
-        
+
         String type = "";
-        if(cbType.getValue() != null ) {
+        if (cbType.getValue() != null) {
             type = cbType.getValue().toString();
         }
-        
-          data = FXCollections.observableArrayList();
-          try(Connection conn = Database.initDatabase()){
+
+        data = FXCollections.observableArrayList();
+        try (Connection conn = Database.initDatabase()) {
             String SQL = "SELECT id,brand,color,type,weight,"
                     + "size,barcode,lostAirport,extra,material,"
                     + "date,flightNumber "
                     + "FROM luggage "
                     + "WHERE lostFound = 1 "
-                    + "AND IFNULL(extra,'') LIKE '%"+extra+"%' "
-                    + "AND IFNULL(date,'') LIKE '%"+date+"%' "
-                    + "AND IFNULL(color,'') LIKE '%"+color+"%' "
-                    + "AND IFNULL(brand,'') LIKE '%"+brand+"%' "
-                    + "AND IFNULL(size,'') LIKE '%"+size+"%' "
-                    + "AND IFNULL(material,'') LIKE '%"+material+"%' "
-                    + "AND IFNULL(flightNumber,'') LIKE '%"+flightnumber+"%' "
-                    + "AND IFNULL(weight,'') LIKE '%"+weight+"%' "
-                    + "AND IFNULL(type,'') LIKE '%"+type+"%'";
-            
-            ResultSet rs = conn.createStatement().executeQuery(SQL);      
+                    + "AND IFNULL(extra,'') LIKE '%" + extra + "%' "
+                    + "AND IFNULL(date,'') LIKE '%" + date + "%' "
+                    + "AND IFNULL(color,'') LIKE '%" + color + "%' "
+                    + "AND IFNULL(brand,'') LIKE '%" + brand + "%' "
+                    + "AND IFNULL(size,'') LIKE '%" + size + "%' "
+                    + "AND IFNULL(material,'') LIKE '%" + material + "%' "
+                    + "AND IFNULL(flightNumber,'') LIKE '%" + flightnumber + "%' "
+                    + "AND IFNULL(weight,'') LIKE '%" + weight + "%' "
+                    + "AND IFNULL(type,'') LIKE '%" + type + "%'";
+
+            ResultSet rs = conn.createStatement().executeQuery(SQL);
             //Add data to the tableview
-            while(rs.next()){
+            while (rs.next()) {
                 //Iterate Row
                 String[] params = new String[rs.getMetaData().getColumnCount()];
-                for(int i=1 ; i<=rs.getMetaData().getColumnCount(); i++){
+                for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
                     //Iterate Column
-                    params[i-1] = rs.getString(i);
+                    params[i - 1] = rs.getString(i);
                 }
                 data.add(new detailedLuggage(params));
             }
-                tvFoundLuggage.setItems(data);
-            }catch(Exception e){
-                System.out.println(e);             
-            }
-      }
-    
+            tvFoundLuggage.setItems(data);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
     public void populateTableView() {
         data = FXCollections.observableArrayList();
-          try(Connection conn = Database.initDatabase()){
+        try (Connection conn = Database.initDatabase()) {
             String SQL = "SELECT id,brand,color,type,weight,size,barcode,"
                     + "lostAirport,extra,material,date,flightNumber "
                     + "FROM luggage "
-                    + "WHERE lostFound = 1";
+                    + "WHERE lostFound = 1 "
+                    + "AND NOT EXISTS (SELECT idLuggage "
+                    + "FROM history "
+                    + "WHERE  luggage.id = history.idLuggage)";
             ResultSet rs = conn.createStatement().executeQuery(SQL);
-            for(int i=1 ; i<rs.getMetaData().getColumnCount(); i++) {
+            for (int i = 1; i < rs.getMetaData().getColumnCount(); i++) {
                 TableColumn col = new TableColumn(rs.getMetaData().getColumnLabel(i + 1));
                 col.setCellValueFactory(new PropertyValueFactory<>(rs.getMetaData().getColumnName(i + 1)));
-                tvFoundLuggage.getColumns().addAll(col); 
+                tvFoundLuggage.getColumns().addAll(col);
             }
-            
+
             //Add data to the tableview
-            while(rs.next()){
+            while (rs.next()) {
                 //Iterate Row
                 String[] params = new String[rs.getMetaData().getColumnCount()];
-                for(int i=1 ; i<=rs.getMetaData().getColumnCount(); i++){
+                for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
                     //Iterate Column
-                    params[i-1] = rs.getString(i);
+                    params[i - 1] = rs.getString(i);
                 }
                 data.add(new detailedLuggage(params));
             }
-            
+
             tvFoundLuggage.setItems(data);
-            }catch(Exception e){
-                System.out.println(e);             
-            }
-            AllLuggageController  allLuggage = new AllLuggageController();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        AllLuggageController allLuggage = new AllLuggageController();
         tvFoundLuggage.setRowFactory(tv -> {
             TableRow<detailedLuggage> row = new TableRow<>();
             BorderPane root = Main.getRoot();
@@ -147,7 +160,7 @@ public class AllFoundLuggageController implements Initializable {
             return row;
         });
     }
-    
+
     public BorderPane getAllFoundLuggageScreen() {
         BorderPane screen = null;
         try {
@@ -156,5 +169,5 @@ public class AllFoundLuggageController implements Initializable {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
         return screen;
-    }  
+    }
 }

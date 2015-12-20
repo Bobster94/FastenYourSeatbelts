@@ -145,9 +145,8 @@ public class AllLuggageController implements Initializable {
                                 if (event.getClickCount() == 2 && (!row.isEmpty())) {
                                     try {
                                         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                                        //get current date time with Date()
-                                        Date date = new Date();
-                                        String dateToday = dateFormat.format(date);
+                                        String dateToday = dateFormat.format(new Date());
+                                        
                                         String handleLuggageQuery = "INSERT INTO history "
                                                 + "(status,idLuggage,idCustomer,dateHandled,idEmployeeHandled) "
                                                 + "VALUES (?,?,?,?,?)";  
@@ -167,7 +166,6 @@ public class AllLuggageController implements Initializable {
                             });
                             return row;
                         });
-
                         layout2.setRight(tvLuggage);
                         btnMatch.setDisable(true);
                     });
