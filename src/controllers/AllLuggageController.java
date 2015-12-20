@@ -32,6 +32,7 @@ import javafx.scene.layout.VBox;
  * FXML Controller class
  *
  * @author Bas
+ * @version 1.0
  */
 public class AllLuggageController implements Initializable {
 
@@ -43,6 +44,11 @@ public class AllLuggageController implements Initializable {
 
     }
 
+    /*
+    * Builds the screen with the specific luggage information on the screen.
+    * @param    String  id          This is the id used in workbench for the luggage
+    * @param    String  luggageType Is either lostLuggage or foundLuggage
+    */
     public void buildscreen(String id, String luggageType) {
         BorderPane root = Main.getRoot();
         try (Connection conn = Database.initDatabase()) {
@@ -112,7 +118,8 @@ public class AllLuggageController implements Initializable {
                             String SQL = "SELECT id,firstName as 'firstname',"
                                 + "insertion,lastName as 'lastname',"
                                 + "birthDate as 'date of birth',"
-                                + "country,city,zipCode as 'zipcode', street,houseNumber as 'house number',"
+                                + "country,city,zipCode as 'zipcode', "
+                                + "street,houseNumber as 'house number',"
                                 + "email,phoneNumber as 'phone number' "
                                 + "FROM customer";
                             Connection newConn = Database.initDatabase();
@@ -159,8 +166,10 @@ public class AllLuggageController implements Initializable {
                                         preparedStatement.setDate(4, java.sql.Date.valueOf(dateToday));
                                         preparedStatement.setInt(5, Main.employee.getEmployeeID());
                                         preparedStatement.executeUpdate();
+                                        
                                     } catch (SQLException ex) {
-                                        Logger.getLogger(AllLuggageController.class.getName()).log(Level.SEVERE, null, ex);
+                                        Logger.getLogger(AllLuggageController.class.getName())
+                                                .log(Level.SEVERE, null, ex);
                                     }
                                 }
                             });

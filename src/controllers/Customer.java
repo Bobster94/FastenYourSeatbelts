@@ -1,15 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controllers;
 
 import javafx.beans.property.SimpleStringProperty;
 
 /**
- *
+ * This class is used to set and get the customer TableView content
  * @author Bas
+ * @version 1.0
  */
 public class Customer {
     private final SimpleStringProperty id;
@@ -34,41 +30,66 @@ public class Customer {
         phoneNumber = new SimpleStringProperty(params[8]);
     }
     
+    /*
+    * @return the customer id
+    */
     public String getID() {
         return id.get();
     }
-    
+
+    /*
+    * @return the firstname from the customer
+    */    
     public String getFirstName() {
         return firstName.get();
     }
     
+    /*
+    * @return the lastname from the customer
+    */
     public String getLastName() {
         return lastName.get();
     }
 
+    /*
+    * @return the birthdate from the customer
+    */
     public String getBirthDate() {
         return birthDate.get();
     }
 
+    /*
+    * @return the city where the customer lives
+    */
     public String getCity() {
         return city.get();
     }
 
+    /*
+    * @return the street where the customer lives
+    */    
     public String getStreet() {
         return street.get();
     }
 
+    /*
+    * @return the housenumber from the customer
+    */
     public String getHouseNumber() {
         return houseNumber.get();
     }
 
+    /*
+    * @return the email from the customer
+    */    
     public String getEmail() {
         return email.get();
     }
 
+    /*
+    * @return the phonenumber from the customer
+    */    
     public String getPhoneNumber() {
         return phoneNumber.get();
     }
-    
-    
 }

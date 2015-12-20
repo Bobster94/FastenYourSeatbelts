@@ -1,15 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controllers;
 
-import controllers.EditCustomerController;
-import controllers.Database;
-import controllers.LoginController;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -25,7 +16,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 
@@ -33,6 +23,7 @@ import javafx.scene.layout.BorderPane;
  * FXML Controller class
  *
  * @author Mark
+ * @version 1.0
  */
 public class EditCustomerController implements Initializable {
 
@@ -43,9 +34,9 @@ public class EditCustomerController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
         
-        };
+    };
+        
     //Customer id
     private static int id;
     
@@ -61,8 +52,12 @@ public class EditCustomerController implements Initializable {
     @FXML private TextField txtZipcode;
     @FXML private TextField txtBirthdate;
     
+    /*
+    * Used to edit the customer with the given values
+    *
+    */
     @FXML
-    private void editCustomer(ActionEvent event) {
+    private void editCustomer() {
         String firstname = txtFirstname.getText();
         String birthDate = txtBirthdate.getText();
         String insertion = txtInsertion.getText();
@@ -132,6 +127,10 @@ public class EditCustomerController implements Initializable {
         return screen;
     } 
     
+    /*
+    * Get the customer from the database and fill all the fields with the resultset
+    * @param    String  id  The from the customer.
+    */
     public void buildScreen(String id) {
         try {
             this.id = Integer.parseInt(id);

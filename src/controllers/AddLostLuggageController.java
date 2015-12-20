@@ -1,4 +1,3 @@
-
 package controllers;
 
 import java.io.IOException;
@@ -21,9 +20,9 @@ import javafx.scene.layout.BorderPane;
  * FXML Controller class
  *
  * @author Jeroen
+ * @version 1.0
  */
 public class AddLostLuggageController implements Initializable {
- 
 
     /**
      * Initializes the controller class.
@@ -31,8 +30,12 @@ public class AddLostLuggageController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }
+
+    /*
+     *
+     * @return the addLostLuggage fxml view as borderPane
+     */
     public BorderPane getAddLostLuggageScreen() {
         BorderPane screen = null;
         try {
@@ -42,29 +45,53 @@ public class AddLostLuggageController implements Initializable {
         }
         return screen;
     }
-    @FXML private TextField txtFirstName;
-    @FXML private TextField txtLastName;
-    @FXML private TextField txtInsertion;
-    @FXML private TextField txtBirthdate;
-    @FXML private TextField txtCity;
-    @FXML private TextField txtStreet;
-    @FXML private TextField txtHouseNumber;
-    @FXML private TextField txtEmail;
-    @FXML private TextField txtDate;
-    @FXML private TextField txtLostAirport;
-    @FXML private TextField txtPhoneNumber;
-    @FXML private TextField txtExtra;
-    @FXML private TextField txtZipcode;
-    @FXML private TextField txtCountry;
-    @FXML private ComboBox  txtBrand;
-    @FXML private ComboBox  txtSize;
-    @FXML private ComboBox  txtWeight;
-    @FXML private ComboBox  txtColor;
-    @FXML private ComboBox  txtType;  
     @FXML
+    private TextField txtFirstName;
+    @FXML
+    private TextField txtLastName;
+    @FXML
+    private TextField txtInsertion;
+    @FXML
+    private TextField txtBirthdate;
+    @FXML
+    private TextField txtCity;
+    @FXML
+    private TextField txtStreet;
+    @FXML
+    private TextField txtHouseNumber;
+    @FXML
+    private TextField txtEmail;
+    @FXML
+    private TextField txtDate;
+    @FXML
+    private TextField txtLostAirport;
+    @FXML
+    private TextField txtPhoneNumber;
+    @FXML
+    private TextField txtExtra;
+    @FXML
+    private TextField txtZipcode;
+    @FXML
+    private TextField txtCountry;
+    @FXML
+    private ComboBox txtBrand;
+    @FXML
+    private ComboBox txtSize;
+    @FXML
+    private ComboBox txtWeight;
+    @FXML
+    private ComboBox txtColor;
+    @FXML
+    private ComboBox txtType;
+
     
-    public void savechanges(ActionEvent event) {
-    
+    /*
+    *
+    * Save the newly created luggage into the database
+    */
+    @FXML
+    public void savechanges() {
+
         String firstName = txtFirstName.getText();
         String lastName = txtLastName.getText();
         String insertion = txtInsertion.getText();
@@ -84,16 +111,15 @@ public class AddLostLuggageController implements Initializable {
         String weight = txtWeight.getValue().toString();
         String color = txtColor.getValue().toString();
         String type = txtType.getValue().toString();
-        
-        try(Connection conn = Database.initDatabase()){
+
+        try (Connection conn = Database.initDatabase()) {
             String SQL = "INSERT INTO luggage (brand,color,type,weight,size,barcode,lostAirport,"
                     + "extra,lostFound,material,date,flightNumber,idEmployee) "
                     + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
-            
-            
+
             PreparedStatement preparedStatement = conn.prepareStatement(SQL);
             preparedStatement.setString(1, brand);
-	    preparedStatement.setString(2, color);
+            preparedStatement.setString(2, color);
             preparedStatement.setString(3, type);
             preparedStatement.setString(4, weight);
             preparedStatement.setString(5, size);
@@ -101,19 +127,19 @@ public class AddLostLuggageController implements Initializable {
             preparedStatement.setString(7, lostAirport);
             preparedStatement.setString(8, extra);
             preparedStatement.setInt(9, 0);
-            preparedStatement.setString(10,"material");
+            preparedStatement.setString(10, "material");
             preparedStatement.setDate(11, java.sql.Date.valueOf(date));
-            preparedStatement.setString(12,"flightnumber");
+            preparedStatement.setString(12, "flightnumber");
             preparedStatement.setInt(13, 1);
             preparedStatement.executeUpdate();
-        
-        String Customer = "INSERT INTO customer (firstname,insertion,lastname,birthDate,country,"
-                + "city,zipCode,street,houseNumber,email,date,phoneNumber,idEmployee) "
-                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";  
-        
+
+            String Customer = "INSERT INTO customer (firstname,insertion,lastname,birthDate,country,"
+                    + "city,zipCode,street,houseNumber,email,date,phoneNumber,idEmployee) "
+                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+
             preparedStatement = conn.prepareStatement(Customer);
             preparedStatement.setString(1, firstName);
-	    preparedStatement.setString(2, insertion); 
+            preparedStatement.setString(2, insertion);
             preparedStatement.setString(3, lastName);
             preparedStatement.setDate(4, java.sql.Date.valueOf(birthdate));
             preparedStatement.setString(5, country);
@@ -126,13 +152,12 @@ public class AddLostLuggageController implements Initializable {
             preparedStatement.setInt(12, phoneNumber);
             preparedStatement.setInt(13, 1);
             preparedStatement.executeUpdate();
-            
+
             //Close connection
             conn.close();
-        }catch(SQLException ex){
-              Logger.getLogger(AddLostLuggageController.class.getName()).log(Level.SEVERE,null,ex);             
-          }
-        
-    }   
-    }
+        } catch (SQLException ex) {
+            Logger.getLogger(AddLostLuggageController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
+    }
+}

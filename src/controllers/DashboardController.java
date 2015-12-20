@@ -9,7 +9,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -23,8 +22,10 @@ import javafx.scene.layout.BorderPane;
 
 /**
  * FXML Controller class
- *
+ * This class is used to set all the content and methods for the Dashboard fxml view
+ * 
  * @author Bas
+ * @version 1.0
  */
 public class DashboardController implements Initializable {
 
@@ -34,6 +35,10 @@ public class DashboardController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * This method will run when the dashboard fxml is called
+     * The method will initialize all the base content for all the tableviews
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -164,8 +169,12 @@ public class DashboardController implements Initializable {
         });
     }
 
+    /*
+    *
+    * Calls the base root from main and sets the content
+    */
     @FXML
-    protected void GetAddFoundLuggage(ActionEvent event){
+    protected void GetAddFoundLuggage(){
         try {
             BorderPane root = Main.getRoot();
             URL paneOneUrl = getClass().getResource("/views/AddFoundLuggage.fxml");
@@ -174,9 +183,13 @@ public class DashboardController implements Initializable {
             Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
+    /*
+    *
+    * Calls the base root from main and sets the content
+    */    
     @FXML
-    protected void GetAddLostLuggage(ActionEvent event) {
+    protected void GetAddLostLuggage() {
         try {
             BorderPane root = Main.getRoot();
             URL paneOneUrl = getClass().getResource("/views/AddLostLuggage.fxml");
@@ -186,8 +199,12 @@ public class DashboardController implements Initializable {
         }
     }
 
+    /*
+    *
+    * Calls the base root from main and sets the content
+    */    
     @FXML
-    protected void GetAddCustomer(ActionEvent event) {
+    protected void GetAddCustomer() {
         try {
             BorderPane root = Main.getRoot();
             URL paneOneUrl = getClass().getResource("/views/AddCustomer.fxml");
@@ -199,8 +216,13 @@ public class DashboardController implements Initializable {
 
     @FXML private TextField txtSearchLostLuggage;
     
+    /*
+    *
+    * Search lostLuggage with the given value
+    * Renew the TableView with the results
+    */
     @FXML
-    protected void searchLostLuggage(ActionEvent event) {
+    protected void searchLostLuggage() {
         String searchField = txtSearchLostLuggage.getText();
         ObservableList<Luggage> data;
         data = FXCollections.observableArrayList();
@@ -233,8 +255,13 @@ public class DashboardController implements Initializable {
     }
     @FXML private TextField txtSearchFoundLuggage;
 
+    /*
+    *
+    * Search foundLuggage with the given value
+    * Renew the TableView with the results
+    */    
     @FXML
-    protected void searchFoundLuggage(ActionEvent event) {
+    protected void searchFoundLuggage() {
         String searchField = txtSearchFoundLuggage.getText();
         ObservableList<Luggage> data;
         data = FXCollections.observableArrayList();
@@ -268,8 +295,13 @@ public class DashboardController implements Initializable {
     @FXML private TextField txtSearchCustomerBirthdate;
     @FXML private TextField txtSearchCustomerLastname;
 
+    /*
+    *
+    * Search customers with the given value
+    * Renew the TableView with the results
+    */
     @FXML
-    protected void searchCustomer(ActionEvent event) {
+    protected void searchCustomer() {
         String lastname = txtSearchCustomerLastname.getText();
         String birthdate = txtSearchCustomerBirthdate.getText();
         ObservableList<Customer> data;
@@ -299,6 +331,10 @@ public class DashboardController implements Initializable {
         }
     }
 
+    /*
+    *
+    * @return the dashboard fxml view as BorderPane
+    */
     public BorderPane getDashboardScreen() {
         BorderPane screen = null;
         try {

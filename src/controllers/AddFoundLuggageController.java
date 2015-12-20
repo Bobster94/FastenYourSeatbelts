@@ -5,9 +5,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,7 +14,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 
@@ -35,6 +32,9 @@ public class AddFoundLuggageController implements Initializable {
         // TODO
     }   
     
+    /*
+    * @return the addFoundLuggage fxml view as borderPane
+    */
     public BorderPane getAddFoundLuggageScreen() {
         BorderPane screen = null;
         try {
@@ -44,6 +44,7 @@ public class AddFoundLuggageController implements Initializable {
         }
         return screen;
     }
+    
     @FXML private TextField txtExtra;
     @FXML private TextField txtBarcode;
     @FXML private TextField txtLostAtAirport;
@@ -57,8 +58,13 @@ public class AddFoundLuggageController implements Initializable {
     @FXML private ComboBox  txtWeight;
     @FXML private ComboBox  txtSize;
     
+    
+    /*
+    *
+    * Saves the newly created luggage into the database
+    */
     @FXML
-    public void AddFoundLuggage (ActionEvent event) {
+    public void AddFoundLuggage () {
         
         String barcode = txtBarcode.getText();
         String foundAirport = txtFoundAtAirport.getText();

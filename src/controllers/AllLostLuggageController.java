@@ -21,11 +21,14 @@ import javafx.scene.layout.BorderPane;
  * FXML Controller class
  *
  * @author Bas
+ * @version 1.0
  */
 public class AllLostLuggageController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -54,8 +57,14 @@ public class AllLostLuggageController implements Initializable {
     @FXML
     private TextField txtDate;
 
+    
+    /*
+    *
+    * Search lostLuggage with the given values
+    * Renew the TableView with the results
+    */
     @FXML
-    protected void searchLostLuggage(ActionEvent event) {
+    protected void searchLostLuggage() {
         String extra = txtExtra.getText();
         String date = txtDate.getText();
         String brand = cbBrand.getText();
@@ -116,6 +125,10 @@ public class AllLostLuggageController implements Initializable {
         }
     }
 
+    /*
+    *
+    * Populate the TableView with LostLuggage data if the AllLostLuggage fxml is called
+    */
     public void populateTableView() {
         data = FXCollections.observableArrayList();
         try (Connection conn = Database.initDatabase()) {
@@ -161,6 +174,10 @@ public class AllLostLuggageController implements Initializable {
         });
     }
 
+    /*
+    *
+    * @return the AllLostLuggage fxml view as BorderPane
+    */
     public BorderPane getAllLostLuggageScreen() {
         BorderPane screen = null;
         try {

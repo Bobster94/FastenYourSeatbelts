@@ -15,27 +15,37 @@ import javafx.stage.Stage;
 /**
  *
  * @author jandorresteijn
+ * @version 1.0
  */
 public class Main extends Application {
-    private static BorderPane root = new BorderPane();
-    public static Employee employee = new Employee();
-
-    public static BorderPane getRoot(){
-        return root;
-    }
     
-    @FXML private BorderPane master;
     @FXML private Label lblPage;
     @FXML private Label lblUser;
     @FXML private Label lblFunction;
+
+    /*
+    * This borderpane is the base of the programm
+    */
+    private static BorderPane root = new BorderPane();
+    public static Employee employee = new Employee();
+
     LoginController login = new LoginController();
     DashboardController dashboard = new DashboardController();
-    
+
+    /*
+    * This returns the root borderpane so other classes can change the
+    * content of the screen.
+    * @return  the root borderpane. 
+    */
+    public static BorderPane getRoot() {
+        return root;
+    }
+
     @Override
     public void start(Stage primaryStage) {
         //Get login fxml from LoginController      
         BorderPane bpRoot = login.getLoginScreen();
-        
+
         //Add fxml to the scene
         primaryStage.setScene(new Scene(bpRoot, 320, 400));
         primaryStage.setResizable(false);
@@ -43,37 +53,57 @@ public class Main extends Application {
         primaryStage.setTitle("Corendon Luggage Application");
         primaryStage.show();
     }
-    
+
+    /*
+    * If logout button is clicked. The programm will close.
+    * @param ActionEvent event
+    */
     @FXML
-    protected void Logout(ActionEvent event){
+    protected void Logout(ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
     }
-    
-    @FXML private Button cbManager;
+
     @FXML
-    protected void getManagerScreen(ActionEvent event) {
+    private Button cbManager;
+
+    /*
+    * If the Manager button is clicked. The root content will be set to the 
+    * manager screen
+    */
+    @FXML
+    protected void getManagerScreen() {
         ManagerController manager = new ManagerController();
         root.setLeft(manager.getManagerScreen());
     }
-    
-    public void UsernameManager(){
+
+    /*
+    * This method will set the username, function and disable/allow the
+    * manager button in the menu on login
+    */
+    public void UsernameManager() {
         lblUser.setText(employee.getUsername());
         int functionId = employee.getFunctionID();
         if (functionId == 0) {
             cbManager.setVisible(false);
             lblFunction.setText("employee");
-        }else{
+        } else {
             cbManager.setVisible(true);
             lblFunction.setText("Manager");
         }
     }
-            
-    @FXML private ComboBox cbLostLuggage;
+
     @FXML
-    protected void selectLostLuggage(ActionEvent event){
+    private ComboBox cbLostLuggage;
+
+    /*
+    * Get the selected value from the dropdown in the menu
+    * and set the screen content to the chosen value
+    */
+    @FXML
+    protected void selectLostLuggage() {
         int selectedValue = cbLostLuggage.getSelectionModel().getSelectedIndex();
-        switch(selectedValue) {
+        switch (selectedValue) {
             case 0:
                 AllLostLuggageController allLostLuggage = new AllLostLuggageController();
                 root.setLeft(allLostLuggage.getAllLostLuggageScreen());
@@ -86,12 +116,18 @@ public class Main extends Application {
                 break;
         }
     }
-    
-    @FXML private ComboBox cbCustomer;
+
     @FXML
-    protected void selectCustomer(ActionEvent event){
+    private ComboBox cbCustomer;
+    
+    /*
+    * Get the selected value from the dropdown in the menu
+    * and set the screen content to the chosen value
+    */
+    @FXML
+    protected void selectCustomer() {
         int selectedValue = cbCustomer.getSelectionModel().getSelectedIndex();
-        switch(selectedValue) {
+        switch (selectedValue) {
             case 0:
                 AllCustomerController allCustomers = new AllCustomerController();
                 root.setLeft(allCustomers.getAllCustomerScreen());
@@ -104,12 +140,18 @@ public class Main extends Application {
                 break;
         }
     }
-    
-    @FXML private ComboBox cbFoundLuggage;
+
     @FXML
-    protected void selectFoundLuggage(ActionEvent event){
+    private ComboBox cbFoundLuggage;
+
+    /*
+    * Get the selected value from the dropdown in the menu
+    * and set the screen content to the chosen value
+    */
+    @FXML
+    protected void selectFoundLuggage() {
         int selectedValue = cbFoundLuggage.getSelectionModel().getSelectedIndex();
-        switch(selectedValue) {
+        switch (selectedValue) {
             case 0:
                 AllFoundLuggageController allFoundLuggage = new AllFoundLuggageController();
                 root.setLeft(allFoundLuggage.getAllFoundLuggageScreen());
@@ -122,14 +164,20 @@ public class Main extends Application {
                 break;
         }
     }
-    
+
+    /*
+    * Set the screen content to the dashboard view.
+    */
     @FXML
-    protected void getDashboardScreen(ActionEvent event){
+    protected void getDashboardScreen(ActionEvent event) {
         root.setLeft(dashboard.getDashboardScreen());
         lblPage.setText("Dashboard");
     }
-    
+
+    /*
+    * 
+    */
     public static void main(String[] args) {
         launch(args);
-    } 
+    }
 }

@@ -20,6 +20,7 @@ import javafx.scene.layout.BorderPane;
  * FXML Controller class
  *
  * @author Bas
+ * @version 1.0
  */
 public class AddCustomerController implements Initializable {
 
@@ -45,9 +46,11 @@ public class AddCustomerController implements Initializable {
     @FXML private TextField txtBirthdate;
     @FXML private TextField txtDate;
    
-    
+    /*
+    * Saves the newly created customer into the database
+    */
     @FXML
-    private void saveCustomer(ActionEvent event) {
+    private void saveCustomer() {
         String firstName = txtFirstName.getText();       
         String country = txtCountry.getText();      
         String lastName = txtLastName.getText();
@@ -87,6 +90,10 @@ public class AddCustomerController implements Initializable {
         }
     }
     
+    /*
+    *
+    * @return the addCustomer view as borderPane
+    */
     public BorderPane getAddCustomerScreen() {
         BorderPane screen = null;
         try {

@@ -22,11 +22,14 @@ import javafx.util.Callback;
  * FXML Controller class
  *
  * @author Bas
+ * @version 1.0
  */
 public class AllFoundLuggageController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -54,8 +57,13 @@ public class AllFoundLuggageController implements Initializable {
     @FXML
     private TextField txtDate;
 
+    /*
+    *
+    * Search foundLuggage based on the given values
+    * Renew the TableView with the results
+    */
     @FXML
-    protected void searchFoundLuggage(ActionEvent event) {
+    protected void searchFoundLuggage() {
         String extra = txtExtra.getText();
         String date = txtDate.getText();
         String brand = cbBrand.getText();
@@ -116,6 +124,10 @@ public class AllFoundLuggageController implements Initializable {
         }
     }
 
+    /*
+    *
+    * Populate the TableView with foundLuggage database records if the allFoundLuggage fxml view is called
+    */
     public void populateTableView() {
         data = FXCollections.observableArrayList();
         try (Connection conn = Database.initDatabase()) {
@@ -161,6 +173,10 @@ public class AllFoundLuggageController implements Initializable {
         });
     }
 
+    /*
+    *
+    * @return the AllFoundLuggage fxml view as borderPane
+    */
     public BorderPane getAllFoundLuggageScreen() {
         BorderPane screen = null;
         try {

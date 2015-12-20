@@ -24,6 +24,7 @@ import javafx.scene.layout.BorderPane;
  * FXML Controller class
  *
  * @author Bas
+ * @version 1.0
  */
 public class AllCustomerController implements Initializable {
 
@@ -44,6 +45,8 @@ public class AllCustomerController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -89,8 +92,13 @@ public class AllCustomerController implements Initializable {
         });
     }
 
+    /*
+    *
+    * Search customers based on the given values. 
+    * Renew the TableView with the results
+    */
     @FXML
-    public void searchCustomer(ActionEvent event) {
+    public void searchCustomer() {
         String firstName = txtFirstname.getText();
         String insertion = txtInsertion.getText();
         String lastName = txtLastname.getText();
@@ -138,6 +146,10 @@ public class AllCustomerController implements Initializable {
         }
     }
 
+    /*
+    *
+    * @return the AllCustomer fxml view as borderPane
+    */
     public BorderPane getAllCustomerScreen() {
         BorderPane screen = null;
         try {

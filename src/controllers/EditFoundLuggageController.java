@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -22,17 +21,24 @@ import javafx.scene.layout.BorderPane;
  * FXML Controller class
  *
  * @author Jeroen 
+ * @version 1.0
  */
 public class EditFoundLuggageController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }   
     
+    /*
+    *
+    * @return the EditFoundLuggage fxml view as BorderPane
+    */
     public BorderPane getEditFoundLuggageScreen() {
         BorderPane screen = null;
         try {
@@ -42,6 +48,7 @@ public class EditFoundLuggageController implements Initializable {
         }
         return screen;
     }
+    
     @FXML private TextField txtExtra;
     @FXML private TextField txtBarcode;
     @FXML private TextField txtLostAtAirport;
@@ -55,8 +62,12 @@ public class EditFoundLuggageController implements Initializable {
     @FXML private ComboBox  txtWeight;
     @FXML private ComboBox  txtSize;
     
+    /*
+    *
+    * Edit the foundLuggage with the given values
+    */
     @FXML
-    public void AddFoundLuggage (ActionEvent event) {
+    public void AddFoundLuggage() {
         
         String barcode = txtBarcode.getText();
         String foundAirport = txtFoundAtAirport.getText();
@@ -70,12 +81,12 @@ public class EditFoundLuggageController implements Initializable {
         String brand = txtBrand.getValue().toString();
         String weight = txtWeight.getValue().toString();
         String size = txtSize.getValue().toString();
-        try(Connection conn = Database.initDatabase()){
+        
+        try(Connection conn = Database.initDatabase()) {
             String SQL = "INSERT INTO luggage (brand,color,type,weight,size,barcode,lostAirport,"
                     + "foundAirport,extra,lostFound,material,date,flightNumber,idEmployee) "
                     + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-            
-            
+           
             PreparedStatement preparedStatement = conn.prepareStatement(SQL);
             preparedStatement.setString(1, brand);
 	    preparedStatement.setString(2, color);
@@ -100,7 +111,11 @@ public class EditFoundLuggageController implements Initializable {
           }
        
     }
-    
+   
+    /*
+    * Get the luggage from the database and fill all the fields with the resultset
+    * @param    String  id  luggage id. Used to search luggage from the database
+    */
     public void buildScreen(String id) {
         try {
             Connection conn = Database.initDatabase();
