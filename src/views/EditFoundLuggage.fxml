@@ -9,128 +9,126 @@
 <?import javafx.collections.FXCollections?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EditFoundLuggageController">
-   <left>
-      <VBox prefHeight="400.0" prefWidth="185.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label text="Specifications">
-               <padding>
-                  <Insets bottom="20.0" left="10.0" top="10.0" />
-               </padding>
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
-            <Label text="Color">
-               <VBox.margin>
-                  <Insets left="10.0" />
-               </VBox.margin>
-            </Label>
-            <ComboBox fx:id="txtColor" prefHeight="31.0" prefWidth="179.0">
-               <VBox.margin>
-                  <Insets left="10.0" />
-               </VBox.margin>
-                    <items>
-                        <FXCollections fx:factory="observableArrayList">
-                             <String fx:value="Blue" />
-                             <String fx:value="Red" />
-                             <String fx:value="Orange" />
-                             <String fx:value="Yellow" />
-                             <String fx:value="White" />
-                             <String fx:value="Purple" />
-                             <String fx:value="Green" />
-                             <String fx:value="Pink" />
-                             <String fx:value="Other" />
-                         </FXCollections>
-                    </items>
-            </ComboBox>
-            <Label text="Type of luggage">
-               <VBox.margin>
-                  <Insets left="10.0" />
-               </VBox.margin>
-            </Label>
-            <ComboBox fx:id="txtType" prefHeight="31.0" prefWidth="186.0">
-               <VBox.margin>
-                  <Insets left="10.0" />
-               </VBox.margin>
-                    <items>
-                       <FXCollections fx:factory="observableArrayList">
-                            <String fx:value="Bag" />
-                            <String fx:value="Handbag" />
-                            <String fx:value="Backpack" />
-                            <String fx:value="Hardcase" />
-                            <String fx:value="Softcase" />
-                            <String fx:value="Suitcase" />
-                            <String fx:value="Other" />
-                        </FXCollections>
-                    </items>
-            </ComboBox>
-            <Label text="Brand">
-               <VBox.margin>
-                  <Insets left="10.0" />
-               </VBox.margin>
-            </Label>
-            <ComboBox fx:id="txtBrand" prefHeight="31.0" prefWidth="191.0">
-               <VBox.margin>
-                  <Insets left="10.0" />
-               </VBox.margin>
-                    <items>
-                        <FXCollections fx:factory="observableArrayList">
-                            <String fx:value="Eastpack)" />
-                            <String fx:value="Button" />
-                            <String fx:value="Samsonite" />
-                            <String fx:value="Porsche" />
-                            <String fx:value="Gucci" />
-                            <String fx:value="Other" />
-                        </FXCollections>
-                    </items>
-            </ComboBox>
-            <Label text="Weight">
-               <VBox.margin>
-                  <Insets left="10.0" />
-               </VBox.margin>
-            </Label>
-            <ComboBox fx:id="txtWeight" prefHeight="31.0" prefWidth="200.0">
-               <VBox.margin>
-                  <Insets left="10.0" />
-               </VBox.margin>
-                    <items>
-                        <FXCollections fx:factory="observableArrayList">
-                            <String fx:value="0 &gt; 1 (kg)" />
-                            <String fx:value="1 &gt; 3 (kg)" />
-                            <String fx:value="3 &gt; 6 (kg)" />
-                            <String fx:value="6 &gt; 10 (kg)" />
-                            <String fx:value="10 &gt; 15 (kg)" />
-                            <String fx:value="15 &gt; 20 (kg)" />
-                            <String fx:value="20 &gt; 25 (kg)" />
-                            <String fx:value="25+" />
-                        </FXCollections>
-                    </items>
-                    </ComboBox>
-            <Label text="Material">
-               <VBox.margin>
-                  <Insets left="10.0" />
-               </VBox.margin>
-            </Label>
-            <ComboBox fx:id="txtMaterial" prefHeight="31.0" prefWidth="200.0">
-               <VBox.margin>
-                  <Insets left="10.0" />
-               </VBox.margin>
-                    <items>
-                        <FXCollections fx:factory="observableArrayList">
-                            <String fx:value="Plastic" />
-                            <String fx:value="Leather" />
-                            <String fx:value="Fabric" />
-                            <String fx:value="Metal" />
-                            <String fx:value="Aluminum" />
-                        </FXCollections>
-                    </items>
-            </ComboBox>
-         </children>
-      </VBox>
-   </left>
    <center>
       <HBox prefHeight="400.0" prefWidth="76.0" BorderPane.alignment="CENTER">
          <children>
+            <VBox prefHeight="400.0" prefWidth="185.0">
+               <children>
+                  <Label prefHeight="60.0" prefWidth="145.0" text="Specifications">
+                     <padding>
+                        <Insets bottom="20.0" left="10.0" top="10.0" />
+                     </padding>
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label text="Color">
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <ComboBox fx:id="cbColor" prefHeight="31.0" prefWidth="179.0">
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                          <items>
+                              <FXCollections fx:factory="observableArrayList">
+                                   <String fx:value="Blue" />
+                                   <String fx:value="Red" />
+                                   <String fx:value="Orange" />
+                                   <String fx:value="Yellow" />
+                                   <String fx:value="White" />
+                                   <String fx:value="Purple" />
+                                   <String fx:value="Green" />
+                                   <String fx:value="Pink" />
+                                   <String fx:value="Other" />
+                               </FXCollections>
+                          </items>
+                  </ComboBox>
+                  <Label text="Type of luggage">
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <ComboBox fx:id="cbType" prefHeight="31.0" prefWidth="186.0">
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                          <items>
+                             <FXCollections fx:factory="observableArrayList">
+                                  <String fx:value="Bag" />
+                                  <String fx:value="Handbag" />
+                                  <String fx:value="Backpack" />
+                                  <String fx:value="Hardcase" />
+                                  <String fx:value="Softcase" />
+                                  <String fx:value="Suitcase" />
+                                  <String fx:value="Other" />
+                              </FXCollections>
+                          </items>
+                  </ComboBox>
+                  <Label text="Brand">
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <ComboBox fx:id="cbBrand" prefHeight="31.0" prefWidth="191.0">
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                          <items>
+                              <FXCollections fx:factory="observableArrayList">
+                                  <String fx:value="Eastpack)" />
+                                  <String fx:value="Button" />
+                                  <String fx:value="Samsonite" />
+                                  <String fx:value="Porsche" />
+                                  <String fx:value="Gucci" />
+                                  <String fx:value="Other" />
+                              </FXCollections>
+                          </items>
+                  </ComboBox>
+                  <Label text="Weight">
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <ComboBox fx:id="cbWeight" prefHeight="31.0" prefWidth="200.0">
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                          <items>
+                              <FXCollections fx:factory="observableArrayList">
+                                  <String fx:value="0 &gt; 1 (kg)" />
+                                  <String fx:value="1 &gt; 3 (kg)" />
+                                  <String fx:value="3 &gt; 6 (kg)" />
+                                  <String fx:value="6 &gt; 10 (kg)" />
+                                  <String fx:value="10 &gt; 15 (kg)" />
+                                  <String fx:value="15 &gt; 20 (kg)" />
+                                  <String fx:value="20 &gt; 25 (kg)" />
+                                  <String fx:value="25+" />
+                              </FXCollections>
+                          </items>
+                          </ComboBox>
+                  <Label text="Material">
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <ComboBox fx:id="cbMaterial" prefHeight="31.0" prefWidth="200.0">
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                          <items>
+                              <FXCollections fx:factory="observableArrayList">
+                                  <String fx:value="Plastic" />
+                                  <String fx:value="Leather" />
+                                  <String fx:value="Fabric" />
+                                  <String fx:value="Metal" />
+                                  <String fx:value="Aluminum" />
+                              </FXCollections>
+                          </items>
+                  </ComboBox>
+               </children>
+            </VBox>
             <VBox prefHeight="400.0" prefWidth="180.0">
                <children>
                   <Label text="Size">
@@ -138,7 +136,7 @@
                         <Insets left="10.0" top="60.0" />
                      </VBox.margin>
                   </Label>
-                  <ComboBox fx:id="txtSize" prefHeight="31.0" prefWidth="175.0">
+                  <ComboBox fx:id="cbSize" prefHeight="31.0" prefWidth="175.0">
                      <VBox.margin>
                         <Insets left="10.0" />
                      </VBox.margin>
@@ -196,7 +194,7 @@
                         <Insets left="10.0" />
                      </VBox.margin>
                   </Label>
-                  <TextField fx:id="txtDate">
+                  <TextField fx:id="txtDate" editable="false">
                      <VBox.margin>
                         <Insets left="10.0" />
                      </VBox.margin>
@@ -218,11 +216,6 @@
                   <Button mnemonicParsing="false" onAction="#AddFoundLuggage" text="Edit found luggage">
                      <VBox.margin>
                         <Insets left="10.0" top="10.0" />
-                     </VBox.margin>
-                  </Button>
-                  <Button layoutX="20.0" layoutY="299.0" mnemonicParsing="false" onAction="#AddFoundLuggage" text="Load from existing luggage">
-                     <VBox.margin>
-                        <Insets left="10.0" top="5.0" />
                      </VBox.margin>
                   </Button>
                </children>
