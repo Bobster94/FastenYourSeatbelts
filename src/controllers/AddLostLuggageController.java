@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -84,11 +83,10 @@ public class AddLostLuggageController implements Initializable {
     @FXML
     private ComboBox txtType;
 
-    
     /*
-    *
-    * Save the newly created luggage into the database
-    */
+     *
+     * Save the newly created luggage into the database
+     */
     @FXML
     public void savechanges() {
 
@@ -113,7 +111,8 @@ public class AddLostLuggageController implements Initializable {
         String type = txtType.getValue().toString();
 
         try (Connection conn = Database.initDatabase()) {
-            String SQL = "INSERT INTO luggage (brand,color,type,weight,size,barcode,lostAirport,"
+            String SQL = "INSERT INTO luggage "
+                    + "(brand,color,type,weight,size,barcode,lostAirport,"
                     + "extra,lostFound,material,date,flightNumber,idEmployee) "
                     + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
@@ -123,41 +122,39 @@ public class AddLostLuggageController implements Initializable {
             preparedStatement.setString(3, type);
             preparedStatement.setString(4, weight);
             preparedStatement.setString(5, size);
-            preparedStatement.setString(6, "barcode");
+            preparedStatement.setNull(6, java.sql.Types.VARCHAR);
             preparedStatement.setString(7, lostAirport);
             preparedStatement.setString(8, extra);
             preparedStatement.setInt(9, 0);
-            preparedStatement.setString(10, "material");
+            preparedStatement.setString(10, "");
             preparedStatement.setDate(11, java.sql.Date.valueOf(date));
-            preparedStatement.setString(12, "flightnumber");
+            preparedStatement.setString(12, "");
             preparedStatement.setInt(13, 1);
             preparedStatement.executeUpdate();
 
-            String Customer = "INSERT INTO customer (firstname,insertion,lastname,birthDate,country,"
-                    + "city,zipCode,street,houseNumber,email,date,phoneNumber,idEmployee) "
-                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
-
-            preparedStatement = conn.prepareStatement(Customer);
-            preparedStatement.setString(1, firstName);
-            preparedStatement.setString(2, insertion);
-            preparedStatement.setString(3, lastName);
-            preparedStatement.setDate(4, java.sql.Date.valueOf(birthdate));
-            preparedStatement.setString(5, country);
-            preparedStatement.setString(6, city);
-            preparedStatement.setString(7, zipcode);
-            preparedStatement.setString(8, street);
-            preparedStatement.setString(9, houseNumber);
-            preparedStatement.setString(10, email);
-            preparedStatement.setDate(11, java.sql.Date.valueOf(date));
-            preparedStatement.setInt(12, phoneNumber);
-            preparedStatement.setInt(13, 1);
-            preparedStatement.executeUpdate();
-
+//            String Customer = "INSERT INTO customer (firstname,insertion,lastname,birthDate,country,"
+//                    + "city,zipCode,street,houseNumber,email,date,phoneNumber,idEmployee) "
+//                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+//
+//            preparedStatement = conn.prepareStatement(Customer);
+//            preparedStatement.setString(1, firstName);
+//            preparedStatement.setString(2, insertion);
+//            preparedStatement.setString(3, lastName);
+//            preparedStatement.setDate(4, java.sql.Date.valueOf(birthdate));
+//            preparedStatement.setString(5, country);
+//            preparedStatement.setString(6, city);
+//            preparedStatement.setString(7, zipcode);
+//            preparedStatement.setString(8, street);
+//            preparedStatement.setString(9, houseNumber);
+//            preparedStatement.setString(10, email);
+//            preparedStatement.setDate(11, java.sql.Date.valueOf(date));
+//            preparedStatement.setInt(12, phoneNumber);
+//            preparedStatement.setInt(13, 1);
+//            preparedStatement.executeUpdate();
             //Close connection
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(AddLostLuggageController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 }

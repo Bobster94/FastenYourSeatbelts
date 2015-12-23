@@ -29,7 +29,7 @@ public class EditLostLuggageController implements Initializable {
     @FXML private ComboBox cbWeight;
     @FXML private ComboBox cbSize;
     @FXML private TextArea txtExtra;
-    //@FXML private ComboBox cbMaterial;
+    @FXML private ComboBox cbMaterial;
     @FXML private TextField txtFlightnumber;
     /**
      * Initializes the controller class.
@@ -45,6 +45,7 @@ public class EditLostLuggageController implements Initializable {
             ResultSet rs = conn.createStatement().executeQuery(selectLuggage);
             if(rs.next()) {
                 txtExtra.setText(new String(rs.getBytes("extra"), "UTF-8"));
+                cbMaterial.setValue(new String(rs.getBytes("material"), "UTF-8"));
                 txtFlightnumber.setText(new String(rs.getBytes("flightNumber"), "UTF-8"));
                 cbBrand.setValue(new String(rs.getBytes("brand"), "UTF-8"));
                 cbColor.setValue(new String(rs.getBytes("color"), "UTF-8"));
