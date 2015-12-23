@@ -129,7 +129,11 @@ public class EditFoundLuggageController implements Initializable {
         try {
             this.id = Integer.parseInt(id);
             Connection conn = Database.initDatabase();
-            String selectLuggage = "SELECT date,foundAirport,lostAirport,barcode,brand,color,type,weight,size,extra,material,flightNumber FROM luggage WHERE id = "+id;
+            String selectLuggage = "SELECT date,foundAirport,lostAirport,"
+                    + "barcode,brand,color,type,weight,"
+                    + "size,extra,material,flightNumber "
+                    + "FROM luggage "
+                    + "WHERE id = "+id;
             ResultSet rs = conn.createStatement().executeQuery(selectLuggage);
             if(rs.next()) {
                 txtExtra.setText(new String(rs.getBytes("extra"), "UTF-8"));
