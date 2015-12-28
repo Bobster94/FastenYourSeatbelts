@@ -167,6 +167,10 @@ public class AllLuggageController implements Initializable {
                                         preparedStatement.setInt(5, Main.employee.getEmployeeID());
                                         preparedStatement.executeUpdate();
                                         
+                                        DashboardController dashboardCont = new DashboardController();
+                                        BorderPane dashboard = dashboardCont.getDashboardScreen();
+                                        root.setLeft(dashboard);
+                                        
                                     } catch (SQLException ex) {
                                         Logger.getLogger(AllLuggageController.class.getName())
                                                 .log(Level.SEVERE, null, ex);
