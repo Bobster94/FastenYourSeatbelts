@@ -4,7 +4,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -61,8 +65,6 @@ public class AddLostLuggageController implements Initializable {
     @FXML
     private TextField txtEmail;
     @FXML
-    private TextField txtDate;
-    @FXML
     private TextField txtLostAirport;
     @FXML
     private TextField txtPhoneNumber;
@@ -82,6 +84,10 @@ public class AddLostLuggageController implements Initializable {
     private ComboBox txtColor;
     @FXML
     private ComboBox txtType;
+    @FXML
+    private ComboBox cbMaterial;
+    @FXML
+    private TextField txtFlightnumber;
 
     /*
      *
@@ -98,7 +104,6 @@ public class AddLostLuggageController implements Initializable {
         String street = txtStreet.getText();
         String houseNumber = txtHouseNumber.getText();
         String email = txtEmail.getText();
-        String date = txtDate.getText();
         String lostAirport = txtLostAirport.getText();
         int phoneNumber = Integer.parseInt(txtPhoneNumber.getText());
         String extra = txtExtra.getText();
@@ -109,14 +114,44 @@ public class AddLostLuggageController implements Initializable {
         String weight = txtWeight.getValue().toString();
         String color = txtColor.getValue().toString();
         String type = txtType.getValue().toString();
-
+        String material = cbMaterial.getValue().toString();
+        String flightnumber = txtFlightnumber.getText();
+        
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        //get current date time with Date()
+        Date dateToday = new Date();
+        String date = dateFormat.format(dateToday);
+        
         try (Connection conn = Database.initDatabase()) {
+        
+            String Customer = "INSERT INTO customer (firstname,insertion,lastname,birthDate,country,"
+            + "city,zipCode,street,houseNumber,email,date,phoneNumber,idEmployee) "
+            + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+
+            PreparedStatement preparedStatement = conn.prepareStatement(Customer, PreparedStatement.RETURN_GENERATED_KEYS);
+            preparedStatement.setString(1, firstName);
+            preparedStatement.setString(2, insertion);
+            preparedStatement.setString(3, lastName);
+            preparedStatement.setDate(4, java.sql.Date.valueOf(birthdate));
+            preparedStatement.setString(5, country);
+            preparedStatement.setString(6, city);
+            preparedStatement.setString(7, zipcode);
+            preparedStatement.setString(8, street);
+            preparedStatement.setString(9, houseNumber);
+            preparedStatement.setString(10, email);
+            preparedStatement.setDate(11, java.sql.Date.valueOf(date));
+            preparedStatement.setInt(12, phoneNumber);
+            preparedStatement.setInt(13, Main.employee.getEmployeeID());
+            preparedStatement.executeUpdate();
+            ResultSet rs = preparedStatement.getGeneratedKeys();
+
+        
             String SQL = "INSERT INTO luggage "
                     + "(brand,color,type,weight,size,barcode,lostAirport,"
-                    + "extra,lostFound,material,date,flightNumber,idEmployee) "
-                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                    + "extra,lostFound,material,date,flightNumber,idEmployee, idCustomer) "
+                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
-            PreparedStatement preparedStatement = conn.prepareStatement(SQL);
+            preparedStatement = conn.prepareStatement(SQL);
             preparedStatement.setString(1, brand);
             preparedStatement.setString(2, color);
             preparedStatement.setString(3, type);
@@ -125,32 +160,19 @@ public class AddLostLuggageController implements Initializable {
             preparedStatement.setNull(6, java.sql.Types.VARCHAR);
             preparedStatement.setString(7, lostAirport);
             preparedStatement.setString(8, extra);
-            preparedStatement.setInt(9, 0);
-            preparedStatement.setString(10, "");
+            preparedStatement.setInt(9, 0); //lost luggage
+            preparedStatement.setString(10, material);
             preparedStatement.setDate(11, java.sql.Date.valueOf(date));
-            preparedStatement.setString(12, "");
-            preparedStatement.setInt(13, 1);
+            preparedStatement.setString(12, flightnumber);
+            preparedStatement.setInt(13, Main.employee.getEmployeeID());
+            if(rs.next()) {
+                preparedStatement.setInt(14, rs.getInt(1));
+            }
             preparedStatement.executeUpdate();
+            
 
-//            String Customer = "INSERT INTO customer (firstname,insertion,lastname,birthDate,country,"
-//                    + "city,zipCode,street,houseNumber,email,date,phoneNumber,idEmployee) "
-//                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
-//
-//            preparedStatement = conn.prepareStatement(Customer);
-//            preparedStatement.setString(1, firstName);
-//            preparedStatement.setString(2, insertion);
-//            preparedStatement.setString(3, lastName);
-//            preparedStatement.setDate(4, java.sql.Date.valueOf(birthdate));
-//            preparedStatement.setString(5, country);
-//            preparedStatement.setString(6, city);
-//            preparedStatement.setString(7, zipcode);
-//            preparedStatement.setString(8, street);
-//            preparedStatement.setString(9, houseNumber);
-//            preparedStatement.setString(10, email);
-//            preparedStatement.setDate(11, java.sql.Date.valueOf(date));
-//            preparedStatement.setInt(12, phoneNumber);
-//            preparedStatement.setInt(13, 1);
-//            preparedStatement.executeUpdate();
+
+            
             //Close connection
             conn.close();
         } catch (SQLException ex) {
