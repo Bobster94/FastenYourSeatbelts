@@ -116,7 +116,7 @@
             <Label layoutX="502.0" layoutY="9.0" text="flightnumber" />
             <TextField fx:id="txtFlightnumber" layoutX="504.0" layoutY="30.0" prefHeight="31.0" prefWidth="131.0" />
             <Label layoutX="363.0" layoutY="177.0" text="material" />
-            <ComboBox fx:id="txtMaterial" layoutX="364.0" layoutY="198.0" prefHeight="31.0" prefWidth="130.0">
+            <ComboBox fx:id="cbMaterial" layoutX="364.0" layoutY="198.0" prefHeight="31.0" prefWidth="130.0">
                <items>
                   <FXCollections fx:factory="observableArrayList">
                      <String fx:value="Small" />
