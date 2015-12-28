@@ -105,7 +105,7 @@ public class EditCustomerController implements Initializable {
             preparedStatement.setString(10, address);
             preparedStatement.setDate(11, java.sql.Date.valueOf(dateToday));
             preparedStatement.setInt(12, telephoneNumber);
-            preparedStatement.setInt(13, 2);
+            preparedStatement.setInt(13, Main.employee.getEmployeeID());
             preparedStatement.setInt(14, id);
             preparedStatement.executeUpdate();
             

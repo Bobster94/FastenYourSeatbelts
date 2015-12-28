@@ -6,6 +6,9 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -63,6 +66,11 @@ public class AddCustomerController implements Initializable {
         String houseNumber = txtHouseNumber.getText();
         String birthdate = txtBirthdate.getText();
         String date = txtDate.getText();
+        
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        //get current date time with Date()
+        Date dateToday = new Date();
+        date = dateFormat.format(dateToday);
 
         try(Connection conn = (Connection) Database.initDatabase()){
             String Customer = "INSERT INTO customer (firstname,insertion,lastname,birthDate,country,"
@@ -83,7 +91,7 @@ public class AddCustomerController implements Initializable {
             preparedStatement.setString(10, email);
             preparedStatement.setDate(11, java.sql.Date.valueOf(date));
             preparedStatement.setInt(12, phoneNumber);
-            preparedStatement.setInt(13, 1);
+            preparedStatement.setInt(13, Main.employee.getEmployeeID());
             preparedStatement.executeUpdate();
     }   catch (SQLException ex) {
             Logger.getLogger(AddCustomerController.class.getName()).log(Level.SEVERE, null, ex);

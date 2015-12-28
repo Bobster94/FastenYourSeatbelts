@@ -7,6 +7,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -101,6 +104,11 @@ public class EditLostLuggageController implements Initializable {
         String brand = cbBrand.getValue().toString();
         String weight = cbWeight.getValue().toString();
         String size = cbSize.getValue().toString();
+        
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        //get current date time with Date()
+        Date dateToday = new Date();
+        date = dateFormat.format(dateToday);
 
         try (Connection conn = Database.initDatabase()) {
             String SQL = "UPDATE luggage "

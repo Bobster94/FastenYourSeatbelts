@@ -6,6 +6,9 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -78,6 +81,12 @@ public class AddFoundLuggageController implements Initializable {
         String brand = txtBrand.getValue().toString();
         String weight = txtWeight.getValue().toString();
         String size = txtSize.getValue().toString();
+        
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        //get current date time with Date()
+        Date dateToday = new Date();
+        date = dateFormat.format(dateToday);
+        
         try(Connection conn = Database.initDatabase()){
             String SQL = "INSERT INTO luggage (brand,color,type,weight,size,barcode,lostAirport,"
                     + "foundAirport,extra,lostFound,material,date,flightNumber,idEmployee) "
@@ -98,7 +107,7 @@ public class AddFoundLuggageController implements Initializable {
             preparedStatement.setString(11, material);
             preparedStatement.setDate(12, java.sql.Date.valueOf(date));
             preparedStatement.setString(13, flightNumber);
-            preparedStatement.setInt(14, 1);
+            preparedStatement.setInt(14, Main.employee.getEmployeeID());
             preparedStatement.executeUpdate();
         
             //Close connection
