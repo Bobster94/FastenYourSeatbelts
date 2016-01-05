@@ -53,9 +53,9 @@ public class AddFoundLuggageController implements Initializable {
     @FXML private TextField txtLostAtAirport;
     @FXML private TextField txtFoundAtAirport;
     @FXML private TextField txtFlightNumber;
-    @FXML private TextField txtDate;
+    @FXML private TextField txtDate; 
+    @FXML private TextField txtColor;
     @FXML private ComboBox  txtMaterial;
-    @FXML private ComboBox  txtColor;
     @FXML private ComboBox  txtType;
     @FXML private ComboBox  txtBrand;
     @FXML private ComboBox  txtWeight;
@@ -76,7 +76,7 @@ public class AddFoundLuggageController implements Initializable {
         String flightNumber = txtFlightNumber.getText();
         String date = txtDate.getText();
         String material = txtMaterial.getValue().toString();
-        String color = txtColor.getValue().toString();
+        String color = txtColor.getText().toString();
         String type = txtType.getValue().toString();
         String brand = txtBrand.getValue().toString();
         String weight = txtWeight.getValue().toString();
