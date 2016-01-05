@@ -11,25 +11,11 @@
       <AnchorPane prefHeight="400.0" prefWidth="700.0" BorderPane.alignment="CENTER">
          <children>
             <TableView fx:id="tvFoundLuggage" layoutX="14.0" layoutY="80.0" prefHeight="250.0" prefWidth="760.0" />
-            <Button layoutX="14.0" layoutY="351.0" mnemonicParsing="false" text="Add Found Luggage" />
             <VBox layoutX="14.0" layoutY="11.0" prefHeight="63.0" prefWidth="650.0">
                <children>
                   <HBox prefHeight="100.0" prefWidth="650.0">
                      <children>
-                        <ComboBox fx:id="cbColor" prefWidth="130.0" promptText="Color">
-                           <items>
-                              <FXCollections fx:factory="observableArrayList">
-                                 <String fx:value="Blue" />
-                                 <String fx:value="Green" />
-                                 <String fx:value="Red" />
-                                 <String fx:value="Yellow" />
-                                 <String fx:value="Black" />
-                                 <String fx:value="White" />
-                                 <String fx:value="Grey" />
-                                 <String fx:value="Purple" />
-                              </FXCollections>
-                           </items>
-                        </ComboBox>
+                        <TextField fx:id="cbColor" prefHeight="31.0" prefWidth="131.0" promptText="color" />
                         <ComboBox fx:id="cbSize" prefWidth="110.0" promptText="Size">
                            <items>
                               <FXCollections fx:factory="observableArrayList">

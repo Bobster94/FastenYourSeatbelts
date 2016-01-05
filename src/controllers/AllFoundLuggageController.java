@@ -39,7 +39,7 @@ public class AllFoundLuggageController implements Initializable {
     @FXML
     private TableView tvFoundLuggage;
     @FXML
-    private ComboBox cbColor;
+    private TextField cbColor;
     @FXML
     private TextField cbBrand;
     @FXML
@@ -71,8 +71,8 @@ public class AllFoundLuggageController implements Initializable {
         String flightnumber = txtFlightnumber.getText();
 
         String color = "";
-        if (cbColor.getValue() != null) {
-            color = cbColor.getValue().toString();
+        if (cbColor.getText() != null) {
+            color = cbColor.getText().toString();
         }
 
         String size = "";
