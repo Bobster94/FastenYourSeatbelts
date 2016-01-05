@@ -81,7 +81,7 @@ public class AddLostLuggageController implements Initializable {
     @FXML
     private ComboBox txtWeight;
     @FXML
-    private ComboBox txtColor;
+    private TextField txtColor;
     @FXML
     private ComboBox txtType;
     @FXML
@@ -112,7 +112,7 @@ public class AddLostLuggageController implements Initializable {
         String brand = txtBrand.getValue().toString();
         String size = txtSize.getValue().toString();
         String weight = txtWeight.getValue().toString();
-        String color = txtColor.getValue().toString();
+        String color = txtColor.getText();
         String type = txtType.getValue().toString();
         String material = cbMaterial.getValue().toString();
         String flightnumber = txtFlightnumber.getText();
