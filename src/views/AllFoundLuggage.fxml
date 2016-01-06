@@ -15,30 +15,54 @@
                <children>
                   <HBox prefHeight="100.0" prefWidth="650.0">
                      <children>
-                        <TextField fx:id="cbColor" prefHeight="31.0" prefWidth="131.0" promptText="color" />
+                        <ComboBox fx:id="txtMaterial" prefHeight="31.0" prefWidth="129.0" promptText="material">
+                           <items>
+                              <FXCollections fx:factory="observableArrayList">
+                                 <String fx:value="Plastic" />
+                                 <String fx:value="Leather" />
+                                 <String fx:value="Fabric" />
+                                 <String fx:value="Metal" />
+                                 <String fx:value="Aluminum" />
+                              </FXCollections>
+                           </items>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </ComboBox>
                         <ComboBox fx:id="cbSize" prefWidth="110.0" promptText="Size">
                            <items>
                               <FXCollections fx:factory="observableArrayList">
-                                 <String fx:value="small" />
-                                 <String fx:value="medium" />
-                                 <String fx:value="large" />
+                                 <String fx:value="Small" />
+                                 <String fx:value="Medium" />
+                                 <String fx:value="Large" />
+                                 <String fx:value="Extra large" />
                               </FXCollections>
                            </items>
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin>
                         </ComboBox>
-                        <TextField fx:id="txtMaterial" prefWidth="110.0" promptText="Material">
+                        <ComboBox fx:id="cbBrand" prefHeight="31.0" prefWidth="110.0" promptText="Brand">
+                            <items>
+                               <FXCollections fx:factory="observableArrayList">
+                                  <String fx:value="Eastpack)" />
+                                  <String fx:value="Button" />
+                                  <String fx:value="Samsonite" />
+                                  <String fx:value="Porsche" />
+                                  <String fx:value="Gucci" />
+                                  <String fx:value="Other" />
+                               </FXCollections>
+                            </items>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </ComboBox>
+                        <TextField fx:id="cbColor" prefHeight="31.0" prefWidth="111.0" promptText="Color">
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin>
                         </TextField>
                         <TextField fx:id="txtFlightnumber" prefWidth="110.0" promptText="Flight number">
-                           <HBox.margin>
-                              <Insets left="10.0" />
-                           </HBox.margin>
-                        </TextField>
-                        <TextField fx:id="cbBrand" prefWidth="110.0" promptText="Brand">
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin>
@@ -50,18 +74,27 @@
                         <ComboBox fx:id="cbType" prefWidth="130.0" promptText="Luggage type">
                            <items>
                               <FXCollections fx:factory="observableArrayList">
+                                 <String fx:value="Bag" />
+                                 <String fx:value="Handbag" />
+                                 <String fx:value="Backpack" />
                                  <String fx:value="Hardcase" />
-                                 <String fx:value="bag" />
-                                 <String fx:value="handbag" />
+                                 <String fx:value="Softcase" />
+                                 <String fx:value="Suitcase" />
+                                 <String fx:value="Other" />
                               </FXCollections>
                            </items>
                         </ComboBox>
                         <ComboBox fx:id="cbWeight" prefWidth="110.0" promptText="Weight">
                            <items>
                               <FXCollections fx:factory="observableArrayList">
-                                 <String fx:value="1 - 10" />
-                                 <String fx:value="11 - 20" />
-                                 <String fx:value="21 - 30" />
+                                  <String fx:value="0 &gt; 1 (kg)" />
+                                  <String fx:value="1 &gt; 3 (kg)" />
+                                  <String fx:value="3 &gt; 6 (kg)" />
+                                  <String fx:value="6 &gt; 10 (kg)" />
+                                  <String fx:value="10 &gt; 15 (kg)" />
+                                  <String fx:value="15 &gt; 20 (kg)" />
+                                  <String fx:value="20 &gt; 25 (kg)" />
+                                  <String fx:value="25+" />
                               </FXCollections>
                            </items>
                            <HBox.margin>

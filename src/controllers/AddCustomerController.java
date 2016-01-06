@@ -47,7 +47,7 @@ public class AddCustomerController implements Initializable {
     @FXML private TextField txtInsertion;
     @FXML private TextField txtHouseNumber;
     @FXML private TextField txtBirthdate;
-    @FXML private TextField txtDate;
+    
    
     /*
     * Saves the newly created customer into the database
@@ -65,10 +65,11 @@ public class AddCustomerController implements Initializable {
         String insertion = txtInsertion.getText();
         String houseNumber = txtHouseNumber.getText();
         String birthdate = txtBirthdate.getText();
-        String date = txtDate.getText();
+        
         
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         //get current date time with Date()
+        String date;
         Date dateToday = new Date();
         date = dateFormat.format(dateToday);
 
