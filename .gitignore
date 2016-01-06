@@ -4,3 +4,5 @@
 src/controllers/Database.java
 
 *.properties
+
+nbproject/project.properties
