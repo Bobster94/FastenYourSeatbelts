@@ -71,7 +71,6 @@ public class AddFoundLuggageController implements Initializable {
     private ComboBox txtWeight;
     @FXML
     private ComboBox txtSize;
-
     /*
      *
      * Saves the newly created luggage into the database
@@ -86,7 +85,7 @@ public class AddFoundLuggageController implements Initializable {
         String flightNumber = txtFlightNumber.getText();
         String date = txtDate.getText();
         String material = txtMaterial.getValue().toString();
-        String color = txtColor.getValue().toString();
+        String color = txtColor.getText().toString();
         String type = txtType.getValue().toString();
         String brand = txtBrand.getValue().toString();
         String weight = txtWeight.getValue().toString();

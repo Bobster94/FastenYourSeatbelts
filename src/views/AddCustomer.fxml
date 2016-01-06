@@ -10,16 +10,16 @@
       <Pane prefHeight="400.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
             <TextField fx:id="txtFirstName" layoutX="35.0" layoutY="37.0" />
-            <TextField fx:id="txtCountry" layoutX="237.0" layoutY="37.0" />
+            <TextField fx:id="txtInsertion" layoutX="35.0" layoutY="96.0" />
             <TextField fx:id="txtLastName" layoutX="35.0" layoutY="157.0" />
-            <TextField fx:id="txtCity" layoutX="238.0" layoutY="96.0" prefHeight="31.0" prefWidth="191.0" />
             <TextField fx:id="txtEmail" layoutX="35.0" layoutY="214.0" />
-            <TextField fx:id="txtStreet" layoutX="237.0" layoutY="157.0" />
             <TextField fx:id="txtPhone" layoutX="35.0" layoutY="266.0" />
-            <TextField fx:id="txtZipcode" layoutX="237.0" layoutY="266.0" />
-            <TextField fx:id="txtInsertion" layoutX="35.0" layoutY="96.0" /> 
-            <TextField fx:id="txtHouseNumber" layoutX="237.0" layoutY="214.0" />
             <TextField fx:id="txtBirthdate" layoutX="35.0" layoutY="324.0" />
+            <TextField fx:id="txtCountry" layoutX="237.0" layoutY="37.0" />
+            <TextField fx:id="txtCity" layoutX="238.0" layoutY="96.0" prefHeight="31.0" prefWidth="191.0" />
+            <TextField fx:id="txtStreet" layoutX="237.0" layoutY="157.0" /> 
+            <TextField fx:id="txtHouseNumber" layoutX="237.0" layoutY="214.0" />
+            <TextField fx:id="txtZipcode" layoutX="237.0" layoutY="266.0" />
             <TextField fx:id="txtDate" layoutX="236.0" layoutY="324.0" />
             
             <Label layoutX="35.0" layoutY="16.0" text="Fisrt name" />
