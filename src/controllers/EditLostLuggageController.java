@@ -81,7 +81,7 @@ public class EditLostLuggageController implements Initializable {
                 cbMaterial.setValue(new String(rs.getBytes("material"), "UTF-8"));
                 txtBarcode.setText(new String(rs.getBytes("barcode"), "UTF-8"));
                 txtDate.setText(new String(rs.getBytes("date"), "UTF-8"));
-                txtFoundAtAirport.setText(new String(rs.getBytes("foundAirport"), "UTF-8"));
+                //txtFoundAtAirport.setText(new String(rs.getBytes("foundAirport"), "UTF-8"));
                 txtLostAtAirport.setText(new String(rs.getBytes("lostAirport"), "UTF-8"));
             }
         } catch (SQLException | UnsupportedEncodingException ex) {

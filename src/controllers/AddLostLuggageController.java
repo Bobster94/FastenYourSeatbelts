@@ -116,17 +116,22 @@ public class AddLostLuggageController implements Initializable {
         String type = txtType.getValue().toString();
         String material = cbMaterial.getValue().toString();
         String flightnumber = txtFlightnumber.getText();
-        
+
+        String[] contentCustomer = {firstName, insertion, lastName, birthdate, country, city, zipcode, street, houseNumber, email, String.valueOf(phoneNumber)};
+        String[] labelsCustomer = {"firstName", "insertion", "lastName", "birthdate", "country", "city", "zipcode", "street", "housenumber", "email", "phoneNumber"};
+        String[] contentLuggage = {brand, color, type, weight, size, material, lostAirport};
+        String[] labelsLuggage = {"brand", "color", "type", "weight", "size", "material", "lost at airport"};
+
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         //get current date time with Date()
         Date dateToday = new Date();
         String date = dateFormat.format(dateToday);
-        
+
         try (Connection conn = Database.initDatabase()) {
-        
+
             String Customer = "INSERT INTO customer (firstname,insertion,lastname,birthDate,country,"
-            + "city,zipCode,street,houseNumber,email,date,phoneNumber,idEmployee) "
-            + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                    + "city,zipCode,street,houseNumber,email,date,phoneNumber,idEmployee) "
+                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
             PreparedStatement preparedStatement = conn.prepareStatement(Customer, PreparedStatement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, firstName);
@@ -145,13 +150,12 @@ public class AddLostLuggageController implements Initializable {
             preparedStatement.executeUpdate();
             ResultSet rs = preparedStatement.getGeneratedKeys();
 
-        
             String SQL = "INSERT INTO luggage "
                     + "(brand,color,type,weight,size,barcode,lostAirport,"
                     + "extra,lostFound,material,date,flightNumber,idEmployee, idCustomer) "
                     + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
-            preparedStatement = conn.prepareStatement(SQL);
+            preparedStatement = conn.prepareStatement(SQL, PreparedStatement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, brand);
             preparedStatement.setString(2, color);
             preparedStatement.setString(3, type);
@@ -165,14 +169,24 @@ public class AddLostLuggageController implements Initializable {
             preparedStatement.setDate(11, java.sql.Date.valueOf(date));
             preparedStatement.setString(12, flightnumber);
             preparedStatement.setInt(13, Main.employee.getEmployeeID());
-            if(rs.next()) {
+            if (rs.next()) {
                 preparedStatement.setInt(14, rs.getInt(1));
             }
             preparedStatement.executeUpdate();
-            
+            ResultSet rsLuggageID = preparedStatement.getGeneratedKeys();
+            if (rsLuggageID.next()) {
+                pdfController pdf = new pdfController();
+                pdf.createPdf(
+                        labelsCustomer,
+                        contentCustomer,
+                        labelsLuggage,
+                        contentLuggage,
+                        "Added lost luggage and customer"
+                );
 
+                pdf.save("createdLuggage_" + firstName + lastName + "_" + rsLuggageID.getInt(1) + date + ".pdf");
+            }
 
-            
             //Close connection
             conn.close();
         } catch (SQLException ex) {

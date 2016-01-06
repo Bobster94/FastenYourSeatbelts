@@ -41,7 +41,7 @@ public class DashboardController implements Initializable {
      * @param rb
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb) {        
         AllLuggageController allLuggage = new AllLuggageController();
         ObservableList<Luggage> LostData = FXCollections.observableArrayList();
         try (Connection conn = Database.initDatabase()) {
