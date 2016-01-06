@@ -43,12 +43,12 @@ public class AllLuggageController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
     }
-
+    private String idCustomer = "";
     /*
-    * Builds the screen with the specific luggage information on the screen.
-    * @param    String  id          This is the id used in workbench for the luggage
-    * @param    String  luggageType Is either lostLuggage or foundLuggage
-    */
+     * Builds the screen with the specific luggage information on the screen.
+     * @param    String  id          This is the id used in workbench for the luggage
+     * @param    String  luggageType Is either lostLuggage or foundLuggage
+     */
     public void buildscreen(String id, String luggageType) {
         BorderPane root = Main.getRoot();
         try (Connection conn = Database.initDatabase()) {
@@ -56,6 +56,7 @@ public class AllLuggageController implements Initializable {
             ResultSet rs = conn.createStatement().executeQuery(selectLuggage);
             BorderPane layout2 = new BorderPane();
             VBox layout = new VBox();
+            VBox customerLayout = new VBox();
             if (rs.next()) {
                 for (int i = 2; i < rs.getMetaData().getColumnCount(); i++) {
                     if ("lostFound".equals(rs.getMetaData().getColumnName(i))) {
@@ -116,12 +117,12 @@ public class AllLuggageController implements Initializable {
                         ObservableList<detailedCustomer> foundData = FXCollections.observableArrayList();
                         try {
                             String SQL = "SELECT id,firstName as 'firstname',"
-                                + "insertion,lastName as 'lastname',"
-                                + "birthDate as 'date of birth',"
-                                + "country,city,zipCode as 'zipcode', "
-                                + "street,houseNumber as 'house number',"
-                                + "email,phoneNumber as 'phone number' "
-                                + "FROM customer";
+                                    + "insertion,lastName as 'lastname',"
+                                    + "birthDate as 'date of birth',"
+                                    + "country,city,zipCode as 'zipcode', "
+                                    + "street,houseNumber as 'house number',"
+                                    + "email,phoneNumber as 'phone number' "
+                                    + "FROM customer";
                             Connection newConn = Database.initDatabase();
                             ResultSet rsLuggage = newConn.createStatement().executeQuery(SQL);
                             for (int i = 1; i < rsLuggage.getMetaData().getColumnCount(); i++) {
@@ -153,24 +154,24 @@ public class AllLuggageController implements Initializable {
                                     try {
                                         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                                         String dateToday = dateFormat.format(new Date());
-                                        
+
                                         String handleLuggageQuery = "INSERT INTO history "
                                                 + "(status,idLuggage,idCustomer,dateHandled,idEmployeeHandled) "
-                                                + "VALUES (?,?,?,?,?)";  
-            
+                                                + "VALUES (?,?,?,?,?)";
+
                                         Connection handleLuggage = Database.initDatabase();
                                         PreparedStatement preparedStatement = handleLuggage.prepareStatement(handleLuggageQuery);
                                         preparedStatement.setString(1, "handled");
-                                        preparedStatement.setInt(3, Integer.parseInt(row.getItem().getId()));
                                         preparedStatement.setInt(2, Integer.parseInt(id));
+                                        preparedStatement.setInt(3, Integer.parseInt(row.getItem().getId()));
                                         preparedStatement.setDate(4, java.sql.Date.valueOf(dateToday));
                                         preparedStatement.setInt(5, Main.employee.getEmployeeID());
                                         preparedStatement.executeUpdate();
-                                        
+
                                         DashboardController dashboardCont = new DashboardController();
                                         BorderPane dashboard = dashboardCont.getDashboardScreen();
                                         root.setLeft(dashboard);
-                                        
+
                                     } catch (SQLException ex) {
                                         Logger.getLogger(AllLuggageController.class.getName())
                                                 .log(Level.SEVERE, null, ex);
@@ -183,6 +184,70 @@ public class AllLuggageController implements Initializable {
                         btnMatch.setDisable(true);
                     });
                     hbox.getChildren().addAll(btnMatch);
+                } else {
+                    String matchedCustomer = "SELECT id,firstName as 'firstname',"
+                            + "insertion,lastName as 'lastname',"
+                            + "birthDate as 'date of birth',"
+                            + "country,city,zipCode as 'zipcode', "
+                            + "street,houseNumber as 'house number',"
+                            + "email,phoneNumber as 'phone number' "
+                            + "FROM customer "
+                            + "Where id = " + rs.getString("idCustomer");
+                    Connection newConn = Database.initDatabase();
+                    ResultSet rsMatchedCustomer = newConn.createStatement().executeQuery(matchedCustomer);
+                    while (rsMatchedCustomer.next()) {
+                        idCustomer = rsMatchedCustomer.getString("id");
+                        for (int i = 2; i < rsMatchedCustomer.getMetaData().getColumnCount(); i++) {
+                            Label label = new Label();
+                            label.setText(rsMatchedCustomer.getMetaData().getColumnLabel(i) + ":");
+                            label.setPadding(new Insets(10, 0, 0, 10));
+                            Label dataLabel = new Label();
+                            dataLabel.setText(rsMatchedCustomer.getString(i));
+                            dataLabel.setPadding(new Insets(10, 0, 0, 10));
+                            HBox hboxx = new HBox();
+                            hboxx.getChildren().addAll(label, dataLabel);
+                            customerLayout.getChildren().addAll(hboxx);
+                        }
+                    }
+                    HBox buttons = new HBox();
+                    Button btnMatch = new Button();
+                    btnMatch.setText("Set as solved");
+                    btnMatch.setOnAction((ActionEvent actionEvent) -> {
+                        try {
+                            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                            String dateToday = dateFormat.format(new Date());
+
+                            String handleLuggageQuery = "INSERT INTO history "
+                                    + "(status,idLuggage,idCustomer,dateHandled,idEmployeeHandled) "
+                                    + "VALUES (?,?,?,?,?)";
+
+                            Connection handleLuggage = Database.initDatabase();
+                            PreparedStatement preparedStatement = handleLuggage.prepareStatement(handleLuggageQuery);
+                            preparedStatement.setString(1, "handled");
+                            preparedStatement.setInt(2, Integer.parseInt(id));
+                            preparedStatement.setInt(3, Integer.parseInt(idCustomer));
+                            preparedStatement.setDate(4, java.sql.Date.valueOf(dateToday));
+                            preparedStatement.setInt(5, Main.employee.getEmployeeID());
+                            preparedStatement.executeUpdate();
+
+                            DashboardController dashboardCont = new DashboardController();
+                            BorderPane dashboard = dashboardCont.getDashboardScreen();
+                            root.setLeft(dashboard);
+
+                        } catch (SQLException ex) {
+                            Logger.getLogger(AllLuggageController.class.getName())
+                                    .log(Level.SEVERE, null, ex);
+                        }
+                    });
+
+                    Button btnGenPDF = new Button();
+                    btnGenPDF.setText("Create PDF");
+                    btnGenPDF.setOnAction((ActionEvent actionEvent) -> {
+
+                    });
+                    buttons.getChildren().addAll(btnMatch, btnGenPDF);
+                    customerLayout.getChildren().add(buttons);
+                    layout2.setRight(customerLayout);
                 }
                 hbox.getChildren().addAll(btnEdit);
                 layout.getChildren().add(hbox);

@@ -1,4 +1,3 @@
-
 package controllers;
 
 import java.io.IOException;
@@ -23,7 +22,7 @@ import javafx.scene.layout.BorderPane;
 /**
  * FXML Controller class
  *
- * @author Jeroen 
+ * @author Jeroen
  */
 public class AddFoundLuggageController implements Initializable {
 
@@ -33,11 +32,11 @@ public class AddFoundLuggageController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }   
-    
+    }
+
     /*
-    * @return the addFoundLuggage fxml view as borderPane
-    */
+     * @return the addFoundLuggage fxml view as borderPane
+     */
     public BorderPane getAddFoundLuggageScreen() {
         BorderPane screen = null;
         try {
@@ -47,28 +46,38 @@ public class AddFoundLuggageController implements Initializable {
         }
         return screen;
     }
-    
-    @FXML private TextField txtExtra;
-    @FXML private TextField txtBarcode;
-    @FXML private TextField txtLostAtAirport;
-    @FXML private TextField txtFoundAtAirport;
-    @FXML private TextField txtFlightNumber;
-    @FXML private TextField txtDate; 
-    @FXML private TextField txtColor;
-    @FXML private ComboBox  txtMaterial;
-    @FXML private ComboBox  txtType;
-    @FXML private ComboBox  txtBrand;
-    @FXML private ComboBox  txtWeight;
-    @FXML private ComboBox  txtSize;
-    
-    
-    /*
-    *
-    * Saves the newly created luggage into the database
-    */
+
     @FXML
-    public void AddFoundLuggage () {
-        
+    private TextField txtExtra;
+    @FXML
+    private TextField txtBarcode;
+    @FXML
+    private TextField txtLostAtAirport;
+    @FXML
+    private TextField txtFoundAtAirport;
+    @FXML
+    private TextField txtFlightNumber;
+    @FXML
+    private TextField txtDate;
+    @FXML
+    private ComboBox txtMaterial;
+    @FXML
+    private TextField txtColor;
+    @FXML
+    private ComboBox txtType;
+    @FXML
+    private ComboBox txtBrand;
+    @FXML
+    private ComboBox txtWeight;
+    @FXML
+    private ComboBox txtSize;
+    /*
+     *
+     * Saves the newly created luggage into the database
+     */
+    @FXML
+    public void AddFoundLuggage() {
+
         String barcode = txtBarcode.getText();
         String foundAirport = txtFoundAtAirport.getText();
         String extra = txtExtra.getText();
@@ -76,26 +85,25 @@ public class AddFoundLuggageController implements Initializable {
         String flightNumber = txtFlightNumber.getText();
         String date = txtDate.getText();
         String material = txtMaterial.getValue().toString();
-        String color = txtColor.getText().toString();
+        String color = txtColor.getText();
         String type = txtType.getValue().toString();
         String brand = txtBrand.getValue().toString();
         String weight = txtWeight.getValue().toString();
         String size = txtSize.getValue().toString();
-        
+
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         //get current date time with Date()
         Date dateToday = new Date();
         date = dateFormat.format(dateToday);
-        
-        try(Connection conn = Database.initDatabase()){
+
+        try (Connection conn = Database.initDatabase()) {
             String SQL = "INSERT INTO luggage (brand,color,type,weight,size,barcode,lostAirport,"
                     + "foundAirport,extra,lostFound,material,date,flightNumber,idEmployee) "
                     + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-            
-            
+
             PreparedStatement preparedStatement = conn.prepareStatement(SQL);
             preparedStatement.setString(1, brand);
-	    preparedStatement.setString(2, color);
+            preparedStatement.setString(2, color);
             preparedStatement.setString(3, type);
             preparedStatement.setString(4, weight);
             preparedStatement.setString(5, size);
@@ -109,12 +117,12 @@ public class AddFoundLuggageController implements Initializable {
             preparedStatement.setString(13, flightNumber);
             preparedStatement.setInt(14, Main.employee.getEmployeeID());
             preparedStatement.executeUpdate();
-        
+
             //Close connection
             conn.close();
-        }catch(SQLException ex){
-              Logger.getLogger(AddFoundLuggageController.class.getName()).log(Level.SEVERE,null,ex);
-          }
-       
+        } catch (SQLException ex) {
+            Logger.getLogger(AddFoundLuggageController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 }
