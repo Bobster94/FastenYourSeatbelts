@@ -27,12 +27,10 @@ import org.jfree.data.category.DefaultCategoryDataset;
  */
 public class ManagerController implements Initializable {
     @FXML private SwingNode snChart;
-    public Number handled;
+    int handled = 0;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        JFreeChart chart = FreeChartDemo("luggage vs month");
-        ChartPanel chartPanel = new ChartPanel(chart);
-        snChart.setContent(chartPanel);
+        
         
         
         try (Connection conn = Database.initDatabase()) {
@@ -48,8 +46,7 @@ public class ManagerController implements Initializable {
         
         try (Connection conn = Database.initDatabase()){
             ResultSet rs = conn.createStatement().executeQuery(SQL);
-            int handled;
-            handled = 0;
+            
         while (rs.next()) {
             int idCustomer = rs.getInt("idCustomer");
             int idLuggage = rs.getInt("idLuggage");
@@ -62,6 +59,10 @@ public class ManagerController implements Initializable {
             }
         }
         System.out.println(handled);
+        
+        JFreeChart chart = FreeChartDemo("luggage vs month");
+        ChartPanel chartPanel = new ChartPanel(chart);
+        snChart.setContent(chartPanel);
         
         } catch (Exception e ) {
             System.out.println(e);
@@ -123,7 +124,7 @@ public class ManagerController implements Initializable {
         dataset.addValue(4, "lost luggage", "October");
         dataset.addValue(4, "lost luggage", "November");
         dataset.addValue(4, "lost luggage", "December");
-
+            
         //Handled luggage
         dataset.addValue(handled, "Handled luggage", "January");
         dataset.addValue(handled, "Handled luggage", "February");
