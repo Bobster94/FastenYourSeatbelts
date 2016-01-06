@@ -12,6 +12,7 @@
       <AnchorPane prefHeight="400.0" prefWidth="700.0" BorderPane.alignment="CENTER">
          <children>
             <TableView fx:id="tvLostLuggage" layoutX="14.0" layoutY="80.0" prefHeight="250.0" prefWidth="760.0" />
+            <Button layoutX="14.0" layoutY="351.0" mnemonicParsing="false" text="Add Lost Luggage" />
             <VBox layoutX="14.0" layoutY="11.0" prefHeight="63.0" prefWidth="650.0">
                <children>
                   <HBox prefHeight="100.0" prefWidth="650.0">
