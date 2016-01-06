@@ -39,13 +39,13 @@ public class AllLostLuggageController implements Initializable {
     @FXML
     private TableView tvLostLuggage;
     @FXML
-    private TextField cbColor;
+    private ComboBox cbColor;
     @FXML
-    private ComboBox cbBrand;
+    private TextField cbBrand;
     @FXML
     private ComboBox cbSize;
     @FXML
-    private ComboBox txtMaterial;
+    private TextField txtMaterial;
     @FXML
     private TextField txtFlightnumber;
     @FXML
@@ -67,20 +67,13 @@ public class AllLostLuggageController implements Initializable {
     protected void searchLostLuggage() {
         String extra = txtExtra.getText();
         String date = txtDate.getText();
+        String brand = cbBrand.getText();
+        String material = txtMaterial.getText();
         String flightnumber = txtFlightnumber.getText();
 
         String color = "";
-        if (cbColor.getText() != null) {
-            color = cbColor.getText();
-        }
-        String material = "";
-        if (txtMaterial.getValue() != null) {
-            material = txtMaterial.getValue().toString();
-        }
-        
-        String brand = "";
-        if (cbBrand.getValue() != null) {
-            brand = cbBrand.getValue().toString();
+        if (cbColor.getValue() != null) {
+            color = cbColor.getValue().toString();
         }
 
         String size = "";

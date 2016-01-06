@@ -41,11 +41,11 @@ public class AllFoundLuggageController implements Initializable {
     @FXML
     private TextField cbColor;
     @FXML
-    private ComboBox cbBrand;
+    private TextField cbBrand;
     @FXML
     private ComboBox cbSize;
     @FXML
-    private ComboBox txtMaterial;
+    private TextField txtMaterial;
     @FXML
     private TextField txtFlightnumber;
     @FXML
@@ -66,23 +66,15 @@ public class AllFoundLuggageController implements Initializable {
     protected void searchFoundLuggage() {
         String extra = txtExtra.getText();
         String date = txtDate.getText();
-        
+        String brand = cbBrand.getText();
+        String material = txtMaterial.getText();
         String flightnumber = txtFlightnumber.getText();
 
         String color = "";
         if (cbColor.getText() != null) {
-            color = cbColor.getText();
+            color = cbColor.getText().toString();
         }
-        String material = "";
-        if (txtMaterial.getValue() != null) {
-            material = txtMaterial.getValue().toString();
-        }
-        
-        String brand = "";
-        if (cbBrand.getValue() != null) {
-            brand = cbBrand.getValue().toString();
-        }
-        
+
         String size = "";
         if (cbSize.getValue() != null) {
             size = cbSize.getValue().toString();
