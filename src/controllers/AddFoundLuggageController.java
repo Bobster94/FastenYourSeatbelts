@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -101,7 +102,7 @@ public class AddFoundLuggageController implements Initializable {
                     + "foundAirport,extra,lostFound,material,date,flightNumber,idEmployee) "
                     + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
-            PreparedStatement preparedStatement = conn.prepareStatement(SQL);
+            PreparedStatement preparedStatement = conn.prepareStatement(SQL, PreparedStatement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, brand);
             preparedStatement.setString(2, color);
             preparedStatement.setString(3, type);
@@ -117,7 +118,24 @@ public class AddFoundLuggageController implements Initializable {
             preparedStatement.setString(13, flightNumber);
             preparedStatement.setInt(14, Main.employee.getEmployeeID());
             preparedStatement.executeUpdate();
+             ResultSet sr = preparedStatement.getGeneratedKeys();
+                        
+            String history = "INSERT INTO history"+
+                    "(status,idLuggage,dateHandled,idEmployeeHandled)"+
+                    "VALUES(?,?,?,?)";
+            preparedStatement = conn.prepareStatement(history);
 
+            preparedStatement.setString(1,"addLuggage");
+            if(sr.next()) {
+                preparedStatement.setInt(2, sr.getInt(1));
+            }
+            preparedStatement.setDate(3, java.sql.Date.valueOf(date));
+            
+            System.out.println("data in database gelukt");
+            
+            preparedStatement.setInt(4, Main.employee.getEmployeeID());
+
+            preparedStatement.executeUpdate();
             //Close connection
             conn.close();
         } catch (SQLException ex) {

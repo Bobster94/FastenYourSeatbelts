@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -78,7 +79,7 @@ public class AddCustomerController implements Initializable {
                     + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";  
             
             
-            PreparedStatement preparedStatement = conn.prepareStatement(Customer);
+            PreparedStatement preparedStatement = conn.prepareStatement(Customer, PreparedStatement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, firstName);
 	    preparedStatement.setString(2, insertion); 
             preparedStatement.setString(3, lastName);
@@ -93,8 +94,27 @@ public class AddCustomerController implements Initializable {
             preparedStatement.setInt(12, phoneNumber);
             preparedStatement.setInt(13, Main.employee.getEmployeeID());
             preparedStatement.executeUpdate();
-    }   catch (SQLException ex) {
-            Logger.getLogger(AddCustomerController.class.getName()).log(Level.SEVERE, null, ex);
+            
+            ResultSet sr = preparedStatement.getGeneratedKeys();
+                        
+            String history = "INSERT INTO history"+
+                    "(status,idCostumer,dateHandled,idEmployeeHandled)"+
+                    "VALUES(?,?,?,?)";
+            preparedStatement = conn.prepareStatement(history);
+
+            preparedStatement.setString(1,"addCostumer");
+            if(sr.next()) {
+                preparedStatement.setInt(2, sr.getInt(1));
+            }
+            preparedStatement.setDate(3, java.sql.Date.valueOf(date));
+            
+            System.out.println("data in database gelukt");
+            
+            preparedStatement.setInt(4, Main.employee.getEmployeeID());
+
+            preparedStatement.executeUpdate();
+    }          catch (SQLException ex) {
+     Logger.getLogger(AddCustomerController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

@@ -116,6 +116,24 @@ public class EditFoundLuggageController implements Initializable {
             preparedStatement.setInt(15, id);
             preparedStatement.executeUpdate();
         
+                        
+            String history = "INSERT INTO history"+
+                    "(status,idLuggage,dateHandled,idEmployeeHandled)"+
+                    "VALUES(?,?,?,?)";
+            preparedStatement = conn.prepareStatement(history);
+
+            preparedStatement.setString(1,"EditFoundLuggage");
+         
+            preparedStatement.setInt(2,id);
+            
+            preparedStatement.setDate(3, java.sql.Date.valueOf(date));
+            
+            System.out.println("data in database gelukt");
+            
+            preparedStatement.setInt(4, Main.employee.getEmployeeID());
+
+            preparedStatement.executeUpdate();
+            
             //Close connection
             conn.close();
             
