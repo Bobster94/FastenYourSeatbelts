@@ -46,7 +46,7 @@ public class ManagerController implements Initializable {
         
         try (Connection conn = Database.initDatabase()){
             ResultSet rs = conn.createStatement().executeQuery(SQL);
-              
+               
         while (rs.next()) {
             int idCustomer = rs.getInt("idCustomer");
             int idLuggage = rs.getInt("idLuggage");
