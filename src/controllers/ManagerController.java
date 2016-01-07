@@ -31,23 +31,23 @@ public class ManagerController implements Initializable {
     private SwingNode snChart;
     int handled = 0;
     int year = 2016;
-        String[][] periodes = {
-            {year+"-01-01",year+"-01-31"}, //January
-            {year+"-02-01",year+"-02-31"}, //February
-            {year+"-03-01",year+"-03-31"}, //March
-            {year+"-04-01",year+"-04-31"}, //April
-            {year+"-05-01",year+"-05-31"}, //May
-            {year+"-06-01",year+"-06-31"}, //June
-            {year+"-07-01",year+"-07-31"}, //Juli
-            {year+"-08-01",year+"-08-31"}, //August
-            {year+"-09-01",year+"-09-31"}, //September
-            {year+"-10-01",year+"-10-31"}, //October
-            {year+"-11-01",year+"-11-31"}, //November
-            {year+"-12-01",year+"-12-31"}, //December
-        };
+    String[][] periodes = {
+        {year + "-01-01", year + "-01-31"}, //January
+        {year + "-02-01", year + "-02-31"}, //February
+        {year + "-03-01", year + "-03-31"}, //March
+        {year + "-04-01", year + "-04-31"}, //April
+        {year + "-05-01", year + "-05-31"}, //May
+        {year + "-06-01", year + "-06-31"}, //June
+        {year + "-07-01", year + "-07-31"}, //Juli
+        {year + "-08-01", year + "-08-31"}, //August
+        {year + "-09-01", year + "-09-31"}, //September
+        {year + "-10-01", year + "-10-31"}, //October
+        {year + "-11-01", year + "-11-31"}, //November
+        {year + "-12-01", year + "-12-31"}, //December
+    };
     Integer[] periodResults = new Integer[periodes.length];
-    
-    String Month[] ={
+
+    String Month[] = {
         "January",
         "February",
         "March",
@@ -61,27 +61,33 @@ public class ManagerController implements Initializable {
         "November",
         "December"
     };
-    
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
         int index = 0;
         for (String[] periode : periodes) {
-            String hanledSQL = "SELECT * FROM history "
-                    + "WHERE history.status = handled"
-                    + "AND history.dateHandled between " + periode[0] + " AND " + periode[1];
+            String handledSQL = "SELECT * FROM history "
+                    + "WHERE history.status = 'handled' "
+                    + "AND history.dateHandled between '" + periode[0] + "' AND '" + periode[1]+"';";
 
-            try (Connection conn = Database.initDatabase()) {
-                ResultSet rs = conn.createStatement().executeQuery(hanledSQL);
+            System.out.println("begin maand: " + periode[0]);
+            System.out.println("eind maand: " + periode[1]);
 
+            try {
+                System.out.println("test");
+                Connection conn = Database.initDatabase();
+                ResultSet rs = conn.createStatement().executeQuery(handledSQL);
+                System.out.println("test2");
+                System.out.println(handledSQL);
+                handled = 0;
                 while (rs.next()) {
                     int idCustomer = rs.getInt("idCustomer");
                     int idLuggage = rs.getInt("idLuggage");
                     String status = rs.getString("status");
-
-                    System.out.println(idCustomer + "\t" + idLuggage + "\t" + status);
-
+                    System.out.println("hah");
                     if ("handled".equals(status)) {
+                        System.out.println("fuck yeah!");
                         handled++;
                     }
                 }
@@ -90,10 +96,11 @@ public class ManagerController implements Initializable {
             } catch (Exception e) {
                 System.out.println(e);
             }
-            JFreeChart chart = FreeChartDemo("luggage vs month");
-            ChartPanel chartPanel = new ChartPanel(chart);
-            snChart.setContent(chartPanel);
         }
+
+        JFreeChart chart = FreeChartDemo("luggage vs month");
+        ChartPanel chartPanel = new ChartPanel(chart);
+        snChart.setContent(chartPanel);
     }
 
     public BorderPane getManagerScreen() {
@@ -155,7 +162,7 @@ public class ManagerController implements Initializable {
         //Handled luggage
         int index = 0;
         for (Integer periodResult : periodResults) {
-            dataset.addValue(periodResult, "Handled luggage", "January");
+            dataset.addValue(periodResult, "Handled luggage", Month[index]);
             index++;
         }
         return dataset;
