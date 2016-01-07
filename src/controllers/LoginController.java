@@ -104,6 +104,7 @@ public class LoginController implements Initializable {
         String username = txtUsername.getText();
         String password = txtPassword.getText();
         Boolean valid = loginValidation(username, password);
+            
         if (valid) {
             //Get the main fxml
             Main main = new Main();
