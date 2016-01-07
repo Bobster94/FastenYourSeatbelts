@@ -28,6 +28,22 @@ import org.jfree.data.category.DefaultCategoryDataset;
 public class ManagerController implements Initializable {
     @FXML private SwingNode snChart;
     int handled = 0;
+    
+    String Month[] ={
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "Juli",
+        "August",
+        "September",
+        "Oktober",
+        "November",
+        "December"
+    };
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         
@@ -140,14 +156,24 @@ public class ManagerController implements Initializable {
         dataset.addValue(handled, "Handled luggage", "October");
         dataset.addValue(handled, "Handled luggage", "November");
         dataset.addValue(handled, "Handled luggage", "December");
-        String[][] periode = {
-            {year+"-01-01-",year+"31-01-"+year}, //januari
-            {year+"-02-02-",year+"31-02-"+year}, //feb
-            {year+"-03-03-",year+"31-03"}
-        };
-        String[] results
-        SELECT * FROM history where between
         
+        
+        String[][] periode = {
+            {year+"-01-01",year+"-01-31"}, //January
+            {year+"-02-01",year+"-02-31"}, //February
+            {year+"-03-01",year+"-03-31"}, //March
+            {year+"-04-01",year+"-04-31"}, //April
+            {year+"-05-01",year+"-05-31"}, //May
+            {year+"-06-01",year+"-06-31"}, //June
+            {year+"-07-01",year+"-07-31"}, //Juli
+            {year+"-08-01",year+"-08-31"}, //August
+            {year+"-09-01",year+"-09-31"}, //September
+            {year+"-10-01",year+"-10-31"}, //October
+            {year+"-11-01",year+"-11-31"}, //November
+            {year+"-12-01",year+"-12-31"}, //December
+        };
+        
+  
         return dataset;
     }
 }
