@@ -68,7 +68,7 @@ public class ManagerController implements Initializable {
         int index = 0;
         for (String[] periode : periodes) {
             String hanledSQL = "SELECT * FROM history "
-                    + "WHERE history.status = handled"
+                    + "WHERE history.status = handled "
                     + "AND history.dateHandled between " + periode[0] + " AND " + periode[1];
 
             try (Connection conn = Database.initDatabase()) {
