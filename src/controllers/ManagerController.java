@@ -26,49 +26,49 @@ import org.jfree.data.category.DefaultCategoryDataset;
  * @author Bas
  */
 public class ManagerController implements Initializable {
-    @FXML private SwingNode snChart;
+
+    @FXML
+    private SwingNode snChart;
     int handled = 0;
+    int year = 2016;
+    String[][] periodes = {
+        {year + "-01-01-", year + "01-31-"}, //januari
+        {year + "-02-01-", year + "01-31-"} //feb
+    };
+    Integer[] periodResults = new Integer[periodes.length];
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        
-        
-        
-        try (Connection conn = Database.initDatabase()) {
-            String SQL = "SELECT idCustomer "
-                    + "FROM history";
-            ResultSet rs = conn.createStatement().executeQuery(SQL);
-            System.out.println(rs.getMetaData());
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        
-        String hanledSQL = "SELECT * FROM history "
-                + "WHERE history.status = handled" 
-                + "AND history.dateHandled between";
-        
-        try (Connection conn = Database.initDatabase()){
-            ResultSet rs = conn.createStatement().executeQuery(SQL);
-               
-        while (rs.next()) {
-            int idCustomer = rs.getInt("idCustomer");
-            int idLuggage = rs.getInt("idLuggage");
-            String status = rs.getString("status");
-            
-            System.out.println(idCustomer + "\t" + idLuggage + "\t" + status);
-                               
-            if ("handled".equals(status)) {
-                handled++;
+
+        int index = 0;
+        for (String[] periode : periodes) {
+            String hanledSQL = "SELECT * FROM history "
+                    + "WHERE history.status = handled"
+                    + "AND history.dateHandled between " + periode[0] + " AND " + periode[1];
+
+            try (Connection conn = Database.initDatabase()) {
+                ResultSet rs = conn.createStatement().executeQuery(hanledSQL);
+
+                while (rs.next()) {
+                    int idCustomer = rs.getInt("idCustomer");
+                    int idLuggage = rs.getInt("idLuggage");
+                    String status = rs.getString("status");
+
+                    System.out.println(idCustomer + "\t" + idLuggage + "\t" + status);
+
+                    if ("handled".equals(status)) {
+                        handled++;
+                    }
+                }
+                periodResults[index] = handled;
+                index++;
+            } catch (Exception e) {
+                System.out.println(e);
             }
+            JFreeChart chart = FreeChartDemo("luggage vs month");
+            ChartPanel chartPanel = new ChartPanel(chart);
+            snChart.setContent(chartPanel);
         }
-        System.out.println(handled);
-        
-        JFreeChart chart = FreeChartDemo("luggage vs month");
-        ChartPanel chartPanel = new ChartPanel(chart);
-        snChart.setContent(chartPanel);
-        
-        } catch (Exception e ) {
-            System.out.println(e);
-        } 
     }
 
     public BorderPane getManagerScreen() {
@@ -93,7 +93,7 @@ public class ManagerController implements Initializable {
                 PlotOrientation.VERTICAL,
                 true, true, false
         );
-        
+
         return lineChart;
     }
 
@@ -126,28 +126,14 @@ public class ManagerController implements Initializable {
         dataset.addValue(4, "lost luggage", "October");
         dataset.addValue(4, "lost luggage", "November");
         dataset.addValue(4, "lost luggage", "December");
-            
+
         //Handled luggage
-        dataset.addValue(handled, "Handled luggage", "January");
-        dataset.addValue(handled, "Handled luggage", "February");
-        dataset.addValue(handled, "Handled luggage", "March");
-        dataset.addValue(handled, "Handled luggage", "April");
-        dataset.addValue(handled, "Handled luggage", "May");
-        dataset.addValue(handled, "Handled luggage", "June");
-        dataset.addValue(handled, "Handled luggage", "July");
-        dataset.addValue(handled, "Handled luggage", "August");
-        dataset.addValue(handled, "Handled luggage", "September");
-        dataset.addValue(handled, "Handled luggage", "October");
-        dataset.addValue(handled, "Handled luggage", "November");
-        dataset.addValue(handled, "Handled luggage", "December");
-        String[][] periode = {
-            {year+"-01-01-",year+"31-01-"+year}, //januari
-            {year+"-02-02-",year+"31-02-"+year}, //feb
-            {year+"-03-03-",year+"31-03"}
-        };
-        String[] results
-        SELECT * FROM history where between
-        
+        int index = 0;
+        for (Integer periodResult : periodResults) {
+            dataset.addValue(periodResult, "Handled luggage", "January");
+            index++;
+        }
+
         return dataset;
     }
 }

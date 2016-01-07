@@ -188,7 +188,7 @@ public class Main extends Application {
                 break;
         }
     }
-
+    
     /*
     * Set the screen content to the dashboard view.
     */
