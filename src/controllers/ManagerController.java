@@ -31,6 +31,7 @@ public class ManagerController implements Initializable {
     int handled = 0;
     int addLostLuggage = 0;
     int addLuggage = 0;
+    int addCustomer = 0;
     int year = 2016;
     String[][] periodes = {
         {year + "-01-01", year + "-01-31"}, //January
@@ -49,6 +50,7 @@ public class ManagerController implements Initializable {
     Integer[] periodResultsHandled = new Integer[periodes.length];
     Integer[] periodResultsLost = new Integer[periodes.length];
     Integer[] periodResultsFound = new Integer[periodes.length];
+    Integer[] periodResultsCustomer = new Integer[periodes.length];
     String Month[] = {
         "January",
         "February",
@@ -78,14 +80,19 @@ public class ManagerController implements Initializable {
             String foundSQL = "SELECT * FROM history "
                     + "WHERE history.status = 'addLuggage' "
                     + "AND history.dateHandled between '" + periode[0] + "' AND '" + periode[1]+"';";
+            String customerSQL = "SELECT * FROM history "
+                    + "WHERE history.status = 'addCustomer' "
+                    + "AND history.dateHandled between '" + periode[0] + "' AND '" + periode[1]+"';";
             try {
                 Connection conn = Database.initDatabase();
                 ResultSet handledRS = conn.createStatement().executeQuery(handledSQL);
                 ResultSet lostRS = conn.createStatement().executeQuery(lostSQL);
                 ResultSet foundRS = conn.createStatement().executeQuery(foundSQL);
+                ResultSet customerRS = conn.createStatement().executeQuery(customerSQL);
                 handled = 0;
                 addLostLuggage = 0;
                 addLuggage = 0;
+                addCustomer = 0;
                 while (handledRS.next()) {
                     int idCustomer = handledRS.getInt("idCustomer");
                     int idLuggage = handledRS.getInt("idLuggage");
@@ -110,10 +117,19 @@ public class ManagerController implements Initializable {
                         addLuggage++;
                     }
                 }
+                while (customerRS.next()) {
+                    int idCustomer = customerRS.getInt("idCustomer");
+                    int idLuggage = customerRS.getInt("idLuggage");
+                    String status = customerRS.getString("status");
+                    if ("addCustomer".equals(status)) {
+                        addCustomer++;
+                    }
+                }
                 
                 periodResultsHandled[index] = handled;
                 periodResultsLost[index] = addLostLuggage;
                 periodResultsFound[index] = addLuggage;
+                periodResultsCustomer[index] = addCustomer;
                 index++;
             } catch (Exception e) {
                 System.out.println(e);
@@ -186,6 +202,13 @@ public class ManagerController implements Initializable {
         for (Integer periodResultHandled : periodResultsHandled) {
             dataset.addValue(periodResultHandled, "Handled luggage", Month[index3]);
             index3++;
+        }
+        
+        //Customer luggage
+        int index4 = 0;
+        for (Integer periodResultCustomer : periodResultsCustomer) {
+            dataset.addValue(periodResultCustomer, "Add customer", Month[index4]);
+            index4++;
         }
         return dataset;
     }
