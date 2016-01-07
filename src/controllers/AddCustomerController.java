@@ -60,7 +60,7 @@ public class AddCustomerController implements Initializable {
         String city = txtCity.getText();
         String email= txtEmail.getText();
         String street = txtStreet.getText();
-        int phoneNumber = Integer.parseInt(txtPhone.getText());
+        String phoneNumber = txtPhone.getText();
         String zipcode = txtZipcode.getText();
         String insertion = txtInsertion.getText();
         String houseNumber = txtHouseNumber.getText();
@@ -91,18 +91,18 @@ public class AddCustomerController implements Initializable {
             preparedStatement.setString(9, houseNumber);
             preparedStatement.setString(10, email);
             preparedStatement.setDate(11, java.sql.Date.valueOf(date));
-            preparedStatement.setInt(12, phoneNumber);
+            preparedStatement.setString(12, phoneNumber);
             preparedStatement.setInt(13, Main.employee.getEmployeeID());
             preparedStatement.executeUpdate();
             
             ResultSet sr = preparedStatement.getGeneratedKeys();
                         
             String history = "INSERT INTO history"+
-                    "(status,idCostumer,dateHandled,idEmployeeHandled)"+
+                    "(status,idCustomer,dateHandled,idEmployeeHandled)"+
                     "VALUES(?,?,?,?)";
             preparedStatement = conn.prepareStatement(history);
 
-            preparedStatement.setString(1,"addCostumer");
+            preparedStatement.setString(1,"addCustomer");
             if(sr.next()) {
                 preparedStatement.setInt(2, sr.getInt(1));
             }

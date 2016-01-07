@@ -29,6 +29,8 @@ public class ManagerController implements Initializable {
     @FXML
     private SwingNode snChart;
     int handled = 0;
+    int addLostLuggage = 0;
+    int addLuggage = 0;
     int year = 2016;
     String[][] periodes = {
         {year + "-01-01", year + "-01-31"}, //January
@@ -44,8 +46,9 @@ public class ManagerController implements Initializable {
         {year + "-11-01", year + "-11-31"}, //November
         {year + "-12-01", year + "-12-31"}, //December
     };
-    Integer[] periodResults = new Integer[periodes.length];
-
+    Integer[] periodResultsHandled = new Integer[periodes.length];
+    Integer[] periodResultsLost = new Integer[periodes.length];
+    Integer[] periodResultsFound = new Integer[periodes.length];
     String Month[] = {
         "January",
         "February",
@@ -53,10 +56,10 @@ public class ManagerController implements Initializable {
         "April",
         "May",
         "June",
-        "Juli",
+        "July",
         "August",
         "September",
-        "Oktober",
+        "October",
         "November",
         "December"
     };
@@ -69,28 +72,48 @@ public class ManagerController implements Initializable {
             String handledSQL = "SELECT * FROM history "
                     + "WHERE history.status = 'handled' "
                     + "AND history.dateHandled between '" + periode[0] + "' AND '" + periode[1]+"';";
-
-            System.out.println("begin maand: " + periode[0]);
-            System.out.println("eind maand: " + periode[1]);
-
+            String lostSQL = "SELECT * FROM history "
+                    + "WHERE history.status = 'addLostLuggage' "
+                    + "AND history.dateHandled between '" + periode[0] + "' AND '" + periode[1]+"';";
+            String foundSQL = "SELECT * FROM history "
+                    + "WHERE history.status = 'addLuggage' "
+                    + "AND history.dateHandled between '" + periode[0] + "' AND '" + periode[1]+"';";
             try {
-                System.out.println("test");
                 Connection conn = Database.initDatabase();
-                ResultSet rs = conn.createStatement().executeQuery(handledSQL);
-                System.out.println("test2");
-                System.out.println(handledSQL);
+                ResultSet handledRS = conn.createStatement().executeQuery(handledSQL);
+                ResultSet lostRS = conn.createStatement().executeQuery(lostSQL);
+                ResultSet foundRS = conn.createStatement().executeQuery(foundSQL);
                 handled = 0;
-                while (rs.next()) {
-                    int idCustomer = rs.getInt("idCustomer");
-                    int idLuggage = rs.getInt("idLuggage");
-                    String status = rs.getString("status");
-                    System.out.println("hah");
+                addLostLuggage = 0;
+                addLuggage = 0;
+                while (handledRS.next()) {
+                    int idCustomer = handledRS.getInt("idCustomer");
+                    int idLuggage = handledRS.getInt("idLuggage");
+                    String status = handledRS.getString("status");
                     if ("handled".equals(status)) {
-                        System.out.println("fuck yeah!");
                         handled++;
                     }
                 }
-                periodResults[index] = handled;
+                while (lostRS.next()) {
+                    int idCustomer = lostRS.getInt("idCustomer");
+                    int idLuggage = lostRS.getInt("idLuggage");
+                    String status = lostRS.getString("status");
+                    if ("addLostLuggage".equals(status)) {
+                        addLostLuggage++;
+                    }
+                }
+                while (foundRS.next()) {
+                    int idCustomer = foundRS.getInt("idCustomer");
+                    int idLuggage = foundRS.getInt("idLuggage");
+                    String status = foundRS.getString("status");
+                    if ("addLuggage".equals(status)) {
+                        addLuggage++;
+                    }
+                }
+                
+                periodResultsHandled[index] = handled;
+                periodResultsLost[index] = addLostLuggage;
+                periodResultsFound[index] = addLuggage;
                 index++;
             } catch (Exception e) {
                 System.out.println(e);
@@ -143,39 +166,26 @@ public class ManagerController implements Initializable {
     */
     private DefaultCategoryDataset createDataset() {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+       
         //Found luggage
-        dataset.addValue(5, "Found luggage", "January");
-        dataset.addValue(3, "Found luggage", "February");
-        dataset.addValue(6, "Found luggage", "March");
-        dataset.addValue(8, "Found luggage", "April");
-        dataset.addValue(10, "Found luggage", "May");
-        dataset.addValue(3, "Found luggage", "June");
-        dataset.addValue(3, "Found luggage", "July");
-        dataset.addValue(3, "Found luggage", "August");
-        dataset.addValue(3, "Found luggage", "September");
-        dataset.addValue(3, "Found luggage", "October");
-        dataset.addValue(3, "Found luggage", "November");
-        dataset.addValue(3, "Found luggage", "December");
-
+        int index1 = 0;
+        for (Integer periodResultFound : periodResultsFound) {
+            dataset.addValue(periodResultFound, "Found luggagee", Month[index1]);
+            index1++;
+        }
+        
         //Lost luggage
-        dataset.addValue(1, "lost luggage", "January");
-        dataset.addValue(2, "lost luggage", "February");
-        dataset.addValue(3, "lost luggage", "March");
-        dataset.addValue(4, "lost luggage", "April");
-        dataset.addValue(4, "lost luggage", "May");
-        dataset.addValue(4, "lost luggage", "June");
-        dataset.addValue(4, "lost luggage", "July");
-        dataset.addValue(4, "lost luggage", "August");
-        dataset.addValue(4, "lost luggage", "September");
-        dataset.addValue(4, "lost luggage", "October");
-        dataset.addValue(4, "lost luggage", "November");
-        dataset.addValue(4, "lost luggage", "December");
-
+        int index2 = 0;
+        for (Integer periodResultLost : periodResultsLost) {
+            dataset.addValue(periodResultLost, "lost luggage", Month[index2]);
+            index2++;
+        }
+        
         //Handled luggage
-        int index = 0;
-        for (Integer periodResult : periodResults) {
-            dataset.addValue(periodResult, "Handled luggage", Month[index]);
-            index++;
+        int index3 = 0;
+        for (Integer periodResultHandled : periodResultsHandled) {
+            dataset.addValue(periodResultHandled, "Handled luggage", Month[index3]);
+            index3++;
         }
         return dataset;
     }

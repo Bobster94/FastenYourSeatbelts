@@ -1,6 +1,7 @@
 package controllers;
 
 import java.io.IOException;
+import java.math.BigInteger;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -105,7 +106,7 @@ public class AddLostLuggageController implements Initializable {
         String houseNumber = txtHouseNumber.getText();
         String email = txtEmail.getText();
         String lostAirport = txtLostAirport.getText();
-        int phoneNumber = Integer.parseInt(txtPhoneNumber.getText());
+        String phoneNumber = txtPhoneNumber.getText();
         String extra = txtExtra.getText();
         String zipcode = txtZipcode.getText();
         String country = txtCountry.getText();
@@ -145,7 +146,7 @@ public class AddLostLuggageController implements Initializable {
             preparedStatement.setString(9, houseNumber);
             preparedStatement.setString(10, email);
             preparedStatement.setDate(11, java.sql.Date.valueOf(date));
-            preparedStatement.setInt(12, phoneNumber);
+            preparedStatement.setString(12, phoneNumber);
             preparedStatement.setInt(13, Main.employee.getEmployeeID());
             preparedStatement.executeUpdate();
             ResultSet rs = preparedStatement.getGeneratedKeys();
@@ -172,15 +173,16 @@ public class AddLostLuggageController implements Initializable {
             if (rs.next()) {
                 preparedStatement.setInt(14, rs.getInt(1));
             }
+            preparedStatement.executeUpdate();
              ResultSet sr = preparedStatement.getGeneratedKeys();
             
-            preparedStatement.executeUpdate();
+            
            
                         
             String history = "INSERT INTO history"+
                     "(status,idLuggage,dateHandled,idEmployeeHandled)"+
                     "VALUES(?,?,?,?)";
-            preparedStatement = conn.prepareStatement(history);
+            preparedStatement = conn.prepareStatement(history, PreparedStatement.RETURN_GENERATED_KEYS);
 
             preparedStatement.setString(1,"addLostLuggage");
             if(sr.next()) {
