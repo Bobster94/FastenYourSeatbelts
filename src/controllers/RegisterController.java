@@ -69,18 +69,18 @@ public class RegisterController implements Initializable {
             
             Connection conn = (Connection) Database.initDatabase();
             String addEmployee = "INSERT INTO employee "
-                    + "(userName,insertion,lastName,password,email,admin,salt) "
-                    + "VALUES (?,?,?,?,?,?,?)";  
-            
+                    + "(userName,firstName,insertion,lastName,password,email,admin,salt) "
+                    + "VALUES (?,?,?,?,?,?,?,?)";  
             
             PreparedStatement preparedStatement = conn.prepareStatement(addEmployee);
             preparedStatement.setString(1, username);
-            preparedStatement.setString(2, insertion); 
-            preparedStatement.setString(3, lastname);
-            preparedStatement.setBytes(4, encryptedPassword);
-            preparedStatement.setString(5, email);
-            preparedStatement.setInt(6, function);
-            preparedStatement.setBytes(7, salt);
+            preparedStatement.setString(2, firstname);
+            preparedStatement.setString(3, insertion); 
+            preparedStatement.setString(4, lastname);
+            preparedStatement.setBytes(5, encryptedPassword);
+            preparedStatement.setString(6, email);
+            preparedStatement.setInt(7, function);
+            preparedStatement.setBytes(8, salt);
             preparedStatement.executeUpdate();
             
             BorderPane root = Main.getRoot();

@@ -8,9 +8,11 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.embed.swing.SwingNode;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -19,8 +21,8 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
- * FXML Controller class
- * This class shows the graphs for the manager
+ * FXML Controller class This class shows the graphs for the manager
+ *
  * @author Bas
  * @version 1.0
  */
@@ -28,6 +30,8 @@ public class ManagerController implements Initializable {
 
     @FXML
     private SwingNode snChart;
+    @FXML
+    private TextField txtYear;
     int handled = 0;
     int addLostLuggage = 0;
     int addLuggage = 0;
@@ -68,21 +72,24 @@ public class ManagerController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        populateChart();
+    }
 
+    private void populateChart() {
         int index = 0;
         for (String[] periode : periodes) {
             String handledSQL = "SELECT * FROM history "
                     + "WHERE history.status = 'handled' "
-                    + "AND history.dateHandled between '" + periode[0] + "' AND '" + periode[1]+"';";
+                    + "AND history.dateHandled between '" + periode[0] + "' AND '" + periode[1] + "';";
             String lostSQL = "SELECT * FROM history "
                     + "WHERE history.status = 'addLostLuggage' "
-                    + "AND history.dateHandled between '" + periode[0] + "' AND '" + periode[1]+"';";
+                    + "AND history.dateHandled between '" + periode[0] + "' AND '" + periode[1] + "';";
             String foundSQL = "SELECT * FROM history "
                     + "WHERE history.status = 'addLuggage' "
-                    + "AND history.dateHandled between '" + periode[0] + "' AND '" + periode[1]+"';";
+                    + "AND history.dateHandled between '" + periode[0] + "' AND '" + periode[1] + "';";
             String customerSQL = "SELECT * FROM history "
                     + "WHERE history.status = 'addCustomer' "
-                    + "AND history.dateHandled between '" + periode[0] + "' AND '" + periode[1]+"';";
+                    + "AND history.dateHandled between '" + periode[0] + "' AND '" + periode[1] + "';";
             try {
                 Connection conn = Database.initDatabase();
                 ResultSet handledRS = conn.createStatement().executeQuery(handledSQL);
@@ -125,26 +132,38 @@ public class ManagerController implements Initializable {
                         addCustomer++;
                     }
                 }
-                
+
                 periodResultsHandled[index] = handled;
                 periodResultsLost[index] = addLostLuggage;
                 periodResultsFound[index] = addLuggage;
                 periodResultsCustomer[index] = addCustomer;
+                
                 index++;
             } catch (Exception e) {
                 System.out.println(e);
             }
         }
-
+        
         JFreeChart chart = FreeChartDemo("luggage vs month");
         ChartPanel chartPanel = new ChartPanel(chart);
+        snChart.setContent(null);
         snChart.setContent(chartPanel);
     }
 
+    @FXML
+    private void searchHistory(ActionEvent event) {
+        if (txtYear.getText() != null && ! txtYear.getText().trim().isEmpty()) {
+            year = Integer.parseInt(txtYear.getText());
+        } else {
+            year = 2016;
+        }
+        populateChart();
+    }
+
     /*
-    * Returns the manager screen
-    * @return BorderPane returns the manager screen as  borderpane
-    */
+     * Returns the manager screen
+     * @return BorderPane returns the manager screen as  borderpane
+     */
     public BorderPane getManagerScreen() {
         BorderPane screen = null;
         try {
@@ -160,10 +179,10 @@ public class ManagerController implements Initializable {
     }
 
     /*
-    * Creates the lineChart
-    * @param String chartTitle  The title for the chart 
-    * @return JFreeChart        The LineChart with data    
-    */
+     * Creates the lineChart
+     * @param String chartTitle  The title for the chart 
+     * @return JFreeChart        The LineChart with data    
+     */
     public JFreeChart FreeChartDemo(String chartTitle) {
         JFreeChart lineChart = ChartFactory.createLineChart(
                 chartTitle,
@@ -177,33 +196,33 @@ public class ManagerController implements Initializable {
     }
 
     /*
-    *Prepare a dataset for the linechart
-    *@return DefaultCategoryDataset The dataset which can be added to the linechart
-    */
+     *Prepare a dataset for the linechart
+     *@return DefaultCategoryDataset The dataset which can be added to the linechart
+     */
     private DefaultCategoryDataset createDataset() {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-       
+
         //Found luggage
         int index1 = 0;
         for (Integer periodResultFound : periodResultsFound) {
             dataset.addValue(periodResultFound, "Found luggagee", Month[index1]);
             index1++;
         }
-        
+
         //Lost luggage
         int index2 = 0;
         for (Integer periodResultLost : periodResultsLost) {
             dataset.addValue(periodResultLost, "lost luggage", Month[index2]);
             index2++;
         }
-        
+
         //Handled luggage
         int index3 = 0;
         for (Integer periodResultHandled : periodResultsHandled) {
             dataset.addValue(periodResultHandled, "Handled luggage", Month[index3]);
             index3++;
         }
-        
+
         //Customer luggage
         int index4 = 0;
         for (Integer periodResultCustomer : periodResultsCustomer) {
