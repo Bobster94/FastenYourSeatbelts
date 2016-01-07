@@ -42,7 +42,9 @@ public class ManagerController implements Initializable {
             System.out.println(e);
         }
         
-        String SQL = "SELECT * FROM history";
+        String hanledSQL = "SELECT * FROM history "
+                + "WHERE history.status = handled" 
+                + "AND history.dateHandled between";
         
         try (Connection conn = Database.initDatabase()){
             ResultSet rs = conn.createStatement().executeQuery(SQL);
@@ -138,7 +140,13 @@ public class ManagerController implements Initializable {
         dataset.addValue(handled, "Handled luggage", "October");
         dataset.addValue(handled, "Handled luggage", "November");
         dataset.addValue(handled, "Handled luggage", "December");
-
+        String[][] periode = {
+            {year+"-01-01-",year+"31-01-"+year}, //januari
+            {year+"-02-02-",year+"31-02-"+year}, //feb
+            {year+"-03-03-",year+"31-03"}
+        };
+        String[] results
+        SELECT * FROM history where between
         
         return dataset;
     }
