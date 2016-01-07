@@ -21,27 +21,28 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 
 /**
- * FXML Controller class
+ * FXML Controller class This class handled the edit found luggage functionality
  *
- * @author Jeroen 
+ * @author Jeroen
  * @version 1.0
  */
 public class EditFoundLuggageController implements Initializable {
 
     /**
      * Initializes the controller class.
+     *
      * @param url
      * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }   
-    
+    }
+
     /*
-    *
-    * @return the EditFoundLuggage fxml view as BorderPane
-    */
+     *
+     * @return the EditFoundLuggage fxml view as BorderPane
+     */
     public BorderPane getEditFoundLuggageScreen() {
         BorderPane screen = null;
         try {
@@ -52,26 +53,38 @@ public class EditFoundLuggageController implements Initializable {
         return screen;
     }
     private static int id;
-    @FXML private TextField txtExtra;
-    @FXML private TextField txtBarcode;
-    @FXML private TextField txtLostAtAirport;
-    @FXML private TextField txtFoundAtAirport;
-    @FXML private TextField txtFlightNumber;
-    @FXML private TextField txtDate;
-    @FXML private ComboBox  cbMaterial;
-    @FXML private ComboBox  cbColor;
-    @FXML private ComboBox  cbType;
-    @FXML private ComboBox  cbBrand;
-    @FXML private ComboBox  cbWeight;
-    @FXML private ComboBox  cbSize;
-    
+    @FXML
+    private TextField txtExtra;
+    @FXML
+    private TextField txtBarcode;
+    @FXML
+    private TextField txtLostAtAirport;
+    @FXML
+    private TextField txtFoundAtAirport;
+    @FXML
+    private TextField txtFlightNumber;
+    @FXML
+    private TextField txtDate;
+    @FXML
+    private ComboBox cbMaterial;
+    @FXML
+    private ComboBox cbColor;
+    @FXML
+    private ComboBox cbType;
+    @FXML
+    private ComboBox cbBrand;
+    @FXML
+    private ComboBox cbWeight;
+    @FXML
+    private ComboBox cbSize;
+
     /*
-    *
-    * Edit the foundLuggage with the given values
-    */
+     *
+     * Edit the foundLuggage with the given values
+     */
     @FXML
     public void AddFoundLuggage() {
-        
+        //Get the values from the screen
         String barcode = txtBarcode.getText();
         String foundAirport = txtFoundAtAirport.getText();
         String extra = txtExtra.getText();
@@ -84,23 +97,25 @@ public class EditFoundLuggageController implements Initializable {
         String brand = cbBrand.getValue().toString();
         String weight = cbWeight.getValue().toString();
         String size = cbSize.getValue().toString();
-        
+
+        //Get the current date
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        //get current date time with Date()
         Date dateToday = new Date();
         date = dateFormat.format(dateToday);
-        
-        try(Connection conn = Database.initDatabase()) {
+
+        try (Connection conn = Database.initDatabase()) {
+            //Create sql query
             String SQL = "UPDATE luggage "
                     + "SET brand = ?, color = ?, type = ?, weight = ?,"
                     + " size = ?, barcode = ?, lostAirport = ?, foundAirport = ?,"
                     + " extra = ?, lostFound = ?, material = ?, date = ?,"
                     + " flightNumber = ?, idEmployee = ? "
                     + "WHERE id = ?";
-           
+            //Run the query
             PreparedStatement preparedStatement = conn.prepareStatement(SQL);
+            //Set the values into the query
             preparedStatement.setString(1, brand);
-	    preparedStatement.setString(2, color);
+            preparedStatement.setString(2, color);
             preparedStatement.setString(3, type);
             preparedStatement.setString(4, weight);
             preparedStatement.setString(5, size);
@@ -115,53 +130,50 @@ public class EditFoundLuggageController implements Initializable {
             preparedStatement.setInt(14, Main.employee.getEmployeeID());
             preparedStatement.setInt(15, id);
             preparedStatement.executeUpdate();
-        
-                        
-            String history = "INSERT INTO history"+
-                    "(status,idLuggage,dateHandled,idEmployeeHandled)"+
-                    "VALUES(?,?,?,?)";
+
+            String history = "INSERT INTO history"
+                    + "(status,idLuggage,dateHandled,idEmployeeHandled)"
+                    + "VALUES(?,?,?,?)";
             preparedStatement = conn.prepareStatement(history);
 
-            preparedStatement.setString(1,"EditFoundLuggage");
-         
-            preparedStatement.setInt(2,id);
-            
+            preparedStatement.setString(1, "EditFoundLuggage");
+            preparedStatement.setInt(2, id);
             preparedStatement.setDate(3, java.sql.Date.valueOf(date));
-            
-            System.out.println("data in database gelukt");
-            
             preparedStatement.setInt(4, Main.employee.getEmployeeID());
-
             preparedStatement.executeUpdate();
-            
+
             //Close connection
             conn.close();
-            
+
             //Redirect to detail page of this luggage
             AllLuggageController AllLuggage = new AllLuggageController();
             AllLuggage.buildscreen(String.valueOf(id), "foundLuggage");
-            
-        }catch(SQLException ex){
-              Logger.getLogger(AddFoundLuggageController.class.getName()).log(Level.SEVERE,null,ex);
-          }
-       
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AddFoundLuggageController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
-   
+
     /*
-    * Get the luggage from the database and fill all the fields with the resultset
-    * @param    String  id  luggage id. Used to search luggage from the database
-    */
+     * Get the luggage from the database and fill all the fields with the resultset
+     * @param    String  id  luggage id. Used to search luggage from the database
+     */
     public void buildScreen(String id) {
         try {
+            //Set the id global in this class
             this.id = Integer.parseInt(id);
+            //Get database connection
             Connection conn = Database.initDatabase();
+            //Create sql query
             String selectLuggage = "SELECT date,foundAirport,lostAirport,"
                     + "barcode,brand,color,type,weight,"
                     + "size,extra,material,flightNumber "
                     + "FROM luggage "
-                    + "WHERE id = "+id;
+                    + "WHERE id = " + id;
             ResultSet rs = conn.createStatement().executeQuery(selectLuggage);
-            if(rs.next()) {
+            //If there are results fill the input fields with them
+            if (rs.next()) {
                 txtExtra.setText(new String(rs.getBytes("extra"), "UTF-8"));
                 txtFlightNumber.setText(new String(rs.getBytes("flightNumber"), "UTF-8"));
                 cbBrand.setValue(new String(rs.getBytes("brand"), "UTF-8"));
@@ -177,6 +189,6 @@ public class EditFoundLuggageController implements Initializable {
             }
         } catch (SQLException | UnsupportedEncodingException ex) {
             Logger.getLogger(EditLostLuggageController.class.getName()).log(Level.SEVERE, null, ex);
-        }   
+        }
     }
 }

@@ -3,8 +3,9 @@ package controllers;
 import javafx.beans.property.SimpleStringProperty;
 
 /**
- *
+ * This class is used to store detailed information about a customer
  * @author Bas
+ * @version 1.0
  */
 public class detailedCustomer {
     private final SimpleStringProperty id;

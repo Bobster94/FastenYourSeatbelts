@@ -1,26 +1,21 @@
 package controllers;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import static java.lang.System.in;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.scene.image.Image;
 import org.apache.pdfbox.exceptions.COSVisitorException;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.edit.PDPageContentStream;
-import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
 /**
- *
+ * This class is used to create pdf's
  * @author Bas
+ * @version 1.0
  */
 public class pdfController {
     
@@ -41,17 +36,26 @@ public class pdfController {
         }
     }
     
+    /*
+    * Creates the pdf with the given values
+    * @param String[] labelsCustomer       The labels for the labels content
+    * @param String[] contentCustoemr      The values for the customer content
+    * @param String[] labelsLuggage        The labels for the luggage content
+    * @param String[] contentLuggage       The values for the luggage content
+    * @param String status                 the status of the luggage/customer. (Handled or created)
+    */
     public void createPdf(
             String[] labelsCustomer, String[] contentCustomer, 
             String[] labelsLuggage, String[] contentLuggage, 
             String status) {
         try {
+            //All the fonts for the document
             PDType1Font timesBold = PDType1Font.TIMES_BOLD;
             PDType1Font helvetiaBold = PDType1Font.HELVETICA_BOLD;
             PDType1Font helvetia = PDType1Font.HELVETICA;
             
+            //Curent date
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            //get current date time with Date()
             Date dateToday = new Date();
             String date = dateFormat.format(dateToday);
             
@@ -62,8 +66,6 @@ public class pdfController {
             contentStream.setNonStrokingColor(150, 0, 0);
             contentStream.drawString("Corendon");
             contentStream.endText();
-            
-            // Line under document header
             contentStream.drawLine(50, 693, 500, 693);
             
             // Customer Content
@@ -117,6 +119,10 @@ public class pdfController {
         }
     }
 
+    /*
+    * Save the created pdf
+    * @param String filename   save the pdf with this filename
+    */
     public void save(String filename) {
         try {
             // Close contentStream

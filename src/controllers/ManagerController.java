@@ -11,9 +11,7 @@ import javafx.embed.swing.SwingNode;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -22,8 +20,9 @@ import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
  * FXML Controller class
- *
+ * This class shows the graphs for the manager
  * @author Bas
+ * @version 1.0
  */
 public class ManagerController implements Initializable {
 
@@ -103,6 +102,10 @@ public class ManagerController implements Initializable {
         snChart.setContent(chartPanel);
     }
 
+    /*
+    * Returns the manager screen
+    * @return BorderPane returns the manager screen as  borderpane
+    */
     public BorderPane getManagerScreen() {
         BorderPane screen = null;
         try {
@@ -117,6 +120,11 @@ public class ManagerController implements Initializable {
         return screen;
     }
 
+    /*
+    * Creates the lineChart
+    * @param String chartTitle  The title for the chart 
+    * @return JFreeChart        The LineChart with data    
+    */
     public JFreeChart FreeChartDemo(String chartTitle) {
         JFreeChart lineChart = ChartFactory.createLineChart(
                 chartTitle,
@@ -129,6 +137,10 @@ public class ManagerController implements Initializable {
         return lineChart;
     }
 
+    /*
+    *Prepare a dataset for the linechart
+    *@return DefaultCategoryDataset The dataset which can be added to the linechart
+    */
     private DefaultCategoryDataset createDataset() {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         //Found luggage

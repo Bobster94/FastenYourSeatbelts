@@ -3,7 +3,7 @@ package controllers;
 import javafx.beans.property.SimpleStringProperty;
 
 /**
- *
+ * This class will store short information about luggage
  * @author Bas
  */
 public class Luggage {

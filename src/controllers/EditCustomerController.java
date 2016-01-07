@@ -12,7 +12,6 @@ import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -58,6 +57,7 @@ public class EditCustomerController implements Initializable {
     */
     @FXML
     private void editCustomer() {
+        //Get values from the screen
         String firstname = txtFirstname.getText();
         String birthDate = txtBirthdate.getText();
         String insertion = txtInsertion.getText();
@@ -70,8 +70,8 @@ public class EditCustomerController implements Initializable {
         int telephoneNumber = Integer.parseInt(txtPhonenumber.getText());
         String zipcode = txtZipcode.getText();
         
+        //Get the current date
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        //get current date time with Date()
         Date date = new Date();
         String dateToday = dateFormat.format(date);
         
@@ -93,6 +93,7 @@ public class EditCustomerController implements Initializable {
                     + "WHERE id = ?";
             
             PreparedStatement preparedStatement = conn.prepareStatement(Customer);
+            //Set the values in the query
             preparedStatement.setString(1, firstname);
 	    preparedStatement.setString(2, insertion); 
             preparedStatement.setString(3, lastname);
@@ -109,25 +110,20 @@ public class EditCustomerController implements Initializable {
             preparedStatement.setInt(14, id);
             preparedStatement.executeUpdate();
             
-           
-                        
+            //Create the sql query
             String history = "INSERT INTO history"+
                     "(status,idCustomer,dateHandled,idEmployeeHandled)"+
                     "VALUES(?,?,?,?)";
             preparedStatement = conn.prepareStatement(history);
-
+            
+            //Set the values in the query
             preparedStatement.setString(1,"EditCustomer");
-         
             preparedStatement.setInt(2,id);
-            
             preparedStatement.setDate(3, java.sql.Date.valueOf(dateToday));
-            
-            System.out.println("data in database gelukt");
-            
             preparedStatement.setInt(4, Main.employee.getEmployeeID());
-
             preparedStatement.executeUpdate();
             
+            //Redirect to specific customer
             SpecificCustomer specCustomer = new SpecificCustomer();
             specCustomer.buildscreen(String.valueOf(id));
             
@@ -157,6 +153,7 @@ public class EditCustomerController implements Initializable {
             String selectCustomer = "SELECT * FROM customer WHERE id = "+id;
             ResultSet rs = conn.createStatement().executeQuery(selectCustomer);
             if(rs.next()) {
+                //Get the value. If the value is null set an empty string
                 txtFirstname.setText(rs.getString("firstName"));
                 if(rs.wasNull()) txtFirstname.setText("");
                 txtInsertion.setText(rs.getString("insertion"));

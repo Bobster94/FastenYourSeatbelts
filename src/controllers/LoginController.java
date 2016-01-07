@@ -33,6 +33,12 @@ public class LoginController implements Initializable {
     }
     
     @FXML private Label lblError;
+    /*
+    * This method validates the username and password 
+    * @param String username    Username from the employee
+    * @param String password    Password from the employee
+    * @return Boolean           If the username and password match a record. Return true
+    */
     private Boolean loginValidation(String username, String password) {
         Boolean valid = false;
         
@@ -75,6 +81,10 @@ public class LoginController implements Initializable {
     @FXML private TextField txtPassword;
     @FXML private Button cbManager;
     
+    /*
+    * This method is called if the employee clicked on the login button
+    * @param ActionEvent event
+    */
     @FXML 
     protected void Login(ActionEvent event) throws IOException {
         String username = txtUsername.getText();
@@ -104,6 +114,10 @@ public class LoginController implements Initializable {
         }
     }
     
+    /*
+    * This method will load the login fxml into a borderpane
+    * @return borderpane    Returns the login view as borderpane
+    */
     public BorderPane getLoginScreen() {
         BorderPane screen = null;
         try {
@@ -115,6 +129,10 @@ public class LoginController implements Initializable {
         return screen;
     }
     
+    /*
+    * If the decline button is pressed the application will close
+    *@param ActionEvent event
+    */
     @FXML
     protected void Logout(ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

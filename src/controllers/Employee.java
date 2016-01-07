@@ -1,8 +1,9 @@
 package controllers;
 
 /**
- *
+ * This class will store information about the employee who is currently logged in
  * @author Bas
+ * @version 1.0
  */
 public class Employee {
     

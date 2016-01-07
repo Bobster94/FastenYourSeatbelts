@@ -22,8 +22,9 @@ import javafx.scene.layout.BorderPane;
 
 /**
  * FXML Controller class
- *
+ * This class handles the edit lost luggage functionality
  * @author Bas
+ * @version 1.0
  */
 public class EditLostLuggageController implements Initializable {
 
@@ -60,16 +61,27 @@ public class EditLostLuggageController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
     }
 
+    /*
+    *Build the screen for edit lost luggage
+    *@param String id   The luggage id
+    */
     public void buildScreen(String id) {
         try {
+            //Set the id as int global in this class
             this.id = Integer.parseInt(id);
+            
+            //Get database a connection
             Connection conn = Database.initDatabase();
+            
+            //Create and run sql query
             String selectLuggage = "SELECT date,foundAirport,lostAirport,"
                     + "barcode,brand,color,type,weight,"
                     + "size,extra,material,flightNumber "
                     + "FROM luggage "
                     + "WHERE id = " + id;
             ResultSet rs = conn.createStatement().executeQuery(selectLuggage);
+            
+            //If there are results fill them in the input fields
             if (rs.next()) {
                 txtExtra.setText(new String(rs.getBytes("extra"), "UTF-8"));
                 txtFlightNumber.setText(new String(rs.getBytes("flightNumber"), "UTF-8"));

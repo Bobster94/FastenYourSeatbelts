@@ -63,7 +63,7 @@ public class Main extends Application {
     }
 
     /*
-    * If logout button is clicked. The programm will close.
+    * If logout button is clicked. The programm will re-open the login screen.
     * @param ActionEvent event
     */
     @FXML

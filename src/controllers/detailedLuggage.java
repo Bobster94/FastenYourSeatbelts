@@ -3,8 +3,9 @@ package controllers;
 import javafx.beans.property.SimpleStringProperty;
 
 /**
- *
+ * This class is used to store detailed information about luggage
  * @author Bas
+ * @version 
  */
 public class detailedLuggage {
     private final SimpleStringProperty id;
