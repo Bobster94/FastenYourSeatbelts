@@ -37,6 +37,7 @@ public class RegisterController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
+    
     @FXML
     TextField txtUsername;
     @FXML
@@ -67,8 +68,8 @@ public class RegisterController implements Initializable {
             byte[] encryptedPassword = encryption.getEncryptedPassword(password, salt);
             
             Connection conn = (Connection) Database.initDatabase();
-            String addEmployee = "INSERT INTO employee (userName,insertion,lastName,password,email,"
-                    + "admin,salt) "
+            String addEmployee = "INSERT INTO employee "
+                    + "(userName,insertion,lastName,password,email,admin,salt) "
                     + "VALUES (?,?,?,?,?,?,?)";  
             
             
@@ -100,5 +101,4 @@ public class RegisterController implements Initializable {
         }
         return screen;
     }
-
 }
