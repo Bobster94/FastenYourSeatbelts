@@ -150,7 +150,7 @@ public class AddLostLuggageController implements Initializable {
             preparedStatement.setInt(13, Main.employee.getEmployeeID());
             preparedStatement.executeUpdate();
             ResultSet rs = preparedStatement.getGeneratedKeys();
-
+            ResultSet qr = preparedStatement.getGeneratedKeys();
             String SQL = "INSERT INTO luggage "
                     + "(brand,color,type,weight,size,barcode,lostAirport,"
                     + "extra,lostFound,material,date,flightNumber,idEmployee, idCustomer) "
@@ -174,26 +174,38 @@ public class AddLostLuggageController implements Initializable {
                 preparedStatement.setInt(14, rs.getInt(1));
             }
             preparedStatement.executeUpdate();
-             ResultSet sr = preparedStatement.getGeneratedKeys();
+            ResultSet sr = preparedStatement.getGeneratedKeys();
             
             
            
-                        
+            //add add lost luggage in history table (voor het manager screen)             
             String history = "INSERT INTO history"+
                     "(status,idLuggage,dateHandled,idEmployeeHandled)"+
                     "VALUES(?,?,?,?)";
             preparedStatement = conn.prepareStatement(history, PreparedStatement.RETURN_GENERATED_KEYS);
-
             preparedStatement.setString(1,"addLostLuggage");
             if(sr.next()) {
                 preparedStatement.setInt(2, sr.getInt(1));
             }
             preparedStatement.setDate(3, java.sql.Date.valueOf(date));
-            
-            System.out.println("data in database gelukt");
-            
-            preparedStatement.setInt(4, Main.employee.getEmployeeID());
 
+            System.out.println("data in database gelukt");
+            preparedStatement.setInt(4, Main.employee.getEmployeeID());
+            preparedStatement.executeUpdate();
+            
+            // add customer in history table (voo het manager screen)
+            String history2 = "INSERT INTO history"+
+                    "(status,idCustomer,dateHandled,idEmployeeHandled)"+
+                    "VALUES(?,?,?,?)";
+            preparedStatement = conn.prepareStatement(history2, PreparedStatement.RETURN_GENERATED_KEYS);
+            preparedStatement.setString(1,"addCustomer");
+            if(qr.next()) {
+                preparedStatement.setInt(2, qr.getInt(1));
+            }
+            preparedStatement.setDate(3, java.sql.Date.valueOf(date));
+
+            System.out.println("data in database gelukt");
+            preparedStatement.setInt(4, Main.employee.getEmployeeID());
             preparedStatement.executeUpdate();
             
             ResultSet rsLuggageID = preparedStatement.getGeneratedKeys();
