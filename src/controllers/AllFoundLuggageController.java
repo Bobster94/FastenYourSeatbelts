@@ -113,7 +113,10 @@ public class AllFoundLuggageController implements Initializable {
                     + "AND IFNULL(material,'') LIKE '%" + material + "%' "
                     + "AND IFNULL(flightNumber,'') LIKE '%" + flightnumber + "%' "
                     + "AND IFNULL(weight,'') LIKE '%" + weight + "%' "
-                    + "AND IFNULL(type,'') LIKE '%" + type + "%'";
+                    + "AND IFNULL(type,'') LIKE '%" + type + "%'"
+                    + "AND NOT EXISTS (SELECT idLuggage "
+                    + "FROM history "
+                    + "WHERE  luggage.id = history.idLuggage AND history.status = 'handled')";
 
             ResultSet rs = conn.createStatement().executeQuery(SQL);
             //Add data to the tableview
@@ -145,7 +148,10 @@ public class AllFoundLuggageController implements Initializable {
                     + "WHERE lostFound = 1 "
                     + "AND NOT EXISTS (SELECT idLuggage "
                     + "FROM history "
-                    + "WHERE  luggage.id = history.idLuggage)";
+                    + "WHERE  luggage.id = history.idLuggage)"
+                    + "AND NOT EXISTS (SELECT idLuggage "
+                    + "FROM history "
+                    + "WHERE  luggage.id = history.idLuggage AND history.status = 'handled')";
             ResultSet rs = conn.createStatement().executeQuery(SQL);
             for (int i = 1; i < rs.getMetaData().getColumnCount(); i++) {
                 TableColumn col = new TableColumn(rs.getMetaData().getColumnLabel(i + 1));
