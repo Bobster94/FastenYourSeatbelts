@@ -1,8 +1,12 @@
 package controllers;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -60,8 +64,20 @@ public class Main extends Application {
     */
     @FXML
     protected void Logout(ActionEvent event) {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.close();
+        try {
+            //Set master screen
+            BorderPane loginScreen = FXMLLoader.load(getClass().getResource("/views/Login.fxml"));
+            
+            //Add the fxml to the scene
+            Scene scene = new Scene(loginScreen);
+            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+            stage.hide();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
