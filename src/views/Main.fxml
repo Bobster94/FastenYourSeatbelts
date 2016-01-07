@@ -37,6 +37,7 @@
                                     <Image url="@../images/corendon.png" />
                                  </image>
                               </ImageView>
+                              <Label fx:id="lblDate" layoutX="355.0" layoutY="68.0" text="date: " />
                            </children>
                         </AnchorPane>
                      </right>

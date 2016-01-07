@@ -109,6 +109,25 @@ public class EditCustomerController implements Initializable {
             preparedStatement.setInt(14, id);
             preparedStatement.executeUpdate();
             
+           
+                        
+            String history = "INSERT INTO history"+
+                    "(status,idCustomer,dateHandled,idEmployeeHandled)"+
+                    "VALUES(?,?,?,?)";
+            preparedStatement = conn.prepareStatement(history);
+
+            preparedStatement.setString(1,"EditCustomer");
+         
+            preparedStatement.setInt(2,id);
+            
+            preparedStatement.setDate(3, java.sql.Date.valueOf(dateToday));
+            
+            System.out.println("data in database gelukt");
+            
+            preparedStatement.setInt(4, Main.employee.getEmployeeID());
+
+            preparedStatement.executeUpdate();
+            
             SpecificCustomer specCustomer = new SpecificCustomer();
             specCustomer.buildscreen(String.valueOf(id));
             

@@ -20,7 +20,6 @@
             <TextField fx:id="txtStreet" layoutX="237.0" layoutY="157.0" /> 
             <TextField fx:id="txtHouseNumber" layoutX="237.0" layoutY="214.0" />
             <TextField fx:id="txtZipcode" layoutX="237.0" layoutY="266.0" />
-            <TextField fx:id="txtDate" layoutX="236.0" layoutY="324.0" />
             
             <Label layoutX="35.0" layoutY="16.0" text="Fisrt name" />
             <Label layoutX="242.0" layoutY="16.0" text="Country" />
@@ -37,7 +36,6 @@
             <Label layoutX="237.0" layoutY="190.0" text="housenumber" />
           
             <Label layoutX="36.0" layoutY="302.0" text="Birthdate" />
-            <Label layoutX="237.0" layoutY="302.0" text="Date" />
             
          </children>
       </Pane>

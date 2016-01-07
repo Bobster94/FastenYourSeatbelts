@@ -2,6 +2,8 @@ package controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.ResultSet;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,11 +27,46 @@ import org.jfree.data.category.DefaultCategoryDataset;
  */
 public class ManagerController implements Initializable {
     @FXML private SwingNode snChart;
+    int handled = 0;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        JFreeChart chart = FreeChartDemo("luggage vs years");
+        
+        
+        
+        try (Connection conn = Database.initDatabase()) {
+            String SQL = "SELECT idCustomer "
+                    + "FROM history";
+            ResultSet rs = conn.createStatement().executeQuery(SQL);
+            System.out.println(rs.getMetaData());
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        
+        String SQL = "SELECT * FROM history";
+        
+        try (Connection conn = Database.initDatabase()){
+            ResultSet rs = conn.createStatement().executeQuery(SQL);
+               
+        while (rs.next()) {
+            int idCustomer = rs.getInt("idCustomer");
+            int idLuggage = rs.getInt("idLuggage");
+            String status = rs.getString("status");
+            
+            System.out.println(idCustomer + "\t" + idLuggage + "\t" + status);
+                               
+            if ("handled".equals(status)) {
+                handled++;
+            }
+        }
+        System.out.println(handled);
+        
+        JFreeChart chart = FreeChartDemo("luggage vs month");
         ChartPanel chartPanel = new ChartPanel(chart);
         snChart.setContent(chartPanel);
+        
+        } catch (Exception e ) {
+            System.out.println(e);
+        } 
     }
 
     public BorderPane getManagerScreen() {
@@ -49,7 +86,7 @@ public class ManagerController implements Initializable {
     public JFreeChart FreeChartDemo(String chartTitle) {
         JFreeChart lineChart = ChartFactory.createLineChart(
                 chartTitle,
-                "Years", "Luggage",
+                "Month", "Luggage",
                 createDataset(),
                 PlotOrientation.VERTICAL,
                 true, true, false
@@ -61,24 +98,47 @@ public class ManagerController implements Initializable {
     private DefaultCategoryDataset createDataset() {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         //Found luggage
-        dataset.addValue(15, "Found luggage", "1970");
-        dataset.addValue(30, "Found luggage", "1980");
-        dataset.addValue(60, "Found luggage", "1990");
-        dataset.addValue(120, "Found luggage", "2000");
-        dataset.addValue(240, "Found luggage", "2010");
-        dataset.addValue(300, "Found luggage", "2014");
+        dataset.addValue(5, "Found luggage", "January");
+        dataset.addValue(3, "Found luggage", "February");
+        dataset.addValue(6, "Found luggage", "March");
+        dataset.addValue(8, "Found luggage", "April");
+        dataset.addValue(10, "Found luggage", "May");
+        dataset.addValue(3, "Found luggage", "June");
+        dataset.addValue(3, "Found luggage", "July");
+        dataset.addValue(3, "Found luggage", "August");
+        dataset.addValue(3, "Found luggage", "September");
+        dataset.addValue(3, "Found luggage", "October");
+        dataset.addValue(3, "Found luggage", "November");
+        dataset.addValue(3, "Found luggage", "December");
 
         //Lost luggage
-        dataset.addValue(200, "lost luggage", "1970");
-        dataset.addValue(250, "lost luggage", "1980");
-        dataset.addValue(310, "lost luggage", "1990");
-        dataset.addValue(100, "lost luggage", "2000");
-
+        dataset.addValue(1, "lost luggage", "January");
+        dataset.addValue(2, "lost luggage", "February");
+        dataset.addValue(3, "lost luggage", "March");
+        dataset.addValue(4, "lost luggage", "April");
+        dataset.addValue(4, "lost luggage", "May");
+        dataset.addValue(4, "lost luggage", "June");
+        dataset.addValue(4, "lost luggage", "July");
+        dataset.addValue(4, "lost luggage", "August");
+        dataset.addValue(4, "lost luggage", "September");
+        dataset.addValue(4, "lost luggage", "October");
+        dataset.addValue(4, "lost luggage", "November");
+        dataset.addValue(4, "lost luggage", "December");
+            
         //Handled luggage
-        dataset.addValue(10, "Handled luggage", "1970");
-        dataset.addValue(25, "Handled luggage", "1980");
-        dataset.addValue(31, "Handled luggage", "1990");
-        dataset.addValue(10, "Handled luggage", "2000");
+        dataset.addValue(handled, "Handled luggage", "January");
+        dataset.addValue(handled, "Handled luggage", "February");
+        dataset.addValue(handled, "Handled luggage", "March");
+        dataset.addValue(handled, "Handled luggage", "April");
+        dataset.addValue(handled, "Handled luggage", "May");
+        dataset.addValue(handled, "Handled luggage", "June");
+        dataset.addValue(handled, "Handled luggage", "July");
+        dataset.addValue(handled, "Handled luggage", "August");
+        dataset.addValue(handled, "Handled luggage", "September");
+        dataset.addValue(handled, "Handled luggage", "October");
+        dataset.addValue(handled, "Handled luggage", "November");
+        dataset.addValue(handled, "Handled luggage", "December");
+
         
         return dataset;
     }

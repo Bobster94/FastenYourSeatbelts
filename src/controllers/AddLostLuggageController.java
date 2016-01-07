@@ -172,7 +172,28 @@ public class AddLostLuggageController implements Initializable {
             if (rs.next()) {
                 preparedStatement.setInt(14, rs.getInt(1));
             }
+             ResultSet sr = preparedStatement.getGeneratedKeys();
+            
             preparedStatement.executeUpdate();
+           
+                        
+            String history = "INSERT INTO history"+
+                    "(status,idLuggage,dateHandled,idEmployeeHandled)"+
+                    "VALUES(?,?,?,?)";
+            preparedStatement = conn.prepareStatement(history);
+
+            preparedStatement.setString(1,"addLostLuggage");
+            if(sr.next()) {
+                preparedStatement.setInt(2, sr.getInt(1));
+            }
+            preparedStatement.setDate(3, java.sql.Date.valueOf(date));
+            
+            System.out.println("data in database gelukt");
+            
+            preparedStatement.setInt(4, Main.employee.getEmployeeID());
+
+            preparedStatement.executeUpdate();
+            
             ResultSet rsLuggageID = preparedStatement.getGeneratedKeys();
             if (rsLuggageID.next()) {
                 pdfController pdf = new pdfController();
