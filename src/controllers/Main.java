@@ -98,6 +98,18 @@ public class Main extends Application {
     protected void getManagerScreen() {
         ManagerController manager = new ManagerController();
         root.setLeft(manager.getManagerScreen());
+        lblPage.setText("History");
+    }
+    
+    /*
+    * If the Employee button is clicked. The root content will be set to the 
+    * Employee screen
+    */
+    @FXML
+    protected void getRegisterScreen() {
+        RegisterController Register = new RegisterController();
+        root.setLeft(Register.getRegisterScreen());
+        lblPage.setText("Register");
     }
 
     /*

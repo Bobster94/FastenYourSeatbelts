@@ -70,7 +70,7 @@
                     </items>
                   </ComboBox>
                   <Button fx:id="cbManager" mnemonicParsing="false" onAction="#getManagerScreen" text="History" />
-                  <Button fx:id="cbEmployee" mnemonicParsing="false" onAction="#getManagerScreen" text="Employee" />
+                  <Button fx:id="cbEmployee" mnemonicParsing="false" onAction="#getRegisterScreen" text="Employee" />
               </items>
             </ToolBar>
          </children>
