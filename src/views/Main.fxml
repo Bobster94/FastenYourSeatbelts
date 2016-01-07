@@ -14,30 +14,28 @@
    <top>
       <VBox prefHeight="150.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox prefHeight="100.0">
+            <HBox prefHeight="100.0" prefWidth="790.0">
                <children>
                   <BorderPane prefHeight="200.0">
-                     <left>
-                        <Label fx:id="lblPage" text="Dashboard" BorderPane.alignment="CENTER">
-                           <font>
-                              <Font name="System Bold" size="30.0" />
-                           </font>
-                        </Label>
-                     </left>
                      <right>
-                        <AnchorPane prefHeight="100.0" prefWidth="417.0" BorderPane.alignment="CENTER">
+                        <AnchorPane prefHeight="100.0" prefWidth="787.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Label layoutX="290.0" layoutY="13.0" text="Name" />
-                              <Label layoutX="290.0" layoutY="40.0" text="Function" />
-                              <Button fx:id="btnLogout" layoutX="290.0" layoutY="63.0" mnemonicParsing="false" onAction="#Logout" text="Logout" />
-                              <Label fx:id="lblUser" layoutX="355.0" layoutY="13.0" text="Piet" />
-                              <Label fx:id="lblFunction" layoutX="355.0" layoutY="40.0" text="Manager" />
-                              <ImageView fitHeight="100.0" fitWidth="300.0" layoutX="94.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+                              <Label layoutX="586.0" layoutY="13.0" text="Name" />
+                              <Label layoutX="586.0" layoutY="40.0" text="Function" />
+                              <Button fx:id="btnLogout" layoutX="586.0" layoutY="63.0" mnemonicParsing="false" onAction="#Logout" text="Logout" />
+                              <Label fx:id="lblUser" layoutX="651.0" layoutY="13.0" text="Piet" />
+                              <Label fx:id="lblFunction" layoutX="651.0" layoutY="40.0" text="Manager" />
+                              <ImageView fitHeight="100.0" fitWidth="300.0" layoutX="11.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../images/corendon.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="lblDate" layoutX="355.0" layoutY="68.0" text="date: " />
+                              <Label fx:id="lblDate" layoutX="651.0" layoutY="68.0" text="date: " />
+                              <Label fx:id="lblPage" layoutX="236.0" layoutY="31.0" text="Dashboard">
+                                 <font>
+                                    <Font name="System Bold" size="30.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </AnchorPane>
                      </right>
@@ -71,7 +69,8 @@
                         </FXCollections>
                     </items>
                   </ComboBox>
-                  <Button fx:id="cbManager" mnemonicParsing="false" onAction="#getManagerScreen" text="Manager" />
+                  <Button fx:id="cbManager" mnemonicParsing="false" onAction="#getManagerScreen" text="History" />
+                  <Button fx:id="cbEmployee" mnemonicParsing="false" onAction="#getManagerScreen" text="Employee" />
               </items>
             </ToolBar>
          </children>

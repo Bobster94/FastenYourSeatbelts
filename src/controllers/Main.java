@@ -86,6 +86,9 @@ public class Main extends Application {
 
     @FXML
     private Button cbManager;
+    
+    @FXML
+    private Button cbEmployee;
 
     /*
     * If the Manager button is clicked. The root content will be set to the 
@@ -108,10 +111,12 @@ public class Main extends Application {
         Date date = new Date();
         if (functionId == 0) {
             cbManager.setVisible(false);
+            cbEmployee.setVisible(false);
             lblFunction.setText("employee");
             lblDate.setText("Date: " + dateFormat.format(date));
         } else {
             cbManager.setVisible(true);
+            cbEmployee.setVisible(true);
             lblFunction.setText("Manager");
             lblDate.setText("Date: " + dateFormat.format(date));
         }
