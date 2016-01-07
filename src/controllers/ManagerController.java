@@ -146,7 +146,6 @@ public class ManagerController implements Initializable {
         
         JFreeChart chart = FreeChartDemo("luggage vs month");
         ChartPanel chartPanel = new ChartPanel(chart);
-        snChart.setContent(null);
         snChart.setContent(chartPanel);
     }
 

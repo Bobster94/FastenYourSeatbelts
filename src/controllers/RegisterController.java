@@ -61,7 +61,7 @@ public class RegisterController implements Initializable {
             String firstname = txtFirstname.getText();
             String lastname = txtLastname.getText();
             String insertion = txtInsertion.getText();
-            String email = txtInsertion.getText();
+            String email = txtEmail.getText();
             int function = cbFunction.getSelectionModel().getSelectedIndex();
             
             byte[] salt = encryption.generateSalt();
