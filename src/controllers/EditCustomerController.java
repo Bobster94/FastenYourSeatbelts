@@ -112,11 +112,11 @@ public class EditCustomerController implements Initializable {
            
                         
             String history = "INSERT INTO history"+
-                    "(status,idCostumer,dateHandled,idEmployeeHandled)"+
+                    "(status,idCustomer,dateHandled,idEmployeeHandled)"+
                     "VALUES(?,?,?,?)";
             preparedStatement = conn.prepareStatement(history);
 
-            preparedStatement.setString(1,"EditCostumer");
+            preparedStatement.setString(1,"EditCustomer");
          
             preparedStatement.setInt(2,id);
             
