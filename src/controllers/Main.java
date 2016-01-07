@@ -1,5 +1,8 @@
 package controllers;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,6 +25,7 @@ public class Main extends Application {
     @FXML private Label lblPage;
     @FXML private Label lblUser;
     @FXML private Label lblFunction;
+    @FXML private Label lblDate;
 
     /*
     * This borderpane is the base of the programm
@@ -84,12 +88,16 @@ public class Main extends Application {
     public void UsernameManager() {
         lblUser.setText(employee.getUsername());
         int functionId = employee.getFunctionID();
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        Date date = new Date();
         if (functionId == 0) {
             cbManager.setVisible(false);
             lblFunction.setText("employee");
+            lblDate.setText("Date: " + dateFormat.format(date));
         } else {
             cbManager.setVisible(true);
             lblFunction.setText("Manager");
+            lblDate.setText("Date: " + dateFormat.format(date));
         }
     }
 
