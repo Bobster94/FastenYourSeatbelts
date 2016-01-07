@@ -48,7 +48,6 @@ public class LoginController implements Initializable {
 
     private Boolean loginValidation(String username, String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
         Boolean valid = false;
-
         try (Connection conn = Database.initDatabase()) {
             //Select the employee with the given username and password
             String selectEmployee

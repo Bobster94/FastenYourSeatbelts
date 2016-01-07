@@ -10,7 +10,7 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
 /*
- * This class can encrypt a string
+ * This class can generate salt, encrypt a password with it and authenticate it later
  * http://www.javacodegeeks.com/2012/05/secure-password-storage-donts-dos-and.html
  */
 public class Encryption {
