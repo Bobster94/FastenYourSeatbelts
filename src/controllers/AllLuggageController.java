@@ -49,6 +49,7 @@ public class AllLuggageController implements Initializable {
      * @param    String  id          This is the id used in workbench for the luggage
      * @param    String  luggageType Is either lostLuggage or foundLuggage
      */
+
     public void buildscreen(String id, String luggageType) {
         BorderPane root = Main.getRoot();
         try (Connection conn = Database.initDatabase()) {
@@ -239,13 +240,7 @@ public class AllLuggageController implements Initializable {
                                     .log(Level.SEVERE, null, ex);
                         }
                     });
-
-                    Button btnGenPDF = new Button();
-                    btnGenPDF.setText("Create PDF");
-                    btnGenPDF.setOnAction((ActionEvent actionEvent) -> {
-
-                    });
-                    buttons.getChildren().addAll(btnMatch, btnGenPDF);
+                    buttons.getChildren().addAll(btnMatch);
                     customerLayout.getChildren().add(buttons);
                     layout2.setRight(customerLayout);
                 }

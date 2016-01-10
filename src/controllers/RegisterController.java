@@ -86,6 +86,7 @@ public class RegisterController implements Initializable {
             BorderPane root = Main.getRoot();
             DashboardController dashboard = new DashboardController();
             root.setLeft(dashboard.getDashboardScreen());
+            
         } catch (SQLException ex) {
             Logger.getLogger(RegisterController.class.getName()).log(Level.SEVERE, null, ex);
         }
