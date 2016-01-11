@@ -12,4 +12,12 @@
    <left>
       <SwingNode fx:id="snChart" BorderPane.alignment="CENTER" />
    </left>
+<<<<<<< HEAD
+=======
+   <top>
+   </top>
+   <top>
+      <Pane prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </top>
+>>>>>>> origin/master
 </BorderPane>

@@ -32,9 +32,15 @@ public class AddFoundLuggageController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+<<<<<<< HEAD
         // TODO
     }   
     
+=======
+        
+    }
+
+>>>>>>> origin/master
     /*
     * @return the addFoundLuggage fxml view as borderPane
     */
@@ -47,6 +53,7 @@ public class AddFoundLuggageController implements Initializable {
         }
         return screen;
     }
+<<<<<<< HEAD
     
     @FXML private TextField txtExtra;
     @FXML private TextField txtBarcode;
@@ -62,6 +69,33 @@ public class AddFoundLuggageController implements Initializable {
     @FXML private ComboBox  txtSize;
     
     
+=======
+    //Getting the textfields id's from view package: add customer.fmxl
+    @FXML
+    private TextField txtExtra;
+    @FXML
+    private TextField txtBarcode;
+    @FXML
+    private TextField txtLostAtAirport;
+    @FXML
+    private TextField txtFoundAtAirport;
+    @FXML
+    private TextField txtFlightNumber;
+    @FXML
+    private TextField txtDate;
+    @FXML
+    private ComboBox txtMaterial;
+    @FXML
+    private TextField txtColor;
+    @FXML
+    private ComboBox txtType;
+    @FXML
+    private ComboBox txtBrand;
+    @FXML
+    private ComboBox txtWeight;
+    @FXML
+    private ComboBox txtSize;
+>>>>>>> origin/master
     /*
     *
     * Saves the newly created luggage into the database
@@ -83,11 +117,17 @@ public class AddFoundLuggageController implements Initializable {
         String size = txtSize.getValue().toString();
         
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        
         //get current date time with Date()
         Date dateToday = new Date();
         date = dateFormat.format(dateToday);
         
+<<<<<<< HEAD
         try(Connection conn = Database.initDatabase()){
+=======
+        //Establishing connection with database and placing the variables in the right order
+        try (Connection conn = Database.initDatabase()) {
+>>>>>>> origin/master
             String SQL = "INSERT INTO luggage (brand,color,type,weight,size,barcode,lostAirport,"
                     + "foundAirport,extra,lostFound,material,date,flightNumber,idEmployee) "
                     + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -109,7 +149,29 @@ public class AddFoundLuggageController implements Initializable {
             preparedStatement.setString(13, flightNumber);
             preparedStatement.setInt(14, Main.employee.getEmployeeID());
             preparedStatement.executeUpdate();
+<<<<<<< HEAD
         
+=======
+            ResultSet sr = preparedStatement.getGeneratedKeys();
+            
+            //update history table add customer       
+            String history = "INSERT INTO history"+
+                    "(status,idLuggage,dateHandled,idEmployeeHandled)"+
+                    "VALUES(?,?,?,?)";
+            preparedStatement = conn.prepareStatement(history);
+
+            preparedStatement.setString(1,"addLuggage");
+            if(sr.next()) {
+                preparedStatement.setInt(2, sr.getInt(1));
+            }
+            preparedStatement.setDate(3, java.sql.Date.valueOf(date));
+            
+            System.out.println("data in database gelukt");
+            
+            preparedStatement.setInt(4, Main.employee.getEmployeeID());
+
+            preparedStatement.executeUpdate();
+>>>>>>> origin/master
             //Close connection
             conn.close();
         }catch(SQLException ex){
