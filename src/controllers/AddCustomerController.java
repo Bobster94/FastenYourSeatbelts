@@ -34,7 +34,8 @@ public class AddCustomerController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
+    //Getting the textfields id's from view package: add customer.fmxl
     } 
     @FXML private TextField txtFirstName;
     @FXML private TextField txtCountry;
@@ -66,18 +67,18 @@ public class AddCustomerController implements Initializable {
         String houseNumber = txtHouseNumber.getText();
         String birthdate = txtBirthdate.getText();
         
-        
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        
         //get current date time with Date()
         String date;
         Date dateToday = new Date();
         date = dateFormat.format(dateToday);
 
+        //Establishing connection with database and placing the variables in the right order
         try(Connection conn = (Connection) Database.initDatabase()){
             String Customer = "INSERT INTO customer (firstname,insertion,lastname,birthDate,country,"
                 + "city,zipCode,street,houseNumber,email,date,phoneNumber,idEmployee) "
                     + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";  
-            
             
             PreparedStatement preparedStatement = conn.prepareStatement(Customer, PreparedStatement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, firstName);
@@ -96,7 +97,7 @@ public class AddCustomerController implements Initializable {
             preparedStatement.executeUpdate();
             
             ResultSet sr = preparedStatement.getGeneratedKeys();
-                        
+            //update history table add customer            
             String history = "INSERT INTO history"+
                     "(status,idCustomer,dateHandled,idEmployeeHandled)"+
                     "VALUES(?,?,?,?)";
@@ -122,6 +123,7 @@ public class AddCustomerController implements Initializable {
     *
     * @return the addCustomer view as borderPane
     */
+    
     public BorderPane getAddCustomerScreen() {
         BorderPane screen = null;
         try {

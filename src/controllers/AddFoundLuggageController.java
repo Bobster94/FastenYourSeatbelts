@@ -32,7 +32,7 @@ public class AddFoundLuggageController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
     }
 
     /*
@@ -47,7 +47,7 @@ public class AddFoundLuggageController implements Initializable {
         }
         return screen;
     }
-
+    //Getting the textfields id's from view package: add customer.fmxl
     @FXML
     private TextField txtExtra;
     @FXML
@@ -93,10 +93,12 @@ public class AddFoundLuggageController implements Initializable {
         String size = txtSize.getValue().toString();
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        
         //get current date time with Date()
         Date dateToday = new Date();
         date = dateFormat.format(dateToday);
-
+        
+        //Establishing connection with database and placing the variables in the right order
         try (Connection conn = Database.initDatabase()) {
             String SQL = "INSERT INTO luggage (brand,color,type,weight,size,barcode,lostAirport,"
                     + "foundAirport,extra,lostFound,material,date,flightNumber,idEmployee) "
@@ -118,8 +120,9 @@ public class AddFoundLuggageController implements Initializable {
             preparedStatement.setString(13, flightNumber);
             preparedStatement.setInt(14, Main.employee.getEmployeeID());
             preparedStatement.executeUpdate();
-             ResultSet sr = preparedStatement.getGeneratedKeys();
-                        
+            ResultSet sr = preparedStatement.getGeneratedKeys();
+            
+            //update history table add customer       
             String history = "INSERT INTO history"+
                     "(status,idLuggage,dateHandled,idEmployeeHandled)"+
                     "VALUES(?,?,?,?)";
