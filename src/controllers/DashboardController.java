@@ -40,6 +40,7 @@ public class DashboardController implements Initializable {
      * @param url
      * @param rb
      */
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {        
         AllLuggageController allLuggage = new AllLuggageController();
